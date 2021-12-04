@@ -1,10 +1,34 @@
+/**
+ * 
+ */
 package infpp.streetlife;
 
+/**
+ * Class for cars
+ */
 public class Car {
+	
+	/**
+	 * x position of the car
+	 */
 	private int x;
+	
+	/**
+	 * y position of the car
+	 */
 	private int y;
+	
+	/**
+	 * name of the car
+	 */
 	private String name;
 	
+	/**
+	 * Constructor of the class
+	 * @param x x position of the car
+	 * @param y y position of the car
+	 * @param name name of the car
+	 */
 	public Car(int x, int y, String name) {
 		this.setX(x);
 		this.setY(y);
@@ -12,53 +36,52 @@ public class Car {
 	}
 
 	/**
-	 * @return x
+	 * @return x x position of the car
 	 */
 	public int getX() {
 		return x;
 	}
 
 	/**
-	 * @param x das zu setzende Attribut x
+	 * @param x new x position
 	 */
 	public void setX(int x) {
 		this.x = x;
 	}
 
 	/**
-	 * @return y
+	 * @return y y position of the car
 	 */
 	public int getY() {
 		return y;
 	}
 
 	/**
-	 * @param y das zu setzende Objekt y
+	 * @param y new y position
 	 */
 	public void setY(int y) {
 		this.y = y;
 	}
 
 	/**
-	 * @return name
+	 * @return name name of the car
 	 */
 	public String getName() {
 		return name;
 	}
 
 	/**
-	 * @param name das zu setzende Objekt name
+	 * @param name new name of the car
 	 */
 	public void setName(String name) {
 		this.name = name;
 	}
 	
 	/**
-	 * @return Description returns the description of the car
+	 * @return description returns the description of the car as a String with name, x- and y-position
 	 */
 	public String toString() {
-		return "Name: "
-				+ this.name
+		return this.name
 				+ " at: x - "
 				+ Integer.toString(this.x)
 				+ " y - "

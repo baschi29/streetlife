@@ -2,7 +2,7 @@
  * 
  */
 /**
- * @author Cornelius Bruett, Bastian Bertz
+ * @author Cornelius, Bastian
  *
  */
 package infpp.streetlife;
