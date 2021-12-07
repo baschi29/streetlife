@@ -4,7 +4,7 @@
 package infpp.streetlife;
 
 /**
- * Class for cars
+ * Class for cars. A Car has a position (x,y) and a specified name
  */
 public class Car {
 	
