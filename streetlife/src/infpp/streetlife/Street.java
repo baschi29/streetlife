@@ -8,74 +8,74 @@ import java.util.Random;
 /**
  * Class representing the world all other objects exist in
  */
-public class City {
+public class Street{
 	
 	/**
-	 * width of the city
-	 * Defines the size of the city together with depth
+	 * width of the street (y)
+	 * Defines the size of the street together with length
 	 */
 	private int width;
 	
 	/**
-	 * depth of the city
-	 * Defines the size of the city together with depth
+	 * length of the street (x)
+	 * Defines the size of the street together with length
 	 */
-	private int depth;
+	private int length;
 	
 	/**
-	 * Car object that is existing in the city
+	 * Car object that is existing in the street
 	 */
 	private Car car;
 	
 	/**
 	 * Constructor of the class
-	 * @param width width of the city
-	 * @param depth depth of the city
-	 * @param car car object in the city
+	 * @param width width of the street
+	 * @param length length of the street
+	 * @param car car object in the street
 	 */
-	public City(int width, int depth, Car car) {
+	public Street(int width, int length, Car car) {
 		this.setWidth(width);
-		this.setDepth(depth);
+		this.setLength(length);
 		this.setCar(car);
 	}
 
 	/**
-	 * @return width widht of city
+	 * @return width widht of street
 	 */
 	public int getWidth() {
 		return width;
 	}
 
 	/**
-	 * @param width new width of the city
+	 * @param width new width of the street
 	 */
 	public void setWidth(int width) {
 		this.width = width;
 	}
 
 	/**
-	 * @return depth depth of city
+	 * @return length length of street
 	 */
-	public int getDepth() {
-		return depth;
+	public int getLength() {
+		return length;
 	}
 
 	/**
-	 * @param depth new depth of the city
+	 * @param length new length of the street
 	 */
-	public void setDepth(int depth) {
-		this.depth = depth;
+	public void setLength(int length) {
+		this.length = length;
 	}
 
 	/**
-	 * @return car car in city
+	 * @return car car in street
 	 */
 	public Car getCar() {
 		return car;
 	}
 
 	/**
-	 * @param car new car object in the city
+	 * @param car new car object in the street
 	 */
 	public void setCar(Car car) {
 		this.car = car;
@@ -99,13 +99,13 @@ public class City {
 	}
 	
 	/**
-	 * @return description returns the description of the city as a String with width, depth and the description of the car
+	 * @return description returns the description of the street as a String with width, length and the description of the car
 	 */
 	public String toString() {
 		return "Width: "
 				+ Integer.toString(this.width)
-				+ "; Depth: "
-				+ Integer.toString(this.depth)
+				+ "; Length: "
+				+ Integer.toString(this.length)
 				+ "\nwith car "
 				+ this.car.toString();
 	}

@@ -16,9 +16,9 @@ public class StreetLifeMain {
 	public static void main(String[] args) {
 		
 		int width = 1024;
-		int depth = 768;
-		Car car = new Car(width/2, depth/2, "Flotter Fiat");
-		City city = new City(width, depth, car);
+		int length = 768;
+		Car car = new Car(width/2, 0, "Flotter Fiat", 5);
+		Street city = new Street(width, depth, car);
 		
 		for (int i = 0; i < 5; i++) {
 			city.move();
