@@ -4,28 +4,16 @@
 package infpp.streetlife;
 
 import java.util.Random;
+import java.util.ArrayList ;
 
 /**
  * Class representing the world all other objects exist in
  */
 public class Street{
 	
-	/**
-	 * width of the street (y)
-	 * Defines the size of the street together with length
-	 */
 	private int width;
-	
-	/**
-	 * length of the street (x)
-	 * Defines the size of the street together with length
-	 */
 	private int length;
-	
-	/**
-	 * Car object that is existing in the street
-	 */
-	private Car car;
+	private ArrayList<Car> cars;
 	
 	/**
 	 * Constructor of the class
@@ -33,14 +21,14 @@ public class Street{
 	 * @param length length of the street
 	 * @param car car object in the street
 	 */
-	public Street(int width, int length, Car car) {
+	public Street(int width, int length) {
 		this.setWidth(width);
 		this.setLength(length);
-		this.setCar(car);
+		cars = new ArrayList<Car>();
 	}
 
 	/**
-	 * @return width widht of street
+	 * @return width width of street
 	 */
 	public int getWidth() {
 		return width;
@@ -67,46 +55,51 @@ public class Street{
 		this.length = length;
 	}
 
-	/**
-	 * @return car car in street
-	 */
-	public Car getCar() {
-		return car;
+	public void addCar(Car car) {
+		cars.add(car);
 	}
-
+	
+	
+	
+	
 	/**
-	 * @param car new car object in the street
+	 * moves the whole citylife for 1 step
 	 */
-	public void setCar(Car car) {
-		this.car = car;
+	public void move() {
+		for (Car car : cars) {
+			car.move();
+		}
 	}
 	
 	/**
-	 * Randomly moves the car 1 step further
+	 * Randomly moves everything
 	 */
-	public void move() {
+	public void moveRandom() {
 		
 		Random rd = new Random();
 		boolean xMovement = rd.nextBoolean();
 		int movementDirection = rd.nextInt(2) * 2 - 1; // Randomly -1 or +1
+		for (Car car : cars) {
 		
-		if (xMovement) {
-			this.car.setX(movementDirection + this.car.getX()); 
+			car.move(movementDirection);
+		
 		}
-		else {
-			this.car.setY(movementDirection + this.car.getY());
-		}
+		
 	}
 	
 	/**
 	 * @return description returns the description of the street as a String with width, length and the description of the car
 	 */
 	public String toString() {
+		String carString = "";
+		
+		for (Car car : cars) {
+			carString += car.toString() + "\n";
+		}
 		return "Width: "
 				+ Integer.toString(this.width)
 				+ "; Length: "
 				+ Integer.toString(this.length)
-				+ "\nwith car "
-				+ this.car.toString();
+				+ carString;
 	}
 }
