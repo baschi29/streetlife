@@ -4,7 +4,7 @@
 package infpp.streetlife;
 
 /**
- * Class for cars. A Car has a position (x,y) and a specified name
+ * Class for cars. A Car has a position (x,y), a specified name and a specific velocity
  */
 public class Car extends StreetObject {
 	
@@ -24,7 +24,20 @@ public class Car extends StreetObject {
 		this.velocity = velocity;
 	}
 	
+	/**
+	 * A car can move from left to right, defined by its velocity
+	 */
+	
 	public void move() {
 		this.setX(this.getX() + velocity);
+	}
+	
+	
+	/**
+	 * A car can move from left to right, specified by amount in pixel
+	 */
+	
+	public void move(int amount) {
+		this.setX(this.getX() + amount);
 	}
 }
