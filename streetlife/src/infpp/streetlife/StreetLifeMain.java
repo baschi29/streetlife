@@ -16,8 +16,8 @@ public class StreetLifeMain {
 	 */
 	public static void main(String[] args) {
 		
-		StreetLifeController controller = new StreetLifeController();
-		controller.start();
+		//StreetLifeController controller = new StreetLifeController();
+		//controller.start();
 
 	}
 
