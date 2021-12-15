@@ -3,6 +3,9 @@
  */
 package infpp.streetlife;
 
+import infpp.streetlife.model.Car;
+import infpp.streetlife.model.Street;
+
 /**
  * Class to generate a city object
  */

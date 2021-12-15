@@ -1,7 +1,7 @@
 /**
  * 
  */
-package infpp.streetlife;
+package infpp.streetlife.model;
 
 /**
  * Class for cars. A Car has a position (x,y), a specified name and a specific velocity

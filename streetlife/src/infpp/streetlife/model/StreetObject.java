@@ -1,7 +1,7 @@
 /**
  * 
  */
-package infpp.streetlife;
+package infpp.streetlife.model;
 
 /**
  * Class for objects on the street. Acts as parent class for every moving object

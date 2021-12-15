@@ -1,7 +1,7 @@
 /**
  * 
  */
-package infpp.streetlife;
+package infpp.streetlife.model;
 
 import java.util.Random;
 import java.util.ArrayList ;
@@ -9,7 +9,7 @@ import java.util.ArrayList ;
 /**
  * Class representing the world all other objects exist in
  */
-public class Street{
+public class StreetLifeModel{
 	
 	private int width;
 	private int length;
