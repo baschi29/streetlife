@@ -71,16 +71,17 @@ public class StreetLifeModel{
 		}
 	}
 	
+	//TODO: Methode sinnvoll? Müsste doch auch alles über eine move Methode machbar sein, Zweck?
 	/**
 	 * Randomly moves everything
 	 */
 	public void moveRandom() {
 		
 		Random rd = new Random();
-		int movementDirection = rd.nextInt(2) * 2 - 1; // Randomly -1 or +1
+		int movementSign = rd.nextInt(2) * 2 - 1; // Randomly -1 or +1
 		for (Car car : cars) {
 		
-			car.move(movementDirection);
+			car.move(movementSign);
 		
 		}
 		

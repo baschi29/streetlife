@@ -29,7 +29,7 @@ public class Car extends StreetObject {
 	 */
 	
 	public void move() {
-		this.setX(this.getX());
+		this.setX(this.getX() + this.getVelocity());
 	}
 	
 	
