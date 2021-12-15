@@ -3,8 +3,7 @@
  */
 package infpp.streetlife;
 
-import infpp.streetlife.model.Car;
-import infpp.streetlife.model.Street;
+import infpp.streetlife.model.*;
 
 /**
  * Class to generate a city object
@@ -26,7 +25,7 @@ public class StreetLifeMain {
 		Car car3 = new Car(width/2, 0, "angenehmer Audi", 4);
 		Car car4 = new Car(width/2, 0, "cooles Cabrio", 3);
 		Car car5 = new Car(width/2, 0, "bombastischer BMW", 9);
-		Street city = new Street(width, length);
+		StreetLifeModel city = new StreetLifeModel(width, length);
 		
 		city.addCar(car1);
 		city.addCar(car2);

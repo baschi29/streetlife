@@ -21,7 +21,7 @@ public class Car extends StreetObject {
 	 */
 	public Car(int x, int y, String name, int velocity) {
 		super(x, y, name);
-		this.velocity = velocity;
+		this.setVelocity(velocity);
 	}
 	
 	/**
@@ -29,7 +29,7 @@ public class Car extends StreetObject {
 	 */
 	
 	public void move() {
-		this.setX(this.getX() + velocity);
+		this.setX(this.getX());
 	}
 	
 	
@@ -39,5 +39,19 @@ public class Car extends StreetObject {
 	
 	public void move(int amount) {
 		this.setX(this.getX() + amount);
+	}
+
+	/**
+	 * @return velocity
+	 */
+	public int getVelocity() {
+		return velocity;
+	}
+
+	/**
+	 * @param velocity das zu setzende Objekt velocity
+	 */
+	public void setVelocity(int velocity) {
+		this.velocity = velocity;
 	}
 }

@@ -21,7 +21,7 @@ public class StreetLifeModel{
 	 * @param length length of the street
 	 * @param car car object in the street
 	 */
-	public Street(int width, int length) {
+	public StreetLifeModel(int width, int length) {
 		this.setWidth(width);
 		this.setLength(length);
 		cars = new ArrayList<Car>();
@@ -77,7 +77,6 @@ public class StreetLifeModel{
 	public void moveRandom() {
 		
 		Random rd = new Random();
-		boolean xMovement = rd.nextBoolean();
 		int movementDirection = rd.nextInt(2) * 2 - 1; // Randomly -1 or +1
 		for (Car car : cars) {
 		
