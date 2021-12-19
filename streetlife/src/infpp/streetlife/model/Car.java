@@ -4,7 +4,7 @@
 package infpp.streetlife.model;
 
 /**
- * Class for cars. A Car has a position (x,y), a specified name and a specific velocity
+ * Class for cars. A Car has a position (x,y), a specified name and a specific velocity. It also states a current lane.
  */
 public class Car extends StreetObject {
 	
@@ -12,7 +12,12 @@ public class Car extends StreetObject {
 	 * velocity of car in pixel/movement (ppm)
 	 */
 	private int velocity;
+	private int lane;
+	private int oldPos;
 	
+
+
+
 	/**
 	 * Constructor of the class
 	 * @param x x position of the car
@@ -21,6 +26,7 @@ public class Car extends StreetObject {
 	 */
 	public Car(int x, int y, String name, int velocity) {
 		super(x, y, name);
+		this.setLane(y);
 		this.setVelocity(velocity);
 	}
 	
@@ -29,6 +35,7 @@ public class Car extends StreetObject {
 	 */
 	
 	public void move() {
+		this.setOldPos(this.getX());
 		this.setX(this.getX() + this.getVelocity());
 	}
 	
@@ -53,5 +60,23 @@ public class Car extends StreetObject {
 	 */
 	public void setVelocity(int velocity) {
 		this.velocity = velocity;
+	}
+	
+	public int getLane() {
+		return lane;
+	}
+
+	public void setLane(int lane) {
+		if (lane >= 0)
+			this.lane = lane;
+	}
+	
+
+	public int getOldPos() {
+		return oldPos;
+	}
+
+	public void setOldPos(int oldPos) {
+		this.oldPos = oldPos;
 	}
 }
