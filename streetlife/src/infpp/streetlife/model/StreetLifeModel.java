@@ -3,8 +3,9 @@
  */
 package infpp.streetlife.model;
 
-import java.util.Random;
 import java.util.ArrayList ;
+import java.util.Random;
+import infpp.streetlife.view.View;
 
 /**
  * Class representing the world all other objects exist in
@@ -13,17 +14,20 @@ public class StreetLifeModel{
 	
 	private int width;
 	private int length;
+	private View view;
 	private ArrayList<Car> cars;
 	
 	/**
 	 * Constructor of the class
-	 * @param width width of the street
+	 * @param width width of the street = number of lanes
 	 * @param length length of the street
-	 * @param car car object in the street
 	 */
-	public StreetLifeModel(int width, int length) {
+	public StreetLifeModel(int width, int length, View view) {
 		this.setWidth(width);
 		this.setLength(length);
+		this.view = view;
+		view.build(width, length);
+		view.display();
 		cars = new ArrayList<Car>();
 	}
 
@@ -59,6 +63,10 @@ public class StreetLifeModel{
 		cars.add(car);
 	}
 	
+	public View getView() {
+		return view;
+	}
+	
 	
 	
 	
@@ -68,8 +76,10 @@ public class StreetLifeModel{
 	public void move() {
 		for (Car car : cars) {
 			car.move();
+			view.updateObject(car);
 		}
 	}
+	
 	
 	//TODO: Methode sinnvoll? Müsste doch auch alles über eine move Methode machbar sein, Zweck?
 	/**
