@@ -22,12 +22,12 @@ public class StreetLifeMain {
 	public static void main(String[] args) {
 		int NUMBER_OF_LANES = 5;
 		
-		Car car1 = new Car(0,1,"Fiat", 1);
-		Car car2 = new Car(0,2,"Audi", 2);
+		Car car1 = new Car(0,1,"F", 1);
+		Car car2 = new Car(0,2,"A", 2);
 		
 		
 		View view = new AsciiView();
-		StreetLifeModel model = new StreetLifeModel(NUMBER_OF_LANES, 10, view);
+		StreetLifeModel model = new StreetLifeModel(NUMBER_OF_LANES, 20, view);
 		model.addCar(car1);
 		model.addCar(car2);
 		Controller controller = new StreetLifeController(NUMBER_OF_LANES,model);
