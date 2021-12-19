@@ -14,7 +14,7 @@ public interface View {
 	/**
 	 * Builds an empty street
 	 * @param numberLanes the number on lanes on street
-	 * @param length the lenght in pixel
+	 * @param length the length in pixel
 	 */
 	abstract public void build(int numberLanes, int length);
 	
