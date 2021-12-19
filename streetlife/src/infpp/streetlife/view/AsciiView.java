@@ -13,6 +13,8 @@ import infpp.streetlife.model.Car;
  */
 public class AsciiView implements View {
 	private final String BREAK = "\n";
+	private final String EMPTY = " ";
+	private final String LINE = "-";
 	private String[][] printMatrix ;
 	
 	/** 
@@ -27,10 +29,10 @@ public class AsciiView implements View {
 			
 			for (int s = 0; s < length; s ++ ) {
 				if (l % 2 == 0) {
-					printMatrix[l][s] = "---";
+					printMatrix[l][s] = LINE;
 				}
 				else {
-					printMatrix[l][s] = "   ";
+					printMatrix[l][s] = EMPTY;
 				}
 			}
 		}
@@ -55,7 +57,7 @@ public class AsciiView implements View {
 		int oldPos = obj.getOldPos();
 		
 		try {
-			printMatrix[laneNumber][oldPos] = "   ";
+			printMatrix[laneNumber][oldPos] = EMPTY;
 			printMatrix[laneNumber][pos] = obj.getName();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -77,7 +79,7 @@ public class AsciiView implements View {
 	public void erase(Car obj) {
 		int laneNumber = calcLane(obj.getLane());
 		int pos = obj.getX();
-		printMatrix[laneNumber][pos] = "   ";
+		printMatrix[laneNumber][pos] = EMPTY;
 		}
 
 	private int calcLane(int laneNumber) {
