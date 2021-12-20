@@ -8,12 +8,9 @@ package infpp.streetlife.model;
  */
 public class Car extends StreetObject {
 	
-	/**
-	 * velocity of car in pixel/movement (ppm)
-	 */
-	private int velocity;
-	private int lane;
-	private int oldPos;
+	private int velocity; //car velocity in pixel per movement (ppm)
+	private int lane;	  //current lane of car
+	private int oldPos;   //remembering "old position" of car for the view
 	
 
 
@@ -23,10 +20,11 @@ public class Car extends StreetObject {
 	 * @param x x position of the car
 	 * @param y y position of the car
 	 * @param name name of the car
+	 * @param velocity velocity of car
 	 */
 	public Car(int x, int y, String name, int velocity) {
 		super(x, y, name);
-		this.setLane(y);
+		this.setLane(y); //the lane is the current y position
 		this.setVelocity(velocity);
 	}
 	
@@ -56,7 +54,7 @@ public class Car extends StreetObject {
 	}
 
 	/**
-	 * @param velocity das zu setzende Objekt velocity
+	 * @param velocity velocity
 	 */
 	public void setVelocity(int velocity) {
 		this.velocity = velocity;
@@ -65,9 +63,12 @@ public class Car extends StreetObject {
 	public int getLane() {
 		return lane;
 	}
-
+	/**
+	 * sets the current lane of the car. cannot be 0 or negative, as these lanes are highly illegal
+	 * @param lane
+	 */
 	public void setLane(int lane) {
-		if (lane >= 0)
+		if (lane >0)
 			this.lane = lane;
 	}
 	

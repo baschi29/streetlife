@@ -21,14 +21,18 @@ public class StreetLifeModel{
 	 * Constructor of the class
 	 * @param width width of the street = number of lanes
 	 * @param length length of the street
+	 * @view the gui the model should be displayed in
 	 */
 	public StreetLifeModel(int width, int length, View view) {
 		this.setWidth(width);
 		this.setLength(length);
+		cars = new ArrayList<Car>();
+		
+		//setting the view, building it and displaying it for the first time
 		this.view = view;
 		view.build(width, length);
 		view.display();
-		cars = new ArrayList<Car>();
+		
 	}
 
 	/**
@@ -59,16 +63,21 @@ public class StreetLifeModel{
 		this.length = length;
 	}
 
+	/**
+	 * 
+	 * @param car adds a car to the street
+	 */
 	public void addCar(Car car) {
 		cars.add(car);
 	}
-	
+	/**
+	 * 
+	 * @return View the view connected to the model
+	 */
 	public View getView() {
 		return view;
 	}
-	
-	
-	
+
 	
 	/**
 	 * moves the whole citylife for 1 step

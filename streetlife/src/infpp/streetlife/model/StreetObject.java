@@ -4,7 +4,7 @@
 package infpp.streetlife.model;
 
 /**
- * Class for objects on the street. Acts as parent class for every moving object
+ * abstract class for objects on the street. Acts as superclass for every moving object such as cars or animals
  */
 public abstract class StreetObject {
 	

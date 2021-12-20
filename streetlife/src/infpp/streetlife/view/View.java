@@ -26,18 +26,19 @@ public interface View {
 	
 	/**
 	 * updates an object on the screen
-	 * @param obj
+	 * @param obj the car to be updated
 	 */
 	abstract public void updateObject(Car obj);
 	
+	/**
+	 * Demolishes the car on the street
+	 */
+	abstract public void erase(Car obj);
+
 	
 	/**
 	 * Display the whole street
 	 */
 	abstract public void display();
 	
-	/**
-	 * Demolishes the car on the street
-	 */
-	abstract public void erase(Car obj);
-}
+}	
