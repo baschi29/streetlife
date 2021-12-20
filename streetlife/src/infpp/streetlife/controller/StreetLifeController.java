@@ -19,7 +19,6 @@ public class StreetLifeController implements Controller {
 	private int numLanes;
 	private int sizeStreet;
 	
-	
 	/**
 	 * Creates a new Controller
 	 * @param numLanes specifies the amount of lanes for the street

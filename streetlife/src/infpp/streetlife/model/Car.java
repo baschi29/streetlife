@@ -57,7 +57,11 @@ public class Car extends StreetObject {
 	 * @param velocity velocity
 	 */
 	public void setVelocity(int velocity) {
-		this.velocity = velocity;
+		if (velocity>0) 
+			this.velocity = velocity;
+		
+		else
+			throw new ArithmeticException("Velocity should be positive");
 	}
 	
 	public int getLane() {
@@ -70,14 +74,22 @@ public class Car extends StreetObject {
 	public void setLane(int lane) {
 		if (lane >0)
 			this.lane = lane;
+		else
+			throw new ArithmeticException("Lane number should be positive");
 	}
 	
-
+	/**
+	 * 
+	 * @return old position as integer
+	 */
 	public int getOldPos() {
 		return oldPos;
 	}
-
-	public void setOldPos(int oldPos) {
+	/**
+	 * 
+	 * @param oldPos the old Pos (for movement for example) -> private!
+	 */
+	private void setOldPos(int oldPos) {
 		this.oldPos = oldPos;
 	}
 }
