@@ -1,6 +1,4 @@
-/**
- * 
- */
+
 package infpp.streetlife.view;
 
 import infpp.streetlife.model.Car;

@@ -1,8 +1,5 @@
 /**
- * 
- */
-/**
  * @author Cornelius, Bastian
- * the streetlife-view commands everything revolving the human-computer-interaction such as gui/views and eventhandling
+ * the main package everything is cointained in. Ships with an tasty StreetLifeMain-Class for housing the main method and possible the bits and bobs needed for startup.
  */
 package infpp.streetlife;

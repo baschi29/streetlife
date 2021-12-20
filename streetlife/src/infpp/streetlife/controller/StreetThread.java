@@ -8,5 +8,5 @@ package infpp.streetlife.controller;
  *
  */
 public class StreetThread extends Thread{
-
+	//TODO stub
 }
