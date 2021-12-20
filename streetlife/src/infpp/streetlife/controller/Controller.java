@@ -10,6 +10,11 @@ package infpp.streetlife.controller;
 public interface Controller {
 
 	/**
+	 * Initiates the simulation without actually starting it
+	 */
+	abstract public void initiate();
+	
+	/**
 	 * Starts the simulation
 	 */
 	abstract public void start();
