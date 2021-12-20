@@ -33,11 +33,21 @@ public class StreetLifeController implements Controller {
 		this.sizeStreet = sizeStreet;
 		this.numberTicks = numTicks;
 		
-	    this.initiate();
+	    try {
+			this.initiate();
+			
+		} catch (Exception e) {
+			// fetch any errors during building-phase
+			System.out.println("Initiating of the StreetLife failed, see below for more details");
+			e.printStackTrace();
+		}
 	}
 
+	/**
+	 * initiates the model with some cars, and adds the view to it
+	 */
 	@Override
-	public void initiate() {
+	public void initiate() {	
 		this.view = new AsciiView();
 		this.model = new StreetLifeModel(numLanes, sizeStreet, view);
 		
@@ -48,16 +58,27 @@ public class StreetLifeController implements Controller {
 		model.addCar(car2);
 	}
 	
+	/**
+	 * starts the simulation and controls the display of the actions
+	 */
 	@Override
 	public void start() {
 		
-		for(int n = 0; n < numberTicks; n ++) {
-			model.move();
-			model.getView().display();
+		try {
+			for(int n = 0; n < numberTicks; n ++) {
+				model.move();
+				model.getView().display();
+			}
+		} catch (Exception e) {
+			// fetches any errors during the running-phase
+			System.out.println("Oops! Something unexpected occured and we are deeply sorry. Check the error message for details:");
+			e.printStackTrace();
 		}
 	}
 
-
+	/**
+	 * stops the whole simulation and ends the program //TODO 
+	 */
 	@Override
 	public void stop() {
 		// TODO Auto-generated method stub
