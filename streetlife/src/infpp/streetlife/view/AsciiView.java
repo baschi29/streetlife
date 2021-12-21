@@ -4,7 +4,7 @@
 package infpp.streetlife.view;
 
 import java.util.Arrays;
-
+import java.util.ArrayList;
 import infpp.streetlife.model.Car;
 
 /**
@@ -21,9 +21,10 @@ public class AsciiView implements View {
 	 * Builds an empty street with specified amount of lanes and the specified length
 	 */
 	@Override
-	public void build(int numberLanes, int length) {
+	public void build(int numberLanes, int length, ArrayList<Car> modelState) {
 		int streetwidht = numberLanes*2+1;
 		this.printMatrix = new String[streetwidht][length];
+		
 		for (int l = 0; l < streetwidht; l ++  ) {
 			
 			
@@ -35,6 +36,10 @@ public class AsciiView implements View {
 					printMatrix[l][s] = EMPTY;
 				}
 			}
+		}
+		
+		for (Car obj: modelState) {
+			this.addObject(obj);
 		}
 	}
 
@@ -67,7 +72,12 @@ public class AsciiView implements View {
 		
 	
 	@Override
-	public void display() {
+	public void display(ArrayList<Car> modelState) {
+		
+		for (Car obj: modelState) {
+			this.updateObject(obj);
+		}
+		
 		for (int l = 0; l < printMatrix.length; l ++) {
 			System.out.println(Arrays.toString(printMatrix[l]));
 		}

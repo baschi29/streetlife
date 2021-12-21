@@ -48,13 +48,17 @@ public class StreetLifeController implements Controller {
 	@Override
 	public void initiate() {	
 		this.view = new AsciiView();
-		this.model = new StreetLifeModel(numLanes, sizeStreet, view);
+		this.model = new StreetLifeModel(numLanes, sizeStreet);
 		
 		Car car1 = new Car(0,1,"F", 1);
 		Car car2 = new Car(0,2,"A", 2);
 		
-		model.addCar(car1);
-		model.addCar(car2);
+		this.model.addCar(car1);
+		this.model.addCar(car2);
+		
+		//setting the view, building it and displaying it for the first time
+		this.view.build(numLanes, sizeStreet, this.model.getModelState());
+		this.view.display(this.model.getModelState());
 	}
 	
 	/**
@@ -65,8 +69,8 @@ public class StreetLifeController implements Controller {
 		
 		try {
 			for(int n = 0; n < numberTicks; n ++) {
-				model.move();
-				model.getView().display();
+				this.model.move();
+				this.view.display(this.model.getModelState());
 			}
 		} catch (Exception e) {
 			// fetches any errors during the running-phase

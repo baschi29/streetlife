@@ -5,16 +5,14 @@ package infpp.streetlife.model;
 
 import java.util.ArrayList ;
 import java.util.Random;
-import infpp.streetlife.view.View;
 
 /**
  * Class representing the world all other objects exist in
  */
-public class StreetLifeModel{
+public class StreetLifeModel implements Model{
 	
 	private int width;
 	private int length;
-	private View view;
 	private ArrayList<Car> cars;
 	
 	/**
@@ -23,15 +21,10 @@ public class StreetLifeModel{
 	 * @param length length of the street
 	 * @view the gui the model should be displayed in
 	 */
-	public StreetLifeModel(int width, int length, View view) {
+	public StreetLifeModel(int width, int length) {
 		this.setWidth(width);
 		this.setLength(length);
 		cars = new ArrayList<Car>();
-		
-		//setting the view, building it and displaying it for the first time
-		this.view = view;
-		view.build(width, length);
-		view.display();
 		
 	}
 
@@ -70,14 +63,6 @@ public class StreetLifeModel{
 	public void addCar(Car car) {
 		cars.add(car);
 	}
-	/**
-	 * 
-	 * @return View the view connected to the model
-	 */
-	public View getView() {
-		return view;
-	}
-
 	
 	/**
 	 * moves the whole citylife for 1 step
@@ -85,7 +70,6 @@ public class StreetLifeModel{
 	public void move() {
 		for (Car car : cars) {
 			car.move();
-			view.updateObject(car);
 		}
 	}
 	
@@ -120,5 +104,10 @@ public class StreetLifeModel{
 				+ "; Length: "
 				+ Integer.toString(this.length)
 				+ carString;
+	}
+
+	@Override
+	public ArrayList<Car> getModelState() {
+		return this.cars;
 	}
 }
