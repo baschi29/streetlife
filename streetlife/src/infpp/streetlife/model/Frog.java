@@ -9,7 +9,7 @@ import java.util.Random;
  * Class for frogs. A Car has a position (x,y), a specified name and a specific jump interval and
  * jump range
  */
-public class Frog extends StreetObject{
+public class Frog extends MovingStreetObject{
 	
 	/**
 	 * Interval in which the frog jumps, defined in movements/jump
@@ -34,11 +34,10 @@ public class Frog extends StreetObject{
 	 * @param jumpInterval number of movement calls it takes for the frog to jump
 	 * @param jumpRange distance the frog is able to jump
 	 */
-	public Frog(int x, int y, String name, int jumpInterval, int jumpRange) {
-		super(x, y, name);
-		this.setJumpInterval(jumpInterval);
+	public Frog(int x, int y, String name, int jumpRange, int velocity) {
+		super(x, y, name, velocity);
 		this.setJumpRange(jumpRange);
-		this.setIntervalCounter(jumpInterval);
+		this.setVelocity(velocity);
 	}
 
 	/**
@@ -49,10 +48,11 @@ public class Frog extends StreetObject{
 	}
 
 	/**
-	 * @param jumpInterval sets the jump interval of the frog
+	 * @param jumpInterval sets the jump interval of the frog, resets IntervalCounter
 	 */
-	public void setJumpInterval(int jumpInterval) {
+	private void setJumpInterval(int jumpInterval) {
 		this.jumpInterval = jumpInterval;
+		this.setIntervalCounter(jumpInterval);
 	}
 
 	/**
@@ -67,6 +67,18 @@ public class Frog extends StreetObject{
 	 */
 	public void setJumpRange(int jumpRange) {
 		this.jumpRange = jumpRange;
+	}
+	
+	/**
+	 * @param velocity sets the velocity of the frog aswell as the jumpInterval resulting
+	 * from velocity and jumpRange
+	 * jumpInterval = velocity / jumpRange
+	 */
+	@Override
+	public void setVelocity(int velocity) {
+		super.setVelocity(velocity);
+		this.setJumpInterval((int) ( this.getVelocity() / this.getJumpRange() )); // may round because of typecast
+		
 	}
 
 	/**

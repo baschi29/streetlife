@@ -79,7 +79,8 @@ public abstract class StreetObject {
 	}
 	
 	/**
-	 * @return description returns the description of the object as a String with name, x and y position
+	 * @return description returns the description of the object as a String
+	 * with name, x and y position
 	 */
 	public String toString() {
 		return this.name
