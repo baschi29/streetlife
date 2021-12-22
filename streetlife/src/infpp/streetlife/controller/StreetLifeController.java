@@ -45,8 +45,8 @@ public class StreetLifeController implements Controller {
 	/**
 	 * initiates the model with some cars, and adds the view to it
 	 */
-	@Override
-	public void initiate() {	
+	
+	private void initiate() {	
 		this.view = new AsciiView();
 		this.model = new StreetLifeModel(numLanes, sizeStreet);
 		
@@ -56,7 +56,7 @@ public class StreetLifeController implements Controller {
 		this.model.addCar(car1);
 		this.model.addCar(car2);
 		
-		//setting the view, building it and displaying it for the first time
+		//building it and displaying it for the first time
 		this.view.build(numLanes, sizeStreet, this.model.getModelState());
 		this.view.display(this.model.getModelState());
 	}
