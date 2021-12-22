@@ -6,10 +6,11 @@ package infpp.streetlife.view;
 import java.util.Arrays;
 import java.util.ArrayList;
 import infpp.streetlife.model.Car;
+import infpp.streetlife.model.StreetObject;
 
 /**
  * @author Cornelius
- *
+ * Important: Does only work with cars
  */
 public class AsciiView implements View {
 	private final String BREAK = "\n";
@@ -21,7 +22,7 @@ public class AsciiView implements View {
 	 * Builds an empty street with specified amount of lanes and the specified length
 	 */
 	@Override
-	public void build(int numberLanes, int length, ArrayList<Car> modelState) {
+	public void build(int numberLanes, int length, ArrayList<StreetObject> modelState) {
 		int streetwidht = numberLanes*2+1;
 		this.printMatrix = new String[streetwidht][length];
 		
@@ -38,8 +39,8 @@ public class AsciiView implements View {
 			}
 		}
 		
-		for (Car obj: modelState) {
-			this.addObject(obj);
+		for (StreetObject obj: modelState) {
+			this.addObject((Car)obj);
 		}
 	}
 
@@ -72,10 +73,10 @@ public class AsciiView implements View {
 		
 	
 	@Override
-	public void display(ArrayList<Car> modelState) {
+	public void display(ArrayList<StreetObject> modelState) {
 		
-		for (Car obj: modelState) {
-			this.updateObject(obj);
+		for (StreetObject obj: modelState) {
+			this.updateObject((Car) obj);
 		}
 		
 		for (int l = 0; l < printMatrix.length; l ++) {

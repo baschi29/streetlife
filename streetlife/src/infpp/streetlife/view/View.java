@@ -2,6 +2,7 @@
 package infpp.streetlife.view;
 
 import infpp.streetlife.model.Car;
+import infpp.streetlife.model.StreetObject;
 
 import java.util.ArrayList;
 
@@ -16,7 +17,7 @@ public interface View {
 	 * @param numberLanes the number on lanes on street
 	 * @param length the length in pixel
 	 */
-	abstract public void build(int numberLanes, int length, ArrayList<Car> modelState);
+	abstract public void build(int numberLanes, int length, ArrayList<StreetObject> modelState);
 	
 	/**
 	 * adds a car to the street
@@ -39,6 +40,6 @@ public interface View {
 	/**
 	 * Display the whole street
 	 */
-	abstract public void display(ArrayList<Car> modelState);
+	abstract public void display(ArrayList<StreetObject> modelState);
 	
 }	

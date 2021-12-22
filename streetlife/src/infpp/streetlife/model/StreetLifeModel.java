@@ -12,7 +12,7 @@ public class StreetLifeModel implements Model{
 	
 	private int width;
 	private int length;
-	private ArrayList<Car> cars;
+	private ArrayList<StreetObject> streetObjects;
 	
 	/**
 	 * Constructor of the class
@@ -23,7 +23,7 @@ public class StreetLifeModel implements Model{
 	public StreetLifeModel(int width, int length) {
 		this.setWidth(width);
 		this.setLength(length);
-		cars = new ArrayList<Car>();
+		streetObjects = new ArrayList<StreetObject>();
 		
 	}
 
@@ -60,14 +60,15 @@ public class StreetLifeModel implements Model{
 	 * @param car adds a car to the street
 	 */
 	public void addCar(Car car) {
-		cars.add(car);
+		streetObjects.add(car);
 	}
 	
 	/**
 	 * moves the whole citylife for 1 step
 	 */
 	public void move() {
-		for (Car car : cars) {
+		for (StreetObject obj : streetObjects) {
+			Car car = (Car) obj;
 			car.move();
 		}
 	}
@@ -78,8 +79,8 @@ public class StreetLifeModel implements Model{
 	public String toString() {
 		String carString = "";
 		
-		for (Car car : cars) {
-			carString += car.toString() + "\n";
+		for (StreetObject obj : streetObjects) {
+			carString += obj.toString() + "\n";
 		}
 		return "Width: "
 				+ Integer.toString(this.width)
@@ -89,7 +90,7 @@ public class StreetLifeModel implements Model{
 	}
 
 	@Override
-	public ArrayList<Car> getModelState() {
-		return this.cars;
+	public ArrayList<StreetObject> getModelState() {
+		return this.streetObjects;
 	}
 }
