@@ -21,7 +21,7 @@ public class Car extends MovingStreetObject {
 	 * @param name name of the car
 	 * @param velocity velocity of car
 	 */
-	public Car(int x, int y, String name, int velocity) {
+	public Car(int x, int y, String name, float velocity) {
 		super(x, y, name, velocity);
 		this.setLane(y); //the lane is the current y position
 	}
@@ -32,7 +32,7 @@ public class Car extends MovingStreetObject {
 	
 	public void move() {
 		this.setOldPos(this.getX());
-		this.setX(this.getX() + this.getVelocity());
+		this.setX((int) (this.getX() + this.getVelocity()));
 	}
 	
 	public int getLane() {

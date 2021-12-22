@@ -11,7 +11,7 @@ public abstract class MovingStreetObject extends StreetObject{
 	/**
 	 * velocity in pixel/movement
 	 */
-	private int velocity;
+	private float velocity;
 	
 	/**
 	 * Constructor of the Class
@@ -20,7 +20,7 @@ public abstract class MovingStreetObject extends StreetObject{
 	 * @param name name of the object
 	 * @param velocity velocity of the object
 	 */
-	public MovingStreetObject(int x, int y, String name, int velocity) {
+	public MovingStreetObject(int x, int y, String name, float velocity) {
 		super(x, y, name);
 		this.setVelocity(velocity);
 	}
@@ -33,7 +33,7 @@ public abstract class MovingStreetObject extends StreetObject{
 	/**
 	 * @return velocity velocity of the moving object
 	 */
-	public int getVelocity() {
+	public float getVelocity() {
 		return velocity;
 	}
 
@@ -41,7 +41,7 @@ public abstract class MovingStreetObject extends StreetObject{
 	 * @param velocity sets the velocity of the moving object
 	 * negative velocities are highly illegal
 	 */
-	public void setVelocity(int velocity) {
+	public void setVelocity(float velocity) {
 		if (velocity >= 0) {
 			this.velocity = velocity;
 		}

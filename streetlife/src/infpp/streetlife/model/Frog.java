@@ -34,7 +34,7 @@ public class Frog extends MovingStreetObject{
 	 * @param jumpInterval number of movement calls it takes for the frog to jump
 	 * @param jumpRange distance the frog is able to jump
 	 */
-	public Frog(int x, int y, String name, int jumpRange, int velocity) {
+	public Frog(int x, int y, String name, int jumpRange, float velocity) {
 		super(x, y, name, velocity);
 		this.setJumpRange(jumpRange);
 		this.setVelocity(velocity);
@@ -76,7 +76,7 @@ public class Frog extends MovingStreetObject{
 	 * because of the restriction of one jump per move the velocity cannot be higher than jumpRange
 	 */
 	@Override
-	public void setVelocity(int velocity) {
+	public void setVelocity(float velocity) {
 		
 		if (this.getVelocity() <= this.getJumpRange()) {
 			super.setVelocity(velocity);

@@ -51,7 +51,7 @@ public class StreetLifeController implements Controller {
 		
 		Car car1 = new Car(0,1,"Fiat", 1);
 		Car car2 = new Car(0,2,"Audi", 2);
-		Frog frog1 = new Frog(10, 4, "Frog", 2, 1);
+		Frog frog1 = new Frog(10, 4, "Frog", 4, 1);
 		
 		this.model.addObject(car1);
 		this.model.addObject(car2);
