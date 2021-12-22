@@ -70,14 +70,22 @@ public class Frog extends MovingStreetObject{
 	}
 	
 	/**
-	 * @param velocity sets the velocity of the frog aswell as the jumpInterval resulting
+	 * @param velocity sets the velocity of the frog as well as the jumpInterval resulting
 	 * from velocity and jumpRange
-	 * jumpInterval = velocity / jumpRange
+	 * jumpInterval = jumpRange / velocity
+	 * because of the restriction of one jump per move the velocity cannot be higher than jumpRange
 	 */
 	@Override
 	public void setVelocity(int velocity) {
-		super.setVelocity(velocity);
-		this.setJumpInterval((int) ( this.getVelocity() / this.getJumpRange() )); // may round because of typecast
+		
+		if (this.getVelocity() <= this.getJumpRange()) {
+			super.setVelocity(velocity);
+			this.setJumpInterval((int) ( this.getJumpRange() / this.getVelocity() )); // may round because of typecast
+		}
+		else {
+			super.setVelocity(this.getJumpRange());
+			this.setJumpInterval(1);
+		}
 		
 	}
 

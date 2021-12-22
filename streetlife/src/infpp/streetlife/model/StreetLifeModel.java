@@ -54,7 +54,8 @@ public class StreetLifeModel implements Model{
 	public void setLength(int length) {
 		this.length = length;
 	}
-
+	
+	//TODO: making StreeLifeModel more generic -> eg. to add frogs
 	/**
 	 * 
 	 * @param car adds a car to the street
