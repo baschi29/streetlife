@@ -119,10 +119,10 @@ public class Frog extends MovingStreetObject{
 			int movementSign = rd.nextInt(2) * 2 - 1; // Randomly -1 or +1
 			
 			if (xMovement) {
-				this.setX(movementSign * this.getJumpRange());
+				this.setX(this.getX() + movementSign * this.getJumpRange());
 			}
 			else {
-				this.setY(movementSign * this.getJumpRange());
+				this.setY(this.getY() + movementSign * this.getJumpRange());
 			}
 			
 			this.setIntervalCounter(this.getJumpInterval());

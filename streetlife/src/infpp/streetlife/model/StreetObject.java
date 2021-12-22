@@ -84,9 +84,9 @@ public abstract class StreetObject {
 	 */
 	public String toString() {
 		return this.name
-				+ " at: x - "
+				+ " at: x = "
 				+ Integer.toString(this.x)
-				+ " y - "
+				+ " ; y = "
 				+ Integer.toString(this.y);
 	}
 }

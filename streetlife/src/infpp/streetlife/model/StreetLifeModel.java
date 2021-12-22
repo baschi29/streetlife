@@ -90,6 +90,7 @@ public class StreetLifeModel implements Model{
 				+ Integer.toString(this.width)
 				+ "; Length: "
 				+ Integer.toString(this.length)
+				+ "\n"
 				+ objectString;
 	}
 

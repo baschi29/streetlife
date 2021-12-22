@@ -3,10 +3,8 @@
  */
 package infpp.streetlife.controller;
 
-import infpp.streetlife.model.Car;
-import infpp.streetlife.model.StreetLifeModel;
-import infpp.streetlife.view.AsciiView;
-import infpp.streetlife.view.View;
+import infpp.streetlife.model.*;
+import infpp.streetlife.view.*;
 
 /**
  *
@@ -47,17 +45,20 @@ public class StreetLifeController implements Controller {
 	 */
 	
 	private void initiate() {	
-		this.view = new AsciiView();
+		//this.view = new AsciiView();
+		this.view = new TextView();
 		this.model = new StreetLifeModel(numLanes, sizeStreet);
 		
-		Car car1 = new Car(0,1,"F", 1);
-		Car car2 = new Car(0,2,"A", 2);
+		Car car1 = new Car(0,1,"Fiat", 1);
+		Car car2 = new Car(0,2,"Audi", 2);
+		Frog frog1 = new Frog(10, 4, "Frog", 2, 1);
 		
 		this.model.addObject(car1);
 		this.model.addObject(car2);
+		this.model.addObject(frog1);
 		
 		//building it and displaying it for the first time
-		this.view.build(numLanes, sizeStreet, this.model.getModelState());
+		this.view.build(this.model.getWidth(), this.model.getLength(), this.model.getModelState());
 		this.view.display(this.model.getModelState());
 	}
 	
