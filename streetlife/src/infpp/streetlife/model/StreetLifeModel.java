@@ -3,8 +3,7 @@
  */
 package infpp.streetlife.model;
 
-import java.util.ArrayList ;
-import java.util.Random;
+import java.util.ArrayList;
 
 /**
  * Class representing the world all other objects exist in
@@ -71,23 +70,6 @@ public class StreetLifeModel implements Model{
 		for (Car car : cars) {
 			car.move();
 		}
-	}
-	
-	
-	//TODO: Methode sinnvoll? Müsste doch auch alles über eine move Methode machbar sein, Zweck?
-	/**
-	 * Randomly moves everything
-	 */
-	public void moveRandom() {
-		
-		Random rd = new Random();
-		int movementSign = rd.nextInt(2) * 2 - 1; // Randomly -1 or +1
-		for (Car car : cars) {
-		
-			car.move(movementSign);
-		
-		}
-		
 	}
 	
 	/**
