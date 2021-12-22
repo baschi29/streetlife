@@ -53,8 +53,8 @@ public class StreetLifeController implements Controller {
 		Car car1 = new Car(0,1,"F", 1);
 		Car car2 = new Car(0,2,"A", 2);
 		
-		this.model.addCar(car1);
-		this.model.addCar(car2);
+		this.model.addObject(car1);
+		this.model.addObject(car2);
 		
 		//building it and displaying it for the first time
 		this.view.build(numLanes, sizeStreet, this.model.getModelState());

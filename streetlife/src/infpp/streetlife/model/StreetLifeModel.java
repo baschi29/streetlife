@@ -60,17 +60,20 @@ public class StreetLifeModel implements Model{
 	 * 
 	 * @param car adds a car to the street
 	 */
-	public void addCar(Car car) {
-		streetObjects.add(car);
+	public void addObject(StreetObject obj) {
+		streetObjects.add(obj);
 	}
 	
 	/**
-	 * moves the whole citylife for 1 step
+	 * moves the whole streetlife for 1 step
 	 */
 	public void move() {
+		
 		for (StreetObject obj : streetObjects) {
-			Car car = (Car) obj;
-			car.move();
+	
+			if (obj instanceof MovingStreetObject) {
+				((MovingStreetObject) obj).move();
+			}
 		}
 	}
 	
@@ -78,16 +81,16 @@ public class StreetLifeModel implements Model{
 	 * @return description returns the description of the street as a String with width, length and the description of the car
 	 */
 	public String toString() {
-		String carString = "";
+		String objectString = "";
 		
 		for (StreetObject obj : streetObjects) {
-			carString += obj.toString() + "\n";
+			objectString += obj.toString() + "\n";
 		}
 		return "Width: "
 				+ Integer.toString(this.width)
 				+ "; Length: "
 				+ Integer.toString(this.length)
-				+ carString;
+				+ objectString;
 	}
 
 	@Override
