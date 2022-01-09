@@ -46,7 +46,8 @@ public class StreetLifeController implements Controller {
 	
 	private void initiate() {	
 		//this.view = new AsciiView();
-		this.view = new TextView();
+		//this.view = new TextView();
+		this.view = new StreetLifeView();
 		this.model = new StreetLifeModel(numLanes, sizeStreet);
 		
 		Car car1 = new Car(0,1,"Fiat", 1);

@@ -5,7 +5,6 @@ package infpp.streetlife.view;
 
 import java.util.ArrayList;
 
-import infpp.streetlife.model.Car;
 import infpp.streetlife.model.StreetObject;
 
 /**
@@ -22,24 +21,6 @@ public class TextView implements View {
 		System.out.println("Starting OceanLife ...");
 		this.numberLanes = numberLanes;
 		this.length = length;
-
-	}
-
-	@Override
-	public void addObject(Car obj) {
-		// hier muss nichts geschehen
-
-	}
-
-	@Override
-	public void updateObject(Car obj) {
-		// hier muss nichts geschehen
-
-	}
-
-	@Override
-	public void erase(Car obj) {
-		// hier muss nichts geschehen
 
 	}
 

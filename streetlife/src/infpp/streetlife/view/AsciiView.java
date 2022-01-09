@@ -48,14 +48,12 @@ public class AsciiView implements View {
 	 * adds an object to the view
 	 */
 	
-	@Override
 	public void addObject(Car obj) {
 		int laneNumber = calcLane(obj.getLane());
 		int pos = obj.getX();
 		printMatrix[laneNumber][pos] = obj.getName();
 		}
 	
-	@Override
 	public void updateObject(Car obj) {
 		
 		int laneNumber = calcLane(obj.getLane());
@@ -71,8 +69,6 @@ public class AsciiView implements View {
 		}
 		}
 		
-	
-	@Override
 	public void display(ArrayList<StreetObject> modelState) {
 		
 		for (StreetObject obj: modelState) {
@@ -86,7 +82,6 @@ public class AsciiView implements View {
 
 	}
 
-	@Override
 	public void erase(Car obj) {
 		int laneNumber = calcLane(obj.getLane());
 		int pos = obj.getX();
