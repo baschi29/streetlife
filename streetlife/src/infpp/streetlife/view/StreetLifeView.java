@@ -9,13 +9,14 @@ import infpp.streetlife.model.StreetObject;
 
 public class StreetLifeView implements View {
 
-	StreetLifeGUI gui = new StreetLifeGUI();
+	private StreetLifeGUI gui = new StreetLifeGUI();
 	
 	@Override
 	public void build(int numberLanes, int length, ArrayList<StreetObject> modelState) {
 		
 		
 		gui.setVisible(true);
+		
 
 	}
 
