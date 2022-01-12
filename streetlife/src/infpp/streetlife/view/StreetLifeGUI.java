@@ -15,6 +15,11 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 
+/**
+ * OLD GUI
+ * @author Basti, Cornelius
+ *
+ */
 
 public class StreetLifeGUI extends JFrame implements ActionListener {
 	
