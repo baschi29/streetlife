@@ -8,6 +8,7 @@ import java.awt.Image;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.EventObject;
 
 import javax.swing.ImageIcon;
@@ -23,7 +24,11 @@ import javax.swing.JSeparator;
 import javax.swing.JSpinner;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.EmptyBorder;
+
+import infpp.streetlife.model.StreetObject;
+
 import javax.swing.SpinnerNumberModel;
+import javax.swing.DefaultComboBoxModel;
 /**
  *  The StreetGUI represents the graphical interface of the street with the displayment area, control buttons etc.
  * @author Cornelius
@@ -32,6 +37,8 @@ import javax.swing.SpinnerNumberModel;
 public class StreetGUI extends JFrame {
 
 	private JPanel contentPane;
+	private ArrayList<StreetObject> nonAddedCars;
+	private ArrayList<StreetObject> addedCars;
 
 	/**
 	 * Launch the application.
@@ -40,7 +47,7 @@ public class StreetGUI extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					StreetGUI frame = new StreetGUI();
+					StreetGUI frame = new StreetGUI(new ArrayList<StreetObject>());
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -52,7 +59,9 @@ public class StreetGUI extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public StreetGUI() {
+	public StreetGUI(ArrayList<StreetObject> modelState) {
+		nonAddedCars = modelState;
+		
 		setTitle("Froschsimulator 2022");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 801, 460);
@@ -145,7 +154,10 @@ public class StreetGUI extends JFrame {
 		gbc_lblInsert.gridy = 0;
 		buttonPanel.add(lblInsert, gbc_lblInsert);
 		
-		JComboBox comboBoxInsert = new JComboBox();
+		JComboBox<StreetObject> comboBoxInsert = new JComboBox<StreetObject>();
+			for(StreetObject obj : nonAddedCars) {
+				comboBoxInsert.addItem(obj);
+			}
 		GridBagConstraints gbc_comboBoxInsert = new GridBagConstraints();
 		gbc_comboBoxInsert.insets = new Insets(0, 0, 5, 5);
 		gbc_comboBoxInsert.fill = GridBagConstraints.HORIZONTAL;
