@@ -27,6 +27,7 @@ public class StreetLifeModel implements Model{
 		
 	}
 
+	
 	/**
 	 * @return width width of street
 	 */
