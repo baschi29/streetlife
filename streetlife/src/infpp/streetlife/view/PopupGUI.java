@@ -8,7 +8,11 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-
+/**
+ * OLD GUI
+ * @author Cornelius
+ *
+ */
 public class PopupGUI extends JFrame implements ActionListener {
 
 	private JPanel contentPane;
