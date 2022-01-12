@@ -14,4 +14,10 @@
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
+	<variableList>
+		<variable>
+			<name>ICON_MAIN</name>
+			<value>file:/C:/Users/banan/git/streetlife/streetlife/img/frog.png</value>
+		</variable>
+	</variableList>
 </projectDescription>
