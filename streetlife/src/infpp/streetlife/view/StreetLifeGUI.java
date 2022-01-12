@@ -5,15 +5,19 @@ package infpp.streetlife.view;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
-import java.util.ArrayList;
+import java.awt.event.*;
 
-import javax.swing.*;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
 
-import infpp.streetlife.model.StreetObject;
 
-public class StreetLifeGUI extends JFrame {
+public class StreetLifeGUI extends JFrame implements ActionListener {
 	
-	private StreetLifeGUI gui;
 	private JPanel generalPanel;
 	private JPanel controlPanel;
 	private JPanel drawingArea;
@@ -21,12 +25,28 @@ public class StreetLifeGUI extends JFrame {
 	private JPanel addingArea;
 	private JPanel deletingArea;
 	private JPanel loadingSavingArea;
+	private JButton startButton = new JButton("Start");
+	private JButton stopButton = new JButton("Stop");
+	private JButton stepButton = new JButton("Schritt");
+	private JButton quitButton = new JButton("Quit");
 	//private JPanel controllingArea;
 	
 	/**
 	 * constructor of the general StreetLifeGUI
 	 */
 	public StreetLifeGUI() {
+		
+		try { SwingUtilities.invokeAndWait(
+				new Runnable() {
+			public void run() {
+				builtGUI();
+			}
+		});
+			
+		} catch (Exception exc) {
+			System.out.println("Error: " + exc);
+		}
+		
 		
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setExtendedState(JFrame.MAXIMIZED_BOTH);
@@ -36,10 +56,15 @@ public class StreetLifeGUI extends JFrame {
 	}
 	
 	private void builtGUI() {
-		//structuring via JPanels
+		
+		
+				this.setTitle("StreetLife - die sehr epische Froschsimulation 2022");
+	
+		
+				//structuring via JPanels
 		
 				generalPanel = new JPanel(new BorderLayout());
-				gui.setContentPane(generalPanel);
+				this.setContentPane(generalPanel);
 				
 				controlPanel = new JPanel(new GridLayout(1, 4, 10, 5));
 				generalPanel.add(controlPanel, BorderLayout.PAGE_START);
@@ -55,14 +80,12 @@ public class StreetLifeGUI extends JFrame {
 				controllingArea = new JPanel(new GridLayout(2, 3));
 				controlPanel.add(controllingArea);
 				//Elements in the controlling Area
-				JButton startButton = new JButton("Start");
-				JButton stopButton = new JButton("Stop");
-				JButton stepButton = new JButton("Schritt");
-				JButton quitButton = new JButton("Quit");
+				
 				controllingArea.add(startButton);
 				controllingArea.add(stopButton);
 				controllingArea.add(stepButton);
 				controllingArea.add(quitButton);
+				quitButton.addActionListener(this);
 				
 				addingArea = new JPanel(new GridLayout(2, 3));
 				controlPanel.add(addingArea);
@@ -93,6 +116,18 @@ public class StreetLifeGUI extends JFrame {
 				generalPanel.add(drawingArea, BorderLayout.CENTER);
 				//Elements in the drawing Area
 				
+				
+				
+				
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if (e.getSource() == this.quitButton){
+			PopupGUI popup = new PopupGUI();
+			popup.setVisible(true);
+		}
+		
 	}
 	
 
