@@ -3,6 +3,8 @@
  */
 package infpp.streetlife.controller;
 
+import java.util.ArrayList;
+
 import infpp.streetlife.model.*;
 import infpp.streetlife.view.*;
 
@@ -16,6 +18,7 @@ public class StreetLifeController implements Controller {
 	private View view;
 	private int numLanes;
 	private int sizeStreet;
+	private ArrayList<String> possibleCars;
 	
 	/**
 	 * Creates a new Controller
@@ -29,6 +32,10 @@ public class StreetLifeController implements Controller {
 		this.numLanes = numLanes;
 		this.sizeStreet = sizeStreet;
 		this.numberTicks = numTicks;
+		this.possibleCars = new ArrayList<>();
+		this.possibleCars.add("Fiat");
+		this.possibleCars.add("Ford");
+		this.possibleCars.add("Ferrari");
 		
 	    try {
 			this.initiate();
@@ -97,14 +104,41 @@ public class StreetLifeController implements Controller {
 	}
 
 	@Override
-	public void addCar() {
-		// TODO Auto-generated method stub
+	public ArrayList<String> getListOfCars() {
+		return this.possibleCars;
+	}
+
+	@Override
+	public void addMovingObject(String str) throws Exception{
+		
+		if (str == "Frog") {
+			this.model.addObject(new Frog(10, 4, "Frog", 4, 1));
+		}
+		else if (str == "Fiat") {
+			this.model.addObject(new Car(0,1,"Fiat", 1));
+		}
+		else if (str == "Ford") {
+			this.model.addObject(new Car(0,2,"Ford", 2));
+		}
+		else if (str == "Ferrari") {
+			this.model.addObject(new Car(0,1,"Ferrari", 5));
+		}
+		else {
+			throw new IllegalArgumentException("Tried adding Object that isn't predefined");
+		}
 		
 	}
 
 	@Override
-	public void delCar() {
-		// TODO Auto-generated method stub
+	public void deleteObject(StreetObject obj) {
+		this.model.deleteObject(obj);
 		
 	}
+
+	@Override
+	public void step() {
+		this.model.move();
+		
+	}
+
 }

@@ -22,6 +22,7 @@ public class StreetLifeModel implements Model{
 	 * @view the gui the model should be displayed in
 	 */
 	public StreetLifeModel(int width, int length) {
+		
 		this.setWidth(width);
 		this.setLength(length);
 		this.streetObjects = new ArrayList<StreetObject>();
