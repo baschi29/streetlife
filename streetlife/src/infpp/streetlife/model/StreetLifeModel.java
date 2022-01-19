@@ -5,6 +5,8 @@ package infpp.streetlife.model;
 
 import java.util.ArrayList;
 
+import infpp.streetlife.view.View;
+
 /**
  * Class representing the world all other objects exist in
  */
@@ -98,5 +100,11 @@ public class StreetLifeModel implements Model{
 	@Override
 	public ArrayList<StreetObject> getModelState() {
 		return this.streetObjects;
+	}
+
+
+	public void setView(View view) {
+		// TODO Auto-generated method stub
+		
 	}
 }

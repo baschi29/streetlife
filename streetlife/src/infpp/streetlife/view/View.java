@@ -1,26 +1,29 @@
 
 package infpp.streetlife.view;
 
-import infpp.streetlife.model.StreetObject;
-
-import java.util.ArrayList;
+import infpp.streetlife.controller.Controller;
+import infpp.streetlife.model.Model;
+import infpp.streetlife.model.StreetLifeModel;
 
 /**
  * @author Cornelius
  *
  */
 public interface View {
-
+	
 	/**
 	 * Builds an empty street
 	 * @param numberLanes the number on lanes on street
 	 * @param length the length in pixel
 	 */
-	abstract public void build(int numberLanes, int length, ArrayList<StreetObject> modelState);
+	abstract public void build();
 	
-	/**
-	 * Display the whole street
-	 */
-	abstract public void display(ArrayList<StreetObject> modelState);
+	abstract public void setModel(StreetLifeModel model);
+	
+	abstract public Model getModel();
+	
+	abstract public void setController(Controller cntrl);
+	
+	abstract public Controller getController();
 	
 }	

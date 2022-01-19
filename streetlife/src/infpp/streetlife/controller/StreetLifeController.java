@@ -12,7 +12,7 @@ import infpp.streetlife.view.*;
 public class StreetLifeController implements Controller {
 
 	private int numberTicks;
-	private StreetLifeModel model;
+	private StreetLifeModel model; //TODO Basti repariert, Basti tauscht aus
 	private View view;
 	private int numLanes;
 	private int sizeStreet;
@@ -58,9 +58,14 @@ public class StreetLifeController implements Controller {
 		this.model.addObject(car2);
 		this.model.addObject(frog1);
 		
+		
+		this.view.setModel(model);
+		this.view.setController(this);
+		this.model.setView(view);
+		
 		//building it and displaying it for the first time
-		this.view.build(this.model.getWidth(), this.model.getLength(), this.model.getModelState());
-		this.view.display(this.model.getModelState());
+		//this.view.build(this.model.getWidth(), this.model.getLength(), this.model.getModelState());
+		//this.view.display(this.model.getModelState());
 	}
 	
 	/**
@@ -72,7 +77,7 @@ public class StreetLifeController implements Controller {
 		try {
 			for(int n = 0; n < numberTicks; n ++) {
 				this.model.move();
-				this.view.display(this.model.getModelState());
+				//this.view.display(this.model.getModelState());
 			}
 		} catch (Exception e) {
 			// fetches any errors during the running-phase
@@ -86,6 +91,18 @@ public class StreetLifeController implements Controller {
 	 */
 	@Override
 	public void stop() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void addCar() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void delCar() {
 		// TODO Auto-generated method stub
 		
 	}
