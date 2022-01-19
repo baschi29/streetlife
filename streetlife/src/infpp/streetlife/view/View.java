@@ -3,7 +3,6 @@ package infpp.streetlife.view;
 
 import infpp.streetlife.controller.Controller;
 import infpp.streetlife.model.Model;
-import infpp.streetlife.model.StreetLifeModel;
 
 /**
  * @author Cornelius
@@ -18,7 +17,7 @@ public interface View {
 	 */
 	abstract public void build();
 	
-	abstract public void setModel(StreetLifeModel model);
+	abstract public void setModel(Model model);
 	
 	abstract public Model getModel();
 	

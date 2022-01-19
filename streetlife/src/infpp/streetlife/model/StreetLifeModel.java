@@ -5,8 +5,6 @@ package infpp.streetlife.model;
 
 import java.util.ArrayList;
 
-import infpp.streetlife.view.View;
-
 /**
  * Class representing the world all other objects exist in
  */
@@ -25,7 +23,7 @@ public class StreetLifeModel implements Model{
 	public StreetLifeModel(int width, int length) {
 		this.setWidth(width);
 		this.setLength(length);
-		streetObjects = new ArrayList<StreetObject>();
+		this.streetObjects = new ArrayList<StreetObject>();
 		
 	}
 
@@ -34,7 +32,7 @@ public class StreetLifeModel implements Model{
 	 * @return width width of street
 	 */
 	public int getWidth() {
-		return width;
+		return this.width;
 	}
 
 	/**
@@ -48,7 +46,7 @@ public class StreetLifeModel implements Model{
 	 * @return length length of street
 	 */
 	public int getLength() {
-		return length;
+		return this.length;
 	}
 
 	/**
@@ -58,13 +56,12 @@ public class StreetLifeModel implements Model{
 		this.length = length;
 	}
 	
-	//TODO: making StreeLifeModel more generic -> eg. to add frogs
 	/**
 	 * 
 	 * @param car adds a car to the street
 	 */
 	public void addObject(StreetObject obj) {
-		streetObjects.add(obj);
+		this.streetObjects.add(obj);
 	}
 	
 	/**
@@ -102,9 +99,9 @@ public class StreetLifeModel implements Model{
 		return this.streetObjects;
 	}
 
-
-	public void setView(View view) {
-		// TODO Auto-generated method stub
+	@Override
+	public void deleteObject(StreetObject obj) {
+		this.streetObjects.remove(obj);
 		
 	}
 }

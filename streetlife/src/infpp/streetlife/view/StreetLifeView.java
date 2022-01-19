@@ -26,7 +26,7 @@ public class StreetLifeView implements View {
 	}
 
 	@Override
-	public void setModel(StreetLifeModel model) {
+	public void setModel(Model model) {
 		this.model = model;
 		gui.setModel(model);
 	}
