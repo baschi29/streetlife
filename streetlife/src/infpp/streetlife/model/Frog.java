@@ -106,7 +106,7 @@ public class Frog extends MovingStreetObject{
 	//TODO: vernünftige Move Methode für Frosch schreiben
 	/**
 	 * A frog moves every <jumpInterval> movement calls
-	 * currently it moves <jumpRange> units randomly in x or y direction
+	 * currently it moves <jumpRange> units randomly in x or positive y direction
 	 * After movement the IntervalCounter gets reset
 	 */
 	public void move() {
@@ -122,7 +122,7 @@ public class Frog extends MovingStreetObject{
 				this.setX(this.getX() + movementSign * this.getJumpRange());
 			}
 			else {
-				this.setY(this.getY() + movementSign * this.getJumpRange());
+				this.setY(this.getY() + this.getJumpRange());
 			}
 			
 			this.setIntervalCounter(this.getJumpInterval());
