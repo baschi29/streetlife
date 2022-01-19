@@ -12,6 +12,7 @@ public class StreetLifeModel implements Model{
 	
 	private int width;
 	private int length;
+	private int savedFrogs;
 	private ArrayList<StreetObject> streetObjects;
 	
 	/**
@@ -66,13 +67,33 @@ public class StreetLifeModel implements Model{
 	
 	/**
 	 * moves the whole streetlife for 1 step
+	 * Objects leaving the street on the right or left reappear at the other site
+	 * Objects leaving in y direction get deleted from the model. If the object is a frog it will get added to the saved frogs count
 	 */
 	public void move() {
 		
 		for (StreetObject obj : streetObjects) {
 	
 			if (obj instanceof MovingStreetObject) {
+				
 				((MovingStreetObject) obj).move();
+				
+				if (obj.getX() > this.getLength()) {
+					obj.setX(obj.getX() - this.getLength());
+				}
+				
+				else if (obj.getX() < 0) {
+					obj.setX(obj.getX() + this.getLength());
+				}
+				
+				if ((obj.getY() > this.getWidth()) || (obj.getY() < 0)) {
+					
+					if (obj instanceof Frog) {
+						this.setSavedFrogs(this.getSavedFrogs() + 1);
+					}
+					
+					this.deleteObject(obj);
+				}
 			}
 		}
 	}
@@ -103,5 +124,21 @@ public class StreetLifeModel implements Model{
 	public void deleteObject(StreetObject obj) {
 		this.streetObjects.remove(obj);
 		
+	}
+
+
+	/**
+	 * @return savedFrogs
+	 */
+	public int getSavedFrogs() {
+		return this.savedFrogs;
+	}
+
+
+	/**
+	 * @param savedFrogs das zu setzende Objekt savedFrogs
+	 */
+	private void setSavedFrogs(int savedFrogs) {
+		this.savedFrogs = savedFrogs;
 	}
 }
