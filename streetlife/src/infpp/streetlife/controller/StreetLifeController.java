@@ -62,6 +62,7 @@ public class StreetLifeController implements Controller {
 		this.view.setModel(model);
 		this.view.setController(this);
 		this.model.setView(view);
+		this.view.build();
 		
 		//building it and displaying it for the first time
 		//this.view.build(this.model.getWidth(), this.model.getLength(), this.model.getModelState());
