@@ -16,16 +16,17 @@ public class TextView implements View {
 	private int numberLanes;
 	private int length;
 	
-	@Override
-	public void build(int numberLanes, int length, ArrayList<StreetObject> modelState) {
+	
+	public TextView(int numberLanes, int length, ArrayList<StreetObject> modelState) {
 		System.out.println("Starting OceanLife ...");
 		this.numberLanes = numberLanes;
 		this.length = length;
 
 	}
 
+	
 	@Override
-	public void display(ArrayList<StreetObject> modelState) {
+	public void build() {
 		
 		String objectString = "";
 		
@@ -40,5 +41,6 @@ public class TextView implements View {
 				+ objectString);
 
 	}
-
+	
+	
 }

@@ -20,4 +20,9 @@ public interface Controller {
 	 */
 	abstract public void stop();
 	
+	
+	abstract void addCar();
+	
+	abstract void delCar();
+	
 }
