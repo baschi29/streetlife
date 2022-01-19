@@ -12,7 +12,7 @@ import infpp.streetlife.view.*;
 public class StreetLifeController implements Controller {
 
 	private int numberTicks;
-	private Model model; //TODO Basti repariert, Basti tauscht aus
+	private Model model;
 	private View view;
 	private int numLanes;
 	private int sizeStreet;
