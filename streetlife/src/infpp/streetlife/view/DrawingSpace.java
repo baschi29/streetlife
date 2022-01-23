@@ -11,72 +11,35 @@ import java.util.ArrayList;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
+import infpp.streetlife.model.Car;
+import infpp.streetlife.model.MovingStreetObject;
 import infpp.streetlife.model.StreetObject;
 
 import java.awt.event.*;
 
+/**
+ * A custom JPanel
+ * @author Cornelius
+ *
+ */
 class DrawingSpace extends JPanel
 {
-    private BufferedImage bg, car;
-    //private ArrayList<BufferedImage> addedCars;
+
     private ArrayList<StreetObject> streetobjs;
-    private int bgWidth, bgHeight;
-    private int carWidth, carHeight;  
-    private int scWidth, scHeight;
-    private int posX, posY;
+  
 	private TexturePaint paint;
 
     public DrawingSpace(ArrayList<StreetObject> streetobjs){      
-        loadImages();
-        init();
+       
         this.streetobjs = streetobjs;
-        setPreferredSize(new Dimension(scWidth, scHeight));
+        //setPreferredSize(this.getParent().getSize());
     }
 
-    private void init(){
-//    	
-//    	
-//    	
-//    	
-//    	
-//        posX = 0;
-//        posY = 0;
-//        carWidth = car.getWidth();
-//        carHeight = car.getHeight();      
-//        bgWidth = bg.getWidth();
-//        bgHeight = bg.getHeight();      
-//        scWidth = bgWidth;
-//        scHeight = bgHeight;        
-    }
-
-    private void loadImages(){
-        try{ 
-           car = ImageIO.read(getClass().getResource("/car.png"));
-        }catch(IOException ioe){
-        	System.out.println("Unable to open file");
-        	}
-    }
-
-    
 
     public void setTexture(TexturePaint tp) {
         this.paint = tp;
     }
     
-    
-    public int getPosX() {
-    	return posX;
-    }
-    public int getPosY() {
-    	return posX;
-    }
-    
-    public void setPosX(int newPos) {
-    	this.posX = newPos;
-    }
-    public void setPosY(int newPos) {
-    	this.posY = newPos;
-    }
     
     
     @Override public void paintComponent(Graphics g){
@@ -87,7 +50,10 @@ class DrawingSpace extends JPanel
         //g.drawImage(bg, 0, 0, bgWidth, bgHeight, null);
         
         for (StreetObject obj : streetobjs) {
-        	g2d.drawImage(obj.getImg(), obj.getX()+(obj.getImg().getWidth()/2), obj.getY()*50-(obj.getImg().getHeight()/2), obj.getImg().getWidth(),obj.getImg().getHeight(), null);
+        	if (obj instanceof MovingStreetObject) {
+        		if (obj instanceof Car)
+        		g2d.drawImage(obj.getImg(), obj.getX()+(obj.getImg().getWidth()/2), obj.getY()*50-(obj.getImg().getHeight()/2), obj.getImg().getWidth(),obj.getImg().getHeight(), null);
+        	}
     	} 
        
         
