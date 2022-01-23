@@ -3,6 +3,11 @@
  */
 package infpp.streetlife.model;
 
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
+
 /**
  * Class for cars. A Car has a position (x,y), a specified name and a specific velocity. It also states a current lane.
  */
@@ -24,6 +29,8 @@ public class Car extends MovingStreetObject {
 	public Car(int x, int y, String name, float velocity) {
 		super(x, y, name, velocity);
 		this.setLane(y); //the lane is the current y position
+		
+		
 	}
 	
 	/**
@@ -63,4 +70,7 @@ public class Car extends MovingStreetObject {
 	private void setOldPos(int oldPos) {
 		this.oldPos = oldPos;
 	}
+	
+	
+	
 }

@@ -3,6 +3,11 @@
  */
 package infpp.streetlife.model;
 
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
+
 /**
  * abstract class for objects on the street. Acts as superclass for every moving object such as cars or animals
  */
@@ -23,6 +28,13 @@ public abstract class StreetObject {
 	 */
 	private String name;
 	
+	
+	/**
+	 * image that displays the object on the screen
+	 */
+
+	private BufferedImage img;
+	
 	/**
 	 * Constructor of the class
 	 * @param x x position of the object
@@ -34,6 +46,12 @@ public abstract class StreetObject {
 		this.x = x;
 		this.y = y;
 		this.name = name;
+		
+		 try { 
+	           img = ImageIO.read(getClass().getResource("/car.png"));
+	        } catch(IOException ioe){
+	        	System.out.println("Unable to open file");
+	        	}
 	}
 
 	/**
@@ -77,6 +95,15 @@ public abstract class StreetObject {
 	public void setY(int y) {
 		this.y = y;
 	}
+	
+	public BufferedImage getImg() {
+		return img;
+	}
+	
+	public void setImg(BufferedImage newImg) {
+		this.img = newImg;
+	}
+	
 	
 	/**
 	 * @return description returns the description of the object as a String
