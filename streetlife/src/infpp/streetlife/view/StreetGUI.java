@@ -1,44 +1,46 @@
 package infpp.streetlife.view;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Image;
 import java.awt.Insets;
+import java.awt.Rectangle;
+import java.awt.TexturePaint;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.awt.*;
 
 import javax.imageio.ImageIO;
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JLayeredPane;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
-import javax.swing.JSpinner;
-import javax.swing.SpinnerNumberModel;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.EmptyBorder;
 
 import infpp.streetlife.controller.Controller;
-import infpp.streetlife.model.StreetLifeModel;
+import infpp.streetlife.model.Model;
 import infpp.streetlife.model.StreetObject;
 /**
  *  The StreetGUI represents the graphical interface of the street with the displayment area, control buttons etc.
  * @author Cornelius
  *
  */
-public class StreetGUI extends JFrame implements ActionListener{
+public class StreetGUI extends JFrame implements ActionListener, ComponentListener{
 
 	//used resources
 	private final String FROG_PATH = "/frog.png";
@@ -64,11 +66,13 @@ public class StreetGUI extends JFrame implements ActionListener{
 	private JPanel contentPane;
 	private ArrayList<StreetObject> nonAddedCars;
 	private ArrayList<StreetObject> addedCars;
-	private StreetLifeModel model;
+	private Model model;
 	private Controller controller;
-	
-	private TexturePanel tp;
 
+	JLayeredPane layeredPane;
+	private DrawingSpace tp;
+	
+	
 	/**
 	 * Launch the application.
 	 */
@@ -88,11 +92,12 @@ public class StreetGUI extends JFrame implements ActionListener{
 	/**
 	 * Create the frame.
 	 */
-	public StreetGUI() {
+	public StreetGUI(Model model) {
 		//nonAddedCars = modelState;
 		
+		this.addComponentListener(this);
 		
-		
+		setPreferredSize(new Dimension(1200,800));
 		setTitle("Froschsimulator 2022");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1200, 600);
@@ -227,25 +232,42 @@ public class StreetGUI extends JFrame implements ActionListener{
 		gbc_btnDelete.gridy = 1;
 		buttonPanel.add(btnDelete, gbc_btnDelete);
 		
-		tp = new TexturePanel();
-		
-		//painting the background, making sure that the image gets properly tiled
+		tp =  new DrawingSpace(model.getModelState());
+//		//painting the background, making sure that the image gets properly tiled
 		BufferedImage asphalt;
 		try {
 			//reading the image file as new BufferedReader Image
 			asphalt = ImageIO.read(this.getClass().getResource(STREET_PATH));
-			
-			//setting the texture
+		
 			tp.setTexture(new TexturePaint(asphalt, new Rectangle(0,0,asphalt.getWidth(),asphalt.getHeight())));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		contentPane.add(tp,BorderLayout.CENTER);
+//		
+//		layeredPane = new JLayeredPane();
+//		contentPane.add(layeredPane, BorderLayout.CENTER);
+//		layeredPane.setLayout(null);
+//		
+//		
+//		//tp.setBounds(0, 0, 1200, 600);
+//		layeredPane.add(tp,1);
+//		
+//		JPanel carpanel = new JPanel();
+//		//carpanel.setBounds(0, 0, 1200, 600);
+//		carpanel.setOpaque(false);
+//		carpanel.setLayout(null);
+//		layeredPane.add(carpanel,0);
+		
+		contentPane.add(tp);		
+		
+		pack();
+		
+		
 	
 	}
 
 	
-	public void setModel(StreetLifeModel model) {
+	public void setModel(Model model) {
 		this.model= model;
 		
 	}
@@ -254,6 +276,7 @@ public class StreetGUI extends JFrame implements ActionListener{
 		this.controller = cntrl;
 		
 	}
+	
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -263,7 +286,8 @@ public class StreetGUI extends JFrame implements ActionListener{
 		}
 		else if (e.getSource() == btnStart) {
 			System.out.println("Start pressed"); //TODO
-			this.controller.start();
+			this.controller.step();
+			this.tp.repaint();
 		}
 		else if (e.getSource() == btnStop) {
 			System.out.println("Stop pressed"); //TODO
@@ -282,6 +306,33 @@ public class StreetGUI extends JFrame implements ActionListener{
 			System.out.println("DEFAULT HELP TEXT");
 		}
 	}
+
+	@Override
+	public void componentResized(ComponentEvent e) {
+		System.out.println("Ich wurde geresized!");
+	
+		
+	}
+
+	@Override
+	public void componentMoved(ComponentEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void componentShown(ComponentEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void componentHidden(ComponentEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	
 
  }
 	
