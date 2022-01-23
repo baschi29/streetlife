@@ -15,8 +15,9 @@ public class StreetLifeView implements View {
 	
 	
 	
-	public StreetLifeView() {
-		this.gui = new StreetGUI();
+	public StreetLifeView(Model model) {
+		this.gui = new StreetGUI(model);
+		this.setModel(model);
 	}
 	
 	

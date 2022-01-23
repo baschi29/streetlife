@@ -54,8 +54,8 @@ public class StreetLifeController implements Controller {
 	private void initiate() {	
 		//this.view = new AsciiView();
 		//this.view = new TextView();
-		this.view = new StreetLifeView();
 		this.model = new StreetLifeModel(numLanes, sizeStreet);
+		this.view = new StreetLifeView(model);
 		
 		Car car1 = new Car(0,1,"Fiat", 1);
 		Car car2 = new Car(0,2,"Audi", 2);
@@ -82,16 +82,7 @@ public class StreetLifeController implements Controller {
 	@Override
 	public void start() {
 		
-		try {
-			for(int n = 0; n < numberTicks; n ++) {
-				this.model.move();
-				//this.view.display(this.model.getModelState());
-			}
-		} catch (Exception e) {
-			// fetches any errors during the running-phase
-			System.out.println("Oops! Something unexpected occured and we are deeply sorry. Check the error message for details:");
-			e.printStackTrace();
-		}
+		
 	}
 
 	/**
@@ -102,6 +93,22 @@ public class StreetLifeController implements Controller {
 		// TODO Auto-generated method stub
 		
 	}
+	
+	
+	@Override
+	public void step() {
+		
+		try {
+				this.model.move();
+				//this.view.display(this.model.getModelState());
+			}
+		 catch (Exception e) {
+			// fetches any errors during the running-phase
+			System.out.println("Oops! Something unexpected occured and we are deeply sorry. Check the error message for details:");
+			e.printStackTrace();
+		}
+	}
+	
 
 	@Override
 	public ArrayList<String> getListOfCars() {
@@ -132,12 +139,6 @@ public class StreetLifeController implements Controller {
 	@Override
 	public void deleteObject(StreetObject obj) {
 		this.model.deleteObject(obj);
-		
-	}
-
-	@Override
-	public void step() {
-		this.model.move();
 		
 	}
 
