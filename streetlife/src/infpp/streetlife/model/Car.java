@@ -39,7 +39,7 @@ public class Car extends MovingStreetObject {
 	
 	public void move() {
 		this.setOldPos(this.getX());
-		this.setX((int) (this.getX() + this.getVelocity()));
+		this.setX((int) (this.getX() + this.getVelocity()*20));
 	}
 	
 	public int getLane() {
