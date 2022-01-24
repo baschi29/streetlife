@@ -40,13 +40,14 @@ import infpp.streetlife.model.StreetObject;
  * @author Cornelius
  *
  */
-public class StreetGUI extends JFrame implements ActionListener, ComponentListener{
+public class StreetGUI extends JFrame implements ActionListener{
 
 	//used resources
 	private final String FROG_PATH = "/frog.png";
 	private final String STREET_PATH = "/asphalt.png";
 	private final String PLAY_PATH = "/play.png";
 	private final String PAUSE_PATH = "/pause.png";
+	private final String STEP_PATH = "/next.png";
 	private final String QUIT_PATH = "/close.png";
 	private final String SAVE_PATH = "/save.png";
 	private final String LOAD_PATH = "/load.png";
@@ -57,6 +58,7 @@ public class StreetGUI extends JFrame implements ActionListener, ComponentListen
 	private JButton btnStart;
 	private JButton btnStop;
 	private JButton btnStep;
+	private JButton btnFrog;
 	
 	private JMenuItem mntmFileMenuItemLoad;
 	private JMenuItem mntmFileMenuItemSave;
@@ -69,6 +71,9 @@ public class StreetGUI extends JFrame implements ActionListener, ComponentListen
 	private Model model;
 	private Controller controller;
 
+	JComboBox<String> comboBoxInsert;
+	JComboBox<StreetObject> comboBoxDelete;
+	
 	JLayeredPane layeredPane;
 	private DrawingSpace tp;
 	
@@ -95,7 +100,6 @@ public class StreetGUI extends JFrame implements ActionListener, ComponentListen
 	public StreetGUI(Model model) {
 		//nonAddedCars = modelState;
 		
-		this.addComponentListener(this);
 		
 		setPreferredSize(new Dimension(1200,800));
 		setTitle("Froschsimulator 2022");
@@ -175,6 +179,17 @@ public class StreetGUI extends JFrame implements ActionListener, ComponentListen
 		gbc_btnStop.gridy = 0;
 		buttonPanel.add(btnStop, gbc_btnStop);
 		
+		this.btnStep = new JButton("Step");
+		ImageIcon imgStep = new ImageIcon(this.getClass().getResource(STEP_PATH));
+		btnStep.setIcon(imgStep);
+		btnStep.addActionListener(this);
+
+		GridBagConstraints gbc_btnStepButton = new GridBagConstraints();
+		gbc_btnStepButton.insets = new Insets(0, 0, 5, 5);
+		gbc_btnStepButton.gridx = 2;
+		gbc_btnStepButton.gridy = 0;
+		buttonPanel.add(btnStep, gbc_btnStepButton);
+		
 		JLabel lblInsert = new JLabel("Insert Car");
 		GridBagConstraints gbc_lblInsert = new GridBagConstraints();
 		gbc_lblInsert.insets = new Insets(0, 0, 5, 5);
@@ -183,9 +198,10 @@ public class StreetGUI extends JFrame implements ActionListener, ComponentListen
 		gbc_lblInsert.gridy = 0;
 		buttonPanel.add(lblInsert, gbc_lblInsert);
 		
-		JComboBox<StreetObject> comboBoxInsert = new JComboBox<StreetObject>();
-			//TODO
-			// cbItems = model.getCars();
+		
+		comboBoxInsert = new JComboBox<String>();
+		
+			
 		GridBagConstraints gbc_comboBoxInsert = new GridBagConstraints();
 		gbc_comboBoxInsert.fill = GridBagConstraints.HORIZONTAL;
 		gbc_comboBoxInsert.insets = new Insets(0, 0, 5, 5);
@@ -193,22 +209,25 @@ public class StreetGUI extends JFrame implements ActionListener, ComponentListen
 		gbc_comboBoxInsert.gridy = 0;
 		buttonPanel.add(comboBoxInsert, gbc_comboBoxInsert);
 		
-		JButton btnInsert = new JButton("Insert");
+		
+		
+		btnInsert = new JButton("Insert");
 		GridBagConstraints gbc_btnInsert = new GridBagConstraints();
+		btnInsert.addActionListener(this);
 		gbc_btnInsert.insets = new Insets(0, 0, 5, 0);
 		gbc_btnInsert.gridx = 7;
 		gbc_btnInsert.gridy = 0;
 		buttonPanel.add(btnInsert, gbc_btnInsert);
 		
-		this.btnStep = new JButton("Release the frog!");
-		btnStep.addActionListener(this);
-		GridBagConstraints gbc_btnStep = new GridBagConstraints();
-		gbc_btnStep.fill = GridBagConstraints.HORIZONTAL;
-		gbc_btnStep.gridwidth = 2;
-		gbc_btnStep.insets = new Insets(0, 0, 0, 5);
-		gbc_btnStep.gridx = 0;
-		gbc_btnStep.gridy = 1;
-		buttonPanel.add(btnStep, gbc_btnStep);
+		btnFrog = new JButton("Release the frog!");
+		btnFrog.addActionListener(this);
+		GridBagConstraints gbc_btnFrog = new GridBagConstraints();
+		gbc_btnFrog.fill = GridBagConstraints.HORIZONTAL;
+		gbc_btnFrog.gridwidth = 3;
+		gbc_btnFrog.insets = new Insets(0, 0, 0, 5);
+		gbc_btnFrog.gridx = 0;
+		gbc_btnFrog.gridy = 1;
+		buttonPanel.add(btnFrog, gbc_btnFrog);
 		
 		JLabel lblDelete = new JLabel("Delete Car");
 		GridBagConstraints gbc_lblDelete = new GridBagConstraints();
@@ -218,7 +237,9 @@ public class StreetGUI extends JFrame implements ActionListener, ComponentListen
 		gbc_lblDelete.gridy = 1;
 		buttonPanel.add(lblDelete, gbc_lblDelete);
 		
-		JComboBox comboBoxDelete = new JComboBox();
+		comboBoxDelete = new JComboBox<StreetObject>();
+		comboBoxDelete.setRenderer(new ComboBoxRenderer());
+		
 		GridBagConstraints gbc_comboBoxDelete = new GridBagConstraints();
 		gbc_comboBoxDelete.fill = GridBagConstraints.HORIZONTAL;
 		gbc_comboBoxDelete.insets = new Insets(0, 0, 0, 5);
@@ -226,7 +247,8 @@ public class StreetGUI extends JFrame implements ActionListener, ComponentListen
 		gbc_comboBoxDelete.gridy = 1;
 		buttonPanel.add(comboBoxDelete, gbc_comboBoxDelete);
 		
-		JButton btnDelete = new JButton("Delete");
+		btnDelete = new JButton("Delete");
+		btnDelete.addActionListener(this);
 		GridBagConstraints gbc_btnDelete = new GridBagConstraints();
 		gbc_btnDelete.gridx = 7;
 		gbc_btnDelete.gridy = 1;
@@ -277,6 +299,21 @@ public class StreetGUI extends JFrame implements ActionListener, ComponentListen
 		
 	}
 	
+	public void setPossibleCars(ArrayList<String> ArrStr) {
+		for (String str : ArrStr) {
+			comboBoxInsert.addItem(str);
+		}
+	}
+	
+	public void addCurrentCar(StreetObject car) {
+		comboBoxDelete.addItem(car);
+		System.out.println("Car was added");
+		this.repaint();
+	}
+	
+	public void removeCurrentCar(StreetObject car) {
+		comboBoxDelete.removeItem(car);
+	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -285,7 +322,11 @@ public class StreetGUI extends JFrame implements ActionListener, ComponentListen
 			dia.setVisible(true);
 		}
 		else if (e.getSource() == btnStart) {
-			System.out.println("Start pressed"); //TODO
+			System.out.println("Start pressed");
+			this.tp.repaint();
+		}
+		else if (e.getSource() == btnStep) {
+			System.out.println("Step pressed"); //TODO
 			this.controller.step();
 			this.tp.repaint();
 		}
@@ -294,42 +335,31 @@ public class StreetGUI extends JFrame implements ActionListener, ComponentListen
 			this.controller.stop();
 		}
 		else if (e.getSource() == btnInsert) {
+			try {
+				this.controller.addMovingObject(comboBoxInsert.getSelectedItem().toString());
+				System.out.println("Insert pressed");
+			} catch (Exception e1) {
+				e1.printStackTrace();
+			}
+			
 			
 		}
 		else if (e.getSource() == btnDelete) {
-	
+			try {
+				this.controller.deleteObject(comboBoxDelete.getItemAt(comboBoxDelete.getSelectedIndex()));
+				System.out.println("Insert pressed");
+				this.tp.repaint();
+			} catch (Exception e1) {
+				e1.printStackTrace();
+			}
 		}
-		else if (e.getSource() == btnStep) {
-			System.out.println("currently no frogs here"); //TODO
+		else if (e.getSource() == btnFrog) {
+			this.controller.releaseTheFrogs(5);
 		}
 		else if (e.getSource() == mntmHelpMenuAbout) { //TODO
-			System.out.println("DEFAULT HELP TEXT");
+			HelpDialog dia = new HelpDialog();
+			dia.setVisible(true);
 		}
-	}
-
-	@Override
-	public void componentResized(ComponentEvent e) {
-		System.out.println("Ich wurde geresized!");
-	
-		
-	}
-
-	@Override
-	public void componentMoved(ComponentEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void componentShown(ComponentEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void componentHidden(ComponentEvent e) {
-		// TODO Auto-generated method stub
-		
 	}
 
 	
