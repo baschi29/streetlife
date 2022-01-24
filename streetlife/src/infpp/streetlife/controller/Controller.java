@@ -31,4 +31,6 @@ public interface Controller {
 	
 	abstract public void deleteObject(StreetObject obj);
 	
+	abstract public void releaseTheFrogs(int number);
+	
 }
