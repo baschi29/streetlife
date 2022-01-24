@@ -33,7 +33,7 @@ public abstract class StreetObject {
 	 * image that displays the object on the screen
 	 */
 
-	private BufferedImage img;
+	protected BufferedImage img;
 	
 	/**
 	 * Constructor of the class
@@ -109,6 +109,7 @@ public abstract class StreetObject {
 	 * @return description returns the description of the object as a String
 	 * with name, x and y position
 	 */
+	@Override
 	public String toString() {
 		return this.name
 				+ " at: x = "

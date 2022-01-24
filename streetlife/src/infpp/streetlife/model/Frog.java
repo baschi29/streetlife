@@ -3,7 +3,10 @@
  */
 package infpp.streetlife.model;
 
+import java.io.IOException;
 import java.util.Random;
+
+import javax.imageio.ImageIO;
 
 /**
  * Class for frogs. A Car has a position (x,y), a specified name and a specific jump interval and
@@ -38,6 +41,12 @@ public class Frog extends MovingStreetObject{
 		super(x, y, name, velocity);
 		this.setJumpRange(jumpRange);
 		this.setVelocity(velocity);
+		
+		try { 
+	           this.img = ImageIO.read(getClass().getResource("/frog_small.png"));
+	        } catch(IOException ioe){
+	        	System.out.println("Unable to open file");
+	        	}
 	}
 
 	/**
@@ -119,7 +128,7 @@ public class Frog extends MovingStreetObject{
 			int movementSign = rd.nextInt(2) * 2 - 1; // Randomly -1 or +1
 			
 			if (xMovement) {
-				this.setX(this.getX() + movementSign * this.getJumpRange());
+				this.setX(this.getX() + movementSign * this.getJumpRange()*20);
 			}
 			else {
 				this.setY(this.getY() + this.getJumpRange());
