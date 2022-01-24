@@ -3,9 +3,12 @@
  */
 package infpp.streetlife.view;
 
+import java.util.ArrayList;
+
 import infpp.streetlife.controller.Controller;
 import infpp.streetlife.model.Model;
 import infpp.streetlife.model.StreetLifeModel;
+import infpp.streetlife.model.StreetObject;
 
 public class StreetLifeView implements View {
 
@@ -48,7 +51,28 @@ public class StreetLifeView implements View {
 
 	@Override
 	public Controller getController() {
-		// TODO Auto-generated method stub
 		return this.controller;
+	}
+
+
+	@Override
+	public void setPossibleCars(ArrayList<String> ArrStr) {
+		this.gui.setPossibleCars(ArrStr);
+		
+		
+	}
+
+
+	@Override
+	public void removeCurrentObject(StreetObject car1) {
+		this.gui.removeCurrentCar(car1);
+		
+	}
+
+
+	@Override
+	public void addCurrentObject(StreetObject car1) {
+		this.gui.addCurrentCar(car1);
+		
 	}
 }
