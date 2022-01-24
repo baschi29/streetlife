@@ -142,4 +142,5 @@ public class StreetLifeModel implements Model{
 	private void setSavedFrogs(int savedFrogs) {
 		this.savedFrogs = savedFrogs;
 	}
+
 }
