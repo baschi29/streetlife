@@ -40,6 +40,10 @@ class DrawingSpace extends JPanel
         this.paint = tp;
     }
     
+    public void addCar(StreetObject car) {
+    	this.streetobjs.add(car);
+    	repaint();
+    }
     
     
     @Override public void paintComponent(Graphics g){
@@ -51,7 +55,7 @@ class DrawingSpace extends JPanel
         
         for (StreetObject obj : streetobjs) {
         	if (obj instanceof MovingStreetObject) {
-        		if (obj instanceof Car)
+        		//if (obj instanceof Car)
         		g2d.drawImage(obj.getImg(), obj.getX()+(obj.getImg().getWidth()/2), obj.getY()*50-(obj.getImg().getHeight()/2), obj.getImg().getWidth(),obj.getImg().getHeight(), null);
         	}
     	} 
