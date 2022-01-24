@@ -1,8 +1,11 @@
 
 package infpp.streetlife.view;
 
+import java.util.ArrayList;
+
 import infpp.streetlife.controller.Controller;
 import infpp.streetlife.model.Model;
+import infpp.streetlife.model.StreetObject;
 
 /**
  * @author Cornelius
@@ -24,5 +27,11 @@ public interface View {
 	abstract public void setController(Controller cntrl);
 	
 	abstract public Controller getController();
+	
+	abstract public void setPossibleCars(ArrayList<String> ArrStr);
+
+	public abstract void removeCurrentObject(StreetObject car1);
+
+	public abstract void addCurrentObject(StreetObject car1);
 	
 }	
