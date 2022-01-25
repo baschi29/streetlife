@@ -70,7 +70,7 @@ public class StreetLifeController implements Controller {
 		
 		this.addObject(car1);
 		this.addObject(car2);
-		//this.addObject(frog1);
+		this.addObject(frog1);
 		
 		//building it and displaying it for the first time
 		//this.view.build(this.model.getWidth(), this.model.getLength(), this.model.getModelState());

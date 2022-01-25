@@ -28,6 +28,10 @@ public abstract class StreetObject {
 	 */
 	private String name;
 	
+	/**
+	 * marks the object as deleted, deletion happens, when method XXX is called in StreetLifeModel
+	 */
+	private boolean deleted;
 	
 	/**
 	 * image that displays the object on the screen
@@ -116,5 +120,19 @@ public abstract class StreetObject {
 				+ Integer.toString(this.x)
 				+ " ; y = "
 				+ Integer.toString(this.y);
+	}
+
+	/**
+	 * @return deleted
+	 */
+	public boolean isDeleted() {
+		return this.deleted;
+	}
+
+	/**
+	 * @param deleted sets the object as deleted (or reverts deletion before object gets removed completely)
+	 */
+	public void setDeleted(boolean deleted) {
+		this.deleted = deleted;
 	}
 }

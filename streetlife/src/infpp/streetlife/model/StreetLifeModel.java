@@ -73,7 +73,7 @@ public class StreetLifeModel implements Model{
 	 */
 	public void move() {
 		
-		for (StreetObject obj : streetObjects) {
+		for (StreetObject obj : this.streetObjects) {
 	
 			if (obj instanceof MovingStreetObject) {
 				
@@ -93,10 +93,12 @@ public class StreetLifeModel implements Model{
 						this.setSavedFrogs(this.getSavedFrogs() + 1);
 					}
 					
-					this.deleteObject(obj);
+					obj.setDeleted(true);
 				}
 			}
 		}
+		
+		this.deleteDeletionPendingObjects();
 	}
 	
 	/**
@@ -115,7 +117,11 @@ public class StreetLifeModel implements Model{
 				+ "\n"
 				+ objectString;
 	}
-
+	
+	/**
+	 * Returns the Model State in Form of a List of all objects
+	 * @return ArrayList List of all objects present
+	 */
 	@Override
 	public ArrayList<StreetObject> getModelState() {
 		return this.streetObjects;
@@ -126,7 +132,26 @@ public class StreetLifeModel implements Model{
 		this.streetObjects.remove(obj);
 		
 	}
-
+	
+	/**
+	 * deletes all objects that are marked as deleted (deleted = true)
+	 */
+	private void deleteDeletionPendingObjects() {
+		
+		ArrayList<StreetObject> toDelete = new ArrayList<>();
+		
+		for (StreetObject obj: this.streetObjects) {
+			
+			if (obj.isDeleted()) {
+				toDelete.add(obj);
+			}
+		}
+		
+		for (StreetObject obj: toDelete) {
+			this.streetObjects.remove(obj);
+		}
+		System.out.println(this.streetObjects.toString());
+	}
 
 	/**
 	 * @return savedFrogs

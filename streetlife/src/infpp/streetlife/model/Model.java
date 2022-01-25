@@ -13,7 +13,7 @@ public interface Model {
 
 	/**
 	 * Returns the Model State in Form of a List of all objects
-	 * @return ArrayList List of all objects
+	 * @return ArrayList List of all objects present
 	 */
 	abstract public ArrayList<StreetObject> getModelState();
 	
@@ -30,4 +30,7 @@ public interface Model {
 	abstract public void addObject(StreetObject obj);
 	
 	abstract public void deleteObject(StreetObject obj);
+	
+	abstract public int getSavedFrogs();
+	
 }
