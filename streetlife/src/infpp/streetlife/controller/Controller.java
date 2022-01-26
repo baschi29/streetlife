@@ -3,7 +3,7 @@
  */
 package infpp.streetlife.controller;
 
-import java.util.ArrayList;
+import java.util.*;
 import infpp.streetlife.model.*;
 
 /**
@@ -32,5 +32,9 @@ public interface Controller {
 	abstract public void deleteObject(StreetObject obj);
 	
 	abstract public void releaseTheFrogs(int number);
+	
+	abstract public void saveToFile(String path) throws Exception;
+	
+	abstract public void loadFromFile(String path) throws Exception;
 	
 }

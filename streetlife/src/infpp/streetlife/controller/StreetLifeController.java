@@ -4,7 +4,8 @@
 package infpp.streetlife.controller;
 
 import java.util.ArrayList;
-
+import java.util.*;
+import java.io.*;
 import infpp.streetlife.model.*;
 import infpp.streetlife.view.*;
 
@@ -162,6 +163,34 @@ public class StreetLifeController implements Controller {
 				e.printStackTrace();
 			}
 		}
+		
+	}
+
+	/**
+	 * Saves the model to a given file
+	 * @param path path to file
+	 */
+	@Override
+	public void saveToFile(String path) throws Exception {
+		
+		OutputStream os = new FileOutputStream(path);
+		ObjectOutputStream oss = new ObjectOutputStream(os);
+		oss.writeObject(this.model);
+		oss.close();
+		
+	}
+	
+	/**
+	 * Loads a model state from a given file
+	 * @param path path to file
+	 */
+	@Override
+	public void loadFromFile(String path) throws Exception {
+		
+		InputStream is = new FileInputStream(path);
+		ObjectInputStream ois = new ObjectInputStream(is);
+		this.model = (Model) ois.readObject();
+		ois.close();
 		
 	}
 
