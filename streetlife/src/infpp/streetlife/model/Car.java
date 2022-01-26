@@ -13,7 +13,6 @@ public class Car extends MovingStreetObject {
 	 */
 	private static final long serialVersionUID = -1398620670097379507L;
 	private int lane;	  //current lane of car
-	private int oldPos;   //remembering "old position" of car for the view
 
 
 	/**
@@ -35,7 +34,6 @@ public class Car extends MovingStreetObject {
 	 */
 	
 	public void move() {
-		this.setOldPos(this.getX());
 		this.setX((int) (this.getX() + this.getVelocity()*20));
 	}
 	
@@ -51,23 +49,6 @@ public class Car extends MovingStreetObject {
 			this.lane = lane;
 		else
 			throw new ArithmeticException("Lane number should be positive");
-	}
-	
-	/**
-	 * 
-	 * @return old position as integer
-	 */
-	public int getOldPos() {
-		return oldPos;
-	}
-	/**
-	 * 
-	 * @param oldPos the old Pos (for movement for example) -> private!
-	 */
-	private void setOldPos(int oldPos) {
-		this.oldPos = oldPos;
-	}
-	
-	
+	}	
 	
 }
