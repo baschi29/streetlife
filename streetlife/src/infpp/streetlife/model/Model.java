@@ -47,4 +47,8 @@ public interface Model {
 	 */
 	abstract public int getSavedFrogs();
 	
+	/**
+	 * @return description returns the description of the street as a String with width, length and the description of the car
+	 */
+	abstract public String toString();
 }
