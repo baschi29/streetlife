@@ -15,9 +15,25 @@ public class StreetLifeModel implements Model, Serializable{
 	 * Version number
 	 */
 	private static final long serialVersionUID = -1052906946115022938L;
+	
+	/**
+	 * Width of the street
+	 */
 	private int width;
+	
+	/**
+	 * length of the street
+	 */
 	private int length;
+	
+	/**
+	 * number of frogs that are counted as saved because they reached a safe space
+	 */
 	private int savedFrogs;
+	
+	/**
+	 * Array containing all objects that are currently present in the model
+	 */
 	private ArrayList<StreetObject> streetObjects;
 	
 	/**
@@ -36,7 +52,7 @@ public class StreetLifeModel implements Model, Serializable{
 
 	
 	/**
-	 * @return width width of street
+	 * @return width width of the street
 	 */
 	public int getWidth() {
 		return this.width;
@@ -45,7 +61,7 @@ public class StreetLifeModel implements Model, Serializable{
 	/**
 	 * @param width new width of the street
 	 */
-	public void setWidth(int width) {
+	private void setWidth(int width) {
 		this.width = width;
 	}
 
@@ -59,20 +75,19 @@ public class StreetLifeModel implements Model, Serializable{
 	/**
 	 * @param length new length of the street
 	 */
-	public void setLength(int length) {
+	private void setLength(int length) {
 		this.length = length;
 	}
 	
 	/**
-	 * 
-	 * @param car adds a car to the street
+	 * @param obj object to be added to the model
 	 */
 	public void addObject(StreetObject obj) {
 		this.streetObjects.add(obj);
 	}
 	
 	/**
-	 * moves the whole streetlife for 1 step
+	 * moves the whole Streetlife for 1 step according to the models rules
 	 * Objects leaving the street on the right or left reappear at the other site
 	 * Objects leaving in y direction get deleted from the model. If the object is a frog it will get added to the saved frogs count
 	 */
@@ -131,7 +146,10 @@ public class StreetLifeModel implements Model, Serializable{
 	public ArrayList<StreetObject> getModelState() {
 		return this.streetObjects;
 	}
-
+	
+	/**
+	 * @param obj object to be deleted from the model
+	 */
 	@Override
 	public void deleteObject(StreetObject obj) {
 		this.streetObjects.remove(obj);
@@ -159,7 +177,7 @@ public class StreetLifeModel implements Model, Serializable{
 	}
 
 	/**
-	 * @return savedFrogs
+	 * @return savedFrogs number of Frogs saved by reaching a safe space
 	 */
 	public int getSavedFrogs() {
 		return this.savedFrogs;
@@ -167,7 +185,7 @@ public class StreetLifeModel implements Model, Serializable{
 
 
 	/**
-	 * @param savedFrogs das zu setzende Objekt savedFrogs
+	 * @param savedFrogs set new value for the number of saved frogs
 	 */
 	private void setSavedFrogs(int savedFrogs) {
 		this.savedFrogs = savedFrogs;
