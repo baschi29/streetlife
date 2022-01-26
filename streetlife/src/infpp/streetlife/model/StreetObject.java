@@ -5,14 +5,20 @@ package infpp.streetlife.model;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.io.Serializable;
 
 import javax.imageio.ImageIO;
 
 /**
  * abstract class for objects on the street. Acts as superclass for every moving object such as cars or animals
  */
-public abstract class StreetObject {
+public abstract class StreetObject implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 366898580346801333L;
+
 	/**
 	 * x position of the object
 	 */
