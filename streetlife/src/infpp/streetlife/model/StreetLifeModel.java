@@ -4,12 +4,17 @@
 package infpp.streetlife.model;
 
 import java.util.ArrayList;
+import java.io.*;
 
 /**
  * Class representing the world all other objects exist in
  */
-public class StreetLifeModel implements Model{
+public class StreetLifeModel implements Model, Serializable{
 	
+	/**
+	 * Version number
+	 */
+	private static final long serialVersionUID = -1052906946115022938L;
 	private int width;
 	private int length;
 	private int savedFrogs;

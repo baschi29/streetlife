@@ -15,6 +15,11 @@ import javax.imageio.ImageIO;
 public class Frog extends MovingStreetObject{
 	
 	/**
+	 * version number
+	 */
+	private static final long serialVersionUID = -2783805143464437390L;
+
+	/**
 	 * Interval in which the frog jumps, defined in movements/jump
 	 */
 	private int jumpInterval;

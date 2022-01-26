@@ -9,6 +9,11 @@ package infpp.streetlife.model;
 public abstract class MovingStreetObject extends StreetObject{
 	
 	/**
+	 * Version number
+	 */
+	private static final long serialVersionUID = -7084546346725325553L;
+	
+	/**
 	 * velocity in pixel/movement
 	 */
 	private float velocity;
