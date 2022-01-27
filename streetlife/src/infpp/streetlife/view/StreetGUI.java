@@ -327,12 +327,22 @@ public class StreetGUI extends JFrame implements ActionListener{
 		}
 		else if (e.getSource() == btnStep) {
 			System.out.println("Step pressed"); //TODO
-			this.controller.step();
+			try {
+				this.controller.step();
+			}
+			catch (Exception exc) {
+				//TODO
+			}
 			this.tp.repaint();
 		}
 		else if (e.getSource() == btnStop) {
 			System.out.println("Stop pressed"); //TODO
-			this.controller.stop();
+			try {
+				this.controller.stop();
+			}
+			catch (Exception exc) {
+				//TODO
+			}
 		}
 		else if (e.getSource() == btnInsert) {
 			try {
@@ -354,7 +364,12 @@ public class StreetGUI extends JFrame implements ActionListener{
 			}
 		}
 		else if (e.getSource() == btnFrog) {
-			this.controller.releaseTheFrogs(5);
+			try {
+				this.controller.releaseTheFrogs(5);
+			}
+			catch (Exception exc) {
+				//TODO
+			}
 		}
 		else if (e.getSource() == mntmHelpMenuAbout) { //TODO
 			HelpDialog dia = new HelpDialog();
