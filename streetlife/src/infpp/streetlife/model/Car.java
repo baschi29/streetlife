@@ -16,14 +16,14 @@ public class Car extends MovingStreetObject {
 
 
 	/**
-	 * Constructor of the class
+	 * Constructor of the class, hardness for all cars is set to 2
 	 * @param x x position of the car
 	 * @param y y position of the car
 	 * @param name name of the car
 	 * @param velocity velocity of car
 	 */
-	public Car(int x, int y, String name, float velocity) {
-		super(x, y, name, velocity);
+	public Car(int x, int y, String name, float velocity) throws Exception{
+		super(x, y, name, 2, velocity);
 		this.setLane(y); //the lane is the current y position
 		
 		
