@@ -162,15 +162,15 @@ public class StreetLifeModel implements Model, Serializable{
 			
 			if (obj.getHardness() <= cobj.getHardness()) {
 				
-				if (Math.abs(obj.getX() - cobj.getX()) <= xMovement) {
+				if (Math.abs(obj.getX() - cobj.getX()) <= Math.abs(xMovement)) {
 					
-					obj.setIntendedX(cobj.getX() + xDirection);
+					obj.setIntendedX(cobj.getX() - xDirection);
 					
 				}
 				
-				else if (Math.abs(obj.getY() - cobj.getY()) <= yMovement) {
+				else if (Math.abs(obj.getY() - cobj.getY()) <= Math.abs(yMovement)) {
 					
-					obj.setIntendedY(cobj.getY() + yDirection);
+					obj.setIntendedY(cobj.getY() - yDirection);
 					
 				}
 				
@@ -210,7 +210,7 @@ public class StreetLifeModel implements Model, Serializable{
 					
 				}
 				
-				for (int i = 1; i <= Math.abs(yMovement); i++) {
+				for (int i = 0; i <= Math.abs(yMovement); i++) {
 					
 					if ((obj.getY() + yDirection * i) == cobj.getY()) {
 						yCollision = true;
