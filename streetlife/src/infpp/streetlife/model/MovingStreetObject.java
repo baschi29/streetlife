@@ -46,7 +46,7 @@ public abstract class MovingStreetObject extends StreetObject{
 	 * The move method moves a MovingStreetObject to their intended x and y positions
 	 * It is the responsibility of the model to verify if the intended positions are valid
 	 */
-	public final void move() {
+	public void move() {
 		
 		this.setX(this.getIntendedX());
 		this.setY(this.getIntendedY());
