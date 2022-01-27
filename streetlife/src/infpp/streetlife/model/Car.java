@@ -12,8 +12,6 @@ public class Car extends MovingStreetObject {
 	 * version number
 	 */
 	private static final long serialVersionUID = -1398620670097379507L;
-	private int lane;	  //current lane of car
-
 
 	/**
 	 * Constructor of the class, hardness for all cars is set to 2
