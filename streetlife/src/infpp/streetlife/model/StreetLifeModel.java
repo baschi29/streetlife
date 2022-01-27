@@ -88,7 +88,24 @@ public class StreetLifeModel implements Model, Serializable{
 	 */
 	@Override
 	public void addObject(StreetObject obj) throws Exception{
-		this.streetObjects.add(obj);
+		
+		int tryCounter = 0;
+		
+		while (tryCounter <= 10) {
+			
+			HashSet<StreetObject> collisions = this.findCollisions(obj, 0, 0);
+			
+			if (collisions.isEmpty()) {
+				this.streetObjects.add(obj);
+				return;
+			}
+			
+			obj.setX(obj.getX() + 1);
+			tryCounter += 1;
+		}
+		
+		throw new Exception("Could not add object because of collision. Please try again later");
+		
 	}
 	
 	/**
@@ -104,8 +121,8 @@ public class StreetLifeModel implements Model, Serializable{
 				
 				MovingStreetObject mobj = (MovingStreetObject) obj;
 				mobj.calculateMove();
-				this.manageBorders(mobj);
 				this.manageCollisions(mobj);
+				this.manageBorders(mobj);
 				
 			}
 		}
@@ -175,6 +192,14 @@ public class StreetLifeModel implements Model, Serializable{
 					
 				}
 				
+				else if (cobj.getX() - ((obj.getIntendedX() % this.getLength() + this.getLength()) % this.getLength()) <= 0) {
+					
+					obj.setIntendedX(cobj.getX() - xDirection);
+					
+				}
+				
+				//else if ()
+				
 				else if (Math.abs(obj.getY() - cobj.getY()) <= Math.abs(yMovement)) {
 					
 					obj.setIntendedY(cobj.getY() - yDirection);
@@ -210,7 +235,7 @@ public class StreetLifeModel implements Model, Serializable{
 				
 				for (int i = 0; i <= Math.abs(xMovement); i++) {
 					
-					if ((obj.getX() + xDirection * i) == cobj.getX()) {
+					if ((obj.getX() + xDirection * i) % this.getLength() == cobj.getX()) {
 						xCollision = true;
 						break;
 					}

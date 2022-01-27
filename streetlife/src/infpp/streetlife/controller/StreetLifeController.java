@@ -144,7 +144,7 @@ public class StreetLifeController implements Controller {
 			this.addObject(new Car(0,1,"Fiat", 1));
 		}
 		else if (str == "Ford") {
-			this.addObject(new Car(1,3,"Ford", 2));
+			this.addObject(new Car(0,3,"Ford", 2));
 		}
 		else if (str == "Ferrari") {
 			this.addObject(new Car(0,3,"Ferrari", 5));
