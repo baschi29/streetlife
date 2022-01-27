@@ -15,15 +15,15 @@ public interface Controller {
 	/**
 	 * Starts the simulation
 	 */
-	abstract public void start();
+	abstract public void start() throws Exception;
 	
 	
 	/**
 	 * Stops the simulation
 	 */
-	abstract public void stop();
+	abstract public void stop() throws Exception;
 	
-	abstract public void step();
+	abstract public void step() throws Exception;
 	
 	abstract public ArrayList<String> getListOfCars();
 	

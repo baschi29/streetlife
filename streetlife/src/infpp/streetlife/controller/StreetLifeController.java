@@ -74,7 +74,7 @@ public class StreetLifeController implements Controller {
 	 * starts the simulation and controls the display of the actions
 	 */
 	@Override
-	public void start() {
+	public void start() throws Exception{
 		
 		
 	}
@@ -83,23 +83,22 @@ public class StreetLifeController implements Controller {
 	 * stops the whole simulation and ends the program //TODO 
 	 */
 	@Override
-	public void stop() {
+	public void stop() throws Exception{
 		// TODO Auto-generated method stub
 		
 	}
 	
 	
 	@Override
-	public void step() {
+	public void step() throws Exception{
 		
 		try {
 				this.model.move();
-				//this.view.display(this.model.getModelState());
 			}
 		 catch (Exception e) {
 			// fetches any errors during the running-phase
-			System.out.println("Oops! Something unexpected occured and we are deeply sorry. Check the error message for details:");
 			e.printStackTrace();
+			throw new Exception("Failed to execute step. Please check console for error logs.");
 		}
 	}
 	
@@ -129,7 +128,7 @@ public class StreetLifeController implements Controller {
 		}
 		
 	}
-
+	
 	private void addObject(StreetObject car1) throws Exception{
 		
 		this.model.addObject(car1);
