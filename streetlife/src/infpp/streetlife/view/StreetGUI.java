@@ -357,7 +357,7 @@ public class StreetGUI extends JFrame implements ActionListener{
 		else if (e.getSource() == btnDelete) {
 			try {
 				this.controller.deleteObject(comboBoxDelete.getItemAt(comboBoxDelete.getSelectedIndex()));
-				System.out.println("Insert pressed");
+				System.out.println("Delete pressed");
 				this.tp.repaint();
 			} catch (Exception e1) {
 				e1.printStackTrace();
