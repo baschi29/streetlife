@@ -33,6 +33,12 @@ public abstract class StreetObject implements Serializable{
 	private String name;
 	
 	/**
+	 * hardness of an objects represents how an object interacts with other objects on collision
+	 * objects with higher hardness "remove" objects with lower hardness, objects with the same or higher hardness are avoided
+	 */
+	private int hardness;
+	
+	/**
 	 * marks the object as deleted, deletion happens, when method XXX is called in StreetLifeModel
 	 */
 	private boolean deleted;
@@ -49,11 +55,12 @@ public abstract class StreetObject implements Serializable{
 	 * @param y y position of the object
 	 * @param name name of the object
 	 */
-	public StreetObject(int x, int y, String name) {
+	public StreetObject(int x, int y, String name, int hardness) {
 		
-		this.x = x;
-		this.y = y;
-		this.name = name;
+		this.setX(x);
+		this.setY(y);
+		this.setName(name);
+		this.setHardness(hardness);
 		
 		 try { 
 	           img = ImageIO.read(getClass().getResource("/car.png"));
@@ -138,5 +145,19 @@ public abstract class StreetObject implements Serializable{
 	 */
 	public void setDeleted(boolean deleted) {
 		this.deleted = deleted;
+	}
+
+	/**
+	 * @return hardness hardness of the object
+	 */
+	public int getHardness() {
+		return hardness;
+	}
+
+	/**
+	 * @param hardness das zu setzende Objekt hardness
+	 */
+	private void setHardness(int hardness) {
+		this.hardness = hardness;
 	}
 }
