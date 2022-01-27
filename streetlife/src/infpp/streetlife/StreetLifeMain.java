@@ -36,7 +36,13 @@ public class StreetLifeMain {
 		}
 			
 			Controller controller = new StreetLifeController(NUMBER_OF_LANES,SIZE_OF_STREET,NUMBER_OF_TICKS);
-			controller.start();
+			try {
+				controller.start();
+			}
+			catch (Exception e) {
+				System.out.println("Error starting the controller");
+				e.printStackTrace();
+			}
 
 	}
 
