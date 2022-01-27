@@ -5,6 +5,7 @@ package infpp.streetlife.model;
 
 import java.util.ArrayList;
 import java.io.*;
+import java.util.HashSet;
 
 /**
  * @author Basti, Cornelius
@@ -103,7 +104,8 @@ public class StreetLifeModel implements Model, Serializable{
 				
 				MovingStreetObject mobj = (MovingStreetObject) obj;
 				mobj.calculateMove();
-				this.borderManagement(mobj);
+				this.manageBorders(mobj);
+				this.manageCollisions(mobj);
 				mobj.move();
 				
 			}
@@ -118,7 +120,7 @@ public class StreetLifeModel implements Model, Serializable{
 	 * Objects leaving in y direction get deleted from the model. If the object is a frog it will get added to the saved frogs count
 	 * @param obj object which x and y positions should get verified according to the border laws
 	 */
-	private void borderManagement(MovingStreetObject obj) {
+	private void manageBorders(MovingStreetObject obj) {
 		
 		if (obj.getIntendedX() > this.getLength()) {
 			obj.setIntendedX(obj.getIntendedX() - this.getLength());
@@ -138,6 +140,94 @@ public class StreetLifeModel implements Model, Serializable{
 			
 		}
 		
+	}
+	
+	/**
+	 * Checks if the new intended position of an object leads to a collision
+	 * If there is one, the collision is dealed with based on the hardness level of the involving objects:
+	 * Objects with lower or the same hardness level will move till they reach the point exactly before the collision
+	 * Objects with higher hardness level will move like there is no collision, the other object will get removed
+	 * @param obj object to be checked for collisions
+	 */
+	private void manageCollisions(MovingStreetObject obj) {
+		
+		int xMovement = obj.getIntendedX() - obj.getX();
+		int yMovement = obj.getIntendedY() - obj.getY();
+		int xDirection = (int) Math.signum(xMovement);
+		int yDirection = (int) Math.signum(yMovement);
+		
+		HashSet<StreetObject> collisions = this.findCollisions(obj, xMovement, yMovement);
+		
+		for (StreetObject cobj: collisions) {
+			
+			if (obj.getHardness() <= cobj.getHardness()) {
+				
+				if (Math.abs(obj.getX() - cobj.getX()) <= xMovement) {
+					
+					obj.setIntendedX(cobj.getX() + xDirection);
+					
+				}
+				
+				else if (Math.abs(obj.getY() - cobj.getY()) <= yMovement) {
+					
+					obj.setIntendedY(cobj.getY() + yDirection);
+					
+				}
+				
+			}
+			
+			if (obj.getHardness() > cobj.getHardness()) {
+				
+				cobj.setDeleted(true);
+				
+			}
+			
+		}
+		
+		
+	}
+	
+	//TODO
+	private HashSet<StreetObject> findCollisions(StreetObject obj, int xMovement, int yMovement) {
+		
+		HashSet<StreetObject> collisions = new HashSet<>();
+		int xDirection = (int) Math.signum(xMovement);
+		int yDirection = (int) Math.signum(yMovement);
+		
+		for (StreetObject cobj: this.streetObjects) {
+			
+			if ((obj != cobj) && !cobj.isDeleted()) {
+				
+				boolean xCollision = false;
+				boolean yCollision = false;
+				
+				for (int i = 0; i <= Math.abs(xMovement); i++) {
+					
+					if ((obj.getX() + xDirection * i) == cobj.getX()) {
+						xCollision = true;
+						break;
+					}
+					
+				}
+				
+				for (int i = 1; i <= Math.abs(yMovement); i++) {
+					
+					if ((obj.getY() + yDirection * i) == cobj.getY()) {
+						yCollision = true;
+						break;
+					}
+					
+				}
+				
+				if (xCollision && yCollision) {
+					collisions.add(cobj);
+				}
+				
+			}
+			
+		}
+		
+		return collisions;
 	}
 	
 	/**

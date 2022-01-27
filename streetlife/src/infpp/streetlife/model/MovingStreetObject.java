@@ -100,4 +100,5 @@ public abstract class MovingStreetObject extends StreetObject{
 	public void setIntendedY(int intendedY) {
 		this.intendedY = intendedY;
 	}
+	
 }

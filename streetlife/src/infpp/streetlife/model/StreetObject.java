@@ -161,4 +161,5 @@ public abstract class StreetObject implements Serializable{
 	private void setHardness(int hardness) {
 		this.hardness = hardness;
 	}
+	
 }
