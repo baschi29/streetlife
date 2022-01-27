@@ -25,13 +25,14 @@ public abstract class MovingStreetObject extends StreetObject{
 	 * @param name name of the object
 	 * @param velocity velocity of the object
 	 */
-	public MovingStreetObject(int x, int y, String name, float velocity) {
-		super(x, y, name);
+	public MovingStreetObject(int x, int y, String name, int hardness, float velocity) throws Exception {
+		super(x, y, name, hardness);
 		this.setVelocity(velocity);
 	}
 	
 	/**
 	 * The move method moves a MovingStreetObject according to their movement rules and velocity
+	 * It also checks if a move is valid
 	 */
 	public abstract void move();
 
@@ -46,7 +47,7 @@ public abstract class MovingStreetObject extends StreetObject{
 	 * @param velocity sets the velocity of the moving object
 	 * negative velocities are highly illegal
 	 */
-	public void setVelocity(float velocity) {
+	public void setVelocity(float velocity) throws Exception{
 		if (velocity >= 0) {
 			this.velocity = velocity;
 		}
