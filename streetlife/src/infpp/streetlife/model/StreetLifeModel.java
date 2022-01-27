@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.io.*;
 
 /**
+ * @author Basti, Cornelius
  * Class representing the world all other objects exist in
  */
 public class StreetLifeModel implements Model, Serializable{

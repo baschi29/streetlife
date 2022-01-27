@@ -13,11 +13,30 @@ import infpp.streetlife.view.*;
  *
  */
 public class StreetLifeController implements Controller {
-
+	
+	/**
+	 * StreetLifeModel the controller uses
+	 */
 	private Model model;
+	
+	/**
+	 * StreetLifeView the controller uses
+	 */
 	private View view;
-	private int numLanes;
+	
+	/**
+	 * Number of Lanes the model is initialized with
+	 */
+	private int numLanes; //TODO Basti
+	
+	/**
+	 * Size of the Street (x direction)
+	 */
 	private int sizeStreet;
+	
+	/**
+	 * List of predefined Cars that can be added to the model
+	 */
 	private ArrayList<String> possibleCars;
 	
 	/**
@@ -59,7 +78,6 @@ public class StreetLifeController implements Controller {
 		
 		this.view.setModel(model);
 		this.view.setController(this);
-		// this.model.setView(view);
 		this.view.build();
 		this.view.setPossibleCars(this.possibleCars);
 		
@@ -71,7 +89,7 @@ public class StreetLifeController implements Controller {
 
 
 	/**
-	 * starts the simulation and controls the display of the actions
+	 * starts the simulation
 	 */
 	@Override
 	public void start() throws Exception{
@@ -80,7 +98,7 @@ public class StreetLifeController implements Controller {
 	}
 
 	/**
-	 * stops the whole simulation and ends the program //TODO 
+	 * stops the simulation
 	 */
 	@Override
 	public void stop() throws Exception{
@@ -88,7 +106,9 @@ public class StreetLifeController implements Controller {
 		
 	}
 	
-	
+	/**
+	 * Moves the simulation one step further
+	 */
 	@Override
 	public void step() throws Exception{
 		
@@ -102,12 +122,18 @@ public class StreetLifeController implements Controller {
 		}
 	}
 	
-
+	/**
+	 * Returns the list of all predefined car templates
+	 * @return ArrayList list of predefined car templates
+	 */
 	@Override
 	public ArrayList<String> getListOfCars() {
 		return this.possibleCars;
 	}
-
+	
+	/**
+	 * @param str Name of predefined object to be added
+	 */
 	@Override
 	public void addMovingObject(String str) throws Exception{
 		
@@ -129,14 +155,19 @@ public class StreetLifeController implements Controller {
 		
 	}
 	
-	private void addObject(StreetObject car1) throws Exception{
+	/**
+	 * @param obj object to be added to the model
+	 */
+	private void addObject(StreetObject obj) throws Exception{
 		
-		this.model.addObject(car1);
-		this.view.addCurrentObject(car1);
+		this.model.addObject(obj);
+		this.view.addCurrentObject(obj);
 		
 	}
 	
-	
+	/**
+	 * @param obj object to be deleted from the model
+	 */
 	@Override
 	public void deleteObject(StreetObject obj) throws Exception{
 		
@@ -144,7 +175,11 @@ public class StreetLifeController implements Controller {
 		this.view.removeCurrentObject(obj);
 		
 	}
-
+	
+	/**
+	 * Releases a number of frogs randomly at the bottom of the street
+	 * @param number number of frogs to be added
+	 */
 	@Override
 	public void releaseTheFrogs(int number) throws Exception{
 		
@@ -169,7 +204,7 @@ public class StreetLifeController implements Controller {
 	}
 	
 	/**
-	 * Loads a model state from a given file
+	 * Loads a model from a given file
 	 * @param path path to file
 	 */
 	@Override

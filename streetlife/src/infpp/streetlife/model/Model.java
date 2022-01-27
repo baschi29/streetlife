@@ -6,7 +6,7 @@ package infpp.streetlife.model;
 import java.util.ArrayList;
 
 /**
- * @author basti
+ * @author Basti, Cornelius
  *
  */
 public interface Model {
