@@ -24,8 +24,6 @@ public class Car extends MovingStreetObject {
 	 */
 	public Car(int x, int y, String name, float velocity) throws Exception{
 		super(x, y, name, 2, velocity);
-		this.setLane(y); //the lane is the current y position
-		
 		
 	}
 	
@@ -36,19 +34,5 @@ public class Car extends MovingStreetObject {
 	public void move() {
 		this.setX((int) (this.getX() + this.getVelocity()*20));
 	}
-	
-	public int getLane() {
-		return lane;
-	}
-	/**
-	 * sets the current lane of the car. cannot be 0 or negative, as these lanes are highly illegal
-	 * @param lane
-	 */
-	public void setLane(int lane) {
-		if (lane >0)
-			this.lane = lane;
-		else
-			throw new ArithmeticException("Lane number should be positive");
-	}	
 	
 }
