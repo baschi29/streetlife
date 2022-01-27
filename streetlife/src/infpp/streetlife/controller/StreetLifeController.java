@@ -14,7 +14,6 @@ import infpp.streetlife.view.*;
  */
 public class StreetLifeController implements Controller {
 
-	private int numberTicks;
 	private Model model;
 	private View view;
 	private int numLanes;
@@ -32,7 +31,6 @@ public class StreetLifeController implements Controller {
 		
 		this.numLanes = numLanes;
 		this.sizeStreet = sizeStreet;
-		this.numberTicks = numTicks;
 		this.possibleCars = new ArrayList<>();
 		this.possibleCars.add("Fiat");
 		this.possibleCars.add("Ford");
@@ -52,7 +50,7 @@ public class StreetLifeController implements Controller {
 	 * initiates the model with some cars, and adds the view to it
 	 */
 	
-	private void initiate() {	
+	private void initiate() throws Exception{	
 		//this.view = new AsciiView();
 		//this.view = new TextView();
 		this.model = new StreetLifeModel(numLanes, sizeStreet);
@@ -65,17 +63,9 @@ public class StreetLifeController implements Controller {
 		this.view.build();
 		this.view.setPossibleCars(this.possibleCars);
 		
-		Car car1 = new Car(0,1,"Fiat", 1);
-		Car car2 = new Car(0,2,"Audi", 2);
-		Frog frog1 = new Frog(10, 4, "Frog", 4, 1);
-		
-		this.addObject(car1);
-		this.addObject(car2);
-		this.addObject(frog1);
-		
-		//building it and displaying it for the first time
-		//this.view.build(this.model.getWidth(), this.model.getLength(), this.model.getModelState());
-		//this.view.display(this.model.getModelState());
+		this.addMovingObject("Fiat");
+		this.addMovingObject("Ford");
+		this.addMovingObject("Ferrari");
 	}
 	
 
@@ -140,7 +130,8 @@ public class StreetLifeController implements Controller {
 		
 	}
 
-	private void addObject(StreetObject car1) {
+	private void addObject(StreetObject car1) throws Exception{
+		
 		this.model.addObject(car1);
 		this.view.addCurrentObject(car1);
 		
@@ -148,20 +139,18 @@ public class StreetLifeController implements Controller {
 	
 	
 	@Override
-	public void deleteObject(StreetObject obj) {
+	public void deleteObject(StreetObject obj) throws Exception{
+		
 		this.model.deleteObject(obj);
 		this.view.removeCurrentObject(obj);
 		
 	}
 
 	@Override
-	public void releaseTheFrogs(int number) {
+	public void releaseTheFrogs(int number) throws Exception{
+		
 		for (int i = 0; i<number; i++) {
-			try {
-				this.addMovingObject("Frog");
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+			this.addMovingObject("Frog");
 		}
 		
 	}

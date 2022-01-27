@@ -29,9 +29,9 @@ public interface Controller {
 	
 	abstract public void addMovingObject(String str) throws Exception;
 	
-	abstract public void deleteObject(StreetObject obj);
+	abstract public void deleteObject(StreetObject obj) throws Exception;
 	
-	abstract public void releaseTheFrogs(int number);
+	abstract public void releaseTheFrogs(int number) throws Exception;
 	
 	abstract public void saveToFile(String path) throws Exception;
 	

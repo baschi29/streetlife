@@ -54,6 +54,7 @@ public class StreetLifeModel implements Model, Serializable{
 	/**
 	 * @return width width of the street
 	 */
+	@Override
 	public int getWidth() {
 		return this.width;
 	}
@@ -68,6 +69,7 @@ public class StreetLifeModel implements Model, Serializable{
 	/**
 	 * @return length length of street
 	 */
+	@Override
 	public int getLength() {
 		return this.length;
 	}
@@ -82,7 +84,8 @@ public class StreetLifeModel implements Model, Serializable{
 	/**
 	 * @param obj object to be added to the model
 	 */
-	public void addObject(StreetObject obj) {
+	@Override
+	public void addObject(StreetObject obj) throws Exception{
 		this.streetObjects.add(obj);
 	}
 	
@@ -91,6 +94,7 @@ public class StreetLifeModel implements Model, Serializable{
 	 * Objects leaving the street on the right or left reappear at the other site
 	 * Objects leaving in y direction get deleted from the model. If the object is a frog it will get added to the saved frogs count
 	 */
+	@Override
 	public void move() {
 		
 		for (StreetObject obj : this.streetObjects) {
@@ -124,6 +128,7 @@ public class StreetLifeModel implements Model, Serializable{
 	/**
 	 * @return description returns the description of the street as a String with width, length and the description of the car
 	 */
+	@Override
 	public String toString() {
 		String objectString = "";
 		
@@ -151,8 +156,14 @@ public class StreetLifeModel implements Model, Serializable{
 	 * @param obj object to be deleted from the model
 	 */
 	@Override
-	public void deleteObject(StreetObject obj) {
-		this.streetObjects.remove(obj);
+	public void deleteObject(StreetObject obj) throws Exception {
+		
+		try {
+			this.streetObjects.remove(obj);
+		}
+		catch (Exception e) {
+			throw new IllegalArgumentException("Tried deleting non existant Object");
+		}
 		
 	}
 	
@@ -171,14 +182,20 @@ public class StreetLifeModel implements Model, Serializable{
 		}
 		
 		for (StreetObject obj: toDelete) {
-			this.streetObjects.remove(obj);
+			try {
+				this.deleteObject(obj);
+			}
+			catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
-		System.out.println(this.streetObjects.toString());
+		
 	}
 
 	/**
 	 * @return savedFrogs number of Frogs saved by reaching a safe space
 	 */
+	@Override
 	public int getSavedFrogs() {
 		return this.savedFrogs;
 	}

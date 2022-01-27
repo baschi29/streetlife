@@ -35,12 +35,12 @@ public interface Model {
 	/**
 	 * @param obj object to be added to the model
 	 */
-	abstract public void addObject(StreetObject obj);
+	abstract public void addObject(StreetObject obj) throws Exception;
 	
 	/**
 	 * @param obj object to be deleted from the model
 	 */
-	abstract public void deleteObject(StreetObject obj);
+	abstract public void deleteObject(StreetObject obj) throws Exception;
 	
 	/**
 	 * @return savedFrogs number of Frogs saved by reaching a safe space
