@@ -29,8 +29,8 @@ public class Car extends MovingStreetObject {
 	 * A car can move from left to right, defined by its velocity
 	 */
 	
-	public void move() {
-		this.setX((int) (this.getX() + this.getVelocity()*20));
+	public void calculateMove() {
+		this.setIntendedX((int) (this.getX() + this.getVelocity()*20));
 	}
 	
 }

@@ -92,8 +92,7 @@ public class StreetLifeModel implements Model, Serializable{
 	
 	/**
 	 * moves the whole Streetlife for 1 step according to the models rules
-	 * Objects leaving the street on the right or left reappear at the other site
-	 * Objects leaving in y direction get deleted from the model. If the object is a frog it will get added to the saved frogs count
+	 * all new positions of all objects get calculated, verified and then set
 	 */
 	@Override
 	public void move() {
@@ -102,28 +101,43 @@ public class StreetLifeModel implements Model, Serializable{
 	
 			if (obj instanceof MovingStreetObject) {
 				
-				((MovingStreetObject) obj).move();
+				MovingStreetObject mobj = (MovingStreetObject) obj;
+				mobj.calculateMove();
+				this.borderManagement(mobj);
+				mobj.move();
 				
-				if (obj.getX() > this.getLength()) {
-					obj.setX(obj.getX() - this.getLength());
-				}
-				
-				else if (obj.getX() < 0) {
-					obj.setX(obj.getX() + this.getLength());
-				}
-				
-				if ((obj.getY() > this.getWidth()) || (obj.getY() < 0)) {
-					
-					if (obj instanceof Frog) {
-						this.setSavedFrogs(this.getSavedFrogs() + 1);
-					}
-					
-					obj.setDeleted(true);
-				}
 			}
 		}
 		
 		this.deleteDeletionPendingObjects();
+	}
+	
+	/**
+	 * Manages the x and y borders of the street for moving street objects
+	 * Objects leaving the street on the right or left reappear at the other site
+	 * Objects leaving in y direction get deleted from the model. If the object is a frog it will get added to the saved frogs count
+	 * @param obj object which x and y positions should get verified according to the border laws
+	 */
+	private void borderManagement(MovingStreetObject obj) {
+		
+		if (obj.getIntendedX() > this.getLength()) {
+			obj.setIntendedX(obj.getIntendedX() - this.getLength());
+		}
+		
+		else if (obj.getIntendedX() < 0) {
+			obj.setIntendedX(obj.getIntendedX() + this.getLength());
+		}
+		
+		if ((obj.getIntendedY() > this.getWidth()) || (obj.getIntendedY() < 0)) {
+			
+			if (obj instanceof Frog) {
+				this.setSavedFrogs(this.getSavedFrogs() + 1);
+			}
+			
+			obj.setDeleted(true);
+			
+		}
+		
 	}
 	
 	/**

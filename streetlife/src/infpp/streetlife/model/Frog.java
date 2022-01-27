@@ -123,7 +123,8 @@ public class Frog extends MovingStreetObject{
 	 * currently it moves <jumpRange> units randomly in x or positive y direction
 	 * After movement the IntervalCounter gets reset
 	 */
-	public void move() {
+	public void calculateMove() {
+		
 		this.setIntervalCounter(this.getIntervalCounter() - 1);
 		
 		if (this.getIntervalCounter() == 0) {
@@ -133,14 +134,15 @@ public class Frog extends MovingStreetObject{
 			int movementSign = rd.nextInt(2) * 2 - 1; // Randomly -1 or +1
 			
 			if (xMovement) {
-				this.setX(this.getX() + movementSign * this.getJumpRange()*20);
+				this.setIntendedX(this.getX() + movementSign * this.getJumpRange()*20);
 			}
 			else {
-				this.setY(this.getY() + this.getJumpRange());
+				this.setIntendedY(this.getY() + this.getJumpRange());
 			}
 			
 			this.setIntervalCounter(this.getJumpInterval());
 		}
+
 	}
 	
 }

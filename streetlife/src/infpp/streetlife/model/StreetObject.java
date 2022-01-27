@@ -54,6 +54,7 @@ public abstract class StreetObject implements Serializable{
 	 * @param x x position of the object
 	 * @param y y position of the object
 	 * @param name name of the object
+	 * @param hardness hardness of the object
 	 */
 	public StreetObject(int x, int y, String name, int hardness) {
 		
