@@ -18,7 +18,7 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.TrayIcon.MessageType;
 /**
- * The CloseDialog is a custom PopUp window that asks the user, if he/she really wants to close the application. Disposes itself on close/cancel, but stops the application on okay.
+ * The ErrorDialog is a custom PopUp window that notifies the user after encountering an error. Includes a system-notification for extra attention.
  * @author Cornelius
  * @version 1.0
  * @since 2022-01-28
@@ -104,13 +104,13 @@ public class ErrorDialog extends JDialog {
 		try {
 			//Obtain only one instance of the SystemTray object
 			SystemTray tray = SystemTray.getSystemTray();
-			Image image = Toolkit.getDefaultToolkit().createImage("frog.png");
+			Image image = Toolkit.getDefaultToolkit().createImage("/frog.png");
 
 			TrayIcon trayIcon = new TrayIcon(image, "Froschsimulator" );
 			//Let the system resize the image if needed
 			trayIcon.setImageAutoSize(true);
 			//Set tooltip text for the tray icon
-			trayIcon.setToolTip("System tray icon demo");
+			trayIcon.setToolTip("Froschsimulator");
 			tray.add(trayIcon);
 	    
 			//print out the notification
