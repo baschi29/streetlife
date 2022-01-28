@@ -340,7 +340,9 @@ public class StreetGUI extends JFrame implements ActionListener{
 				//this.controller.start();		//TODO not yet implemented
 			}
 			catch (Exception exc) {
-				//launch an errorMessageWindow for notifying the user
+				//launch an errorDialog for notifying the user
+				ErrorDialog dia = new ErrorDialog(exc);
+				dia.setVisible(true);
 			}
 		}
 		
@@ -353,7 +355,9 @@ public class StreetGUI extends JFrame implements ActionListener{
 				this.controller.step();
 			}
 			catch (Exception exc) {
-				//launch an errorMessageWindow for notifying the user
+				//launch an errorDialog for notifying the user
+				ErrorDialog dia = new ErrorDialog(exc);
+				dia.setVisible(true);
 			}
 		}
 		
@@ -364,7 +368,9 @@ public class StreetGUI extends JFrame implements ActionListener{
 				this.controller.stop();
 			}
 			catch (Exception exc) {
-				///launch an errorMessageWindow for notifying the user
+				//launch an errorDialog for notifying the user
+				ErrorDialog dia = new ErrorDialog(exc);
+				dia.setVisible(true);
 			}
 		}
 		
@@ -374,8 +380,10 @@ public class StreetGUI extends JFrame implements ActionListener{
 			try {
 				this.controller.addMovingObject(comboBoxInsert.getSelectedItem().toString());
 			} 
-			catch (Exception e1) {
-				///launch an errorMessageWindow for notifying the user
+			catch (Exception exc) {
+				//launch an errorDialog for notifying the user
+				ErrorDialog dia = new ErrorDialog(exc);
+				dia.setVisible(true);
 			}
 				
 		}
@@ -387,8 +395,10 @@ public class StreetGUI extends JFrame implements ActionListener{
 				this.controller.deleteObject(comboBoxDelete.getItemAt(comboBoxDelete.getSelectedIndex()));
 				
 			} 
-			catch (Exception e1) {
-				//launch an errorMessageWindow for notifying the user
+			catch (Exception exc) {
+				//launch an errorDialog for notifying the user
+				ErrorDialog dia = new ErrorDialog(exc);
+				dia.setVisible(true);
 			}
 		}
 		
@@ -398,7 +408,9 @@ public class StreetGUI extends JFrame implements ActionListener{
 				this.controller.releaseTheFrogs(5); //TODO currently set to a constant number
 			}
 			catch (Exception exc) {
-				//launch an errorMessageWindow for notifying the user
+				//launch an errorDialog for notifying the user
+				ErrorDialog dia = new ErrorDialog(exc);
+				dia.setVisible(true);
 			}
 		}
 		
@@ -409,7 +421,9 @@ public class StreetGUI extends JFrame implements ActionListener{
 				dia.setVisible(true);
 			}
 			catch (Exception exc) {
-				//launch an errorMessageWindow for notifying the user
+				//launch an errorDialog for notifying the user
+				ErrorDialog dia = new ErrorDialog(exc);
+				dia.setVisible(true);
 			}
 		}
 		
