@@ -15,6 +15,11 @@ import javax.imageio.ImageIO;
 public class Frog extends MovingStreetObject{
 	
 	/**
+	 * version number
+	 */
+	private static final long serialVersionUID = -2783805143464437390L;
+
+	/**
 	 * Interval in which the frog jumps, defined in movements/jump
 	 */
 	private int jumpInterval;
@@ -30,15 +35,15 @@ public class Frog extends MovingStreetObject{
 	private int jumpRange;
 	
 	/**
-	 * Constructor
+	 * Constructor, hardness for all frogs is set to 1
 	 * @param x initial x position of the frog
 	 * @param y initial y position of the frog
 	 * @param name name of the frog
 	 * @param jumpInterval number of movement calls it takes for the frog to jump
 	 * @param jumpRange distance the frog is able to jump
 	 */
-	public Frog(int x, int y, String name, int jumpRange, float velocity) {
-		super(x, y, name, velocity);
+	public Frog(int x, int y, String name, int jumpRange, float velocity) throws Exception{
+		super(x, y, name, 1, velocity);
 		this.setJumpRange(jumpRange);
 		this.setVelocity(velocity);
 		
@@ -85,7 +90,7 @@ public class Frog extends MovingStreetObject{
 	 * because of the restriction of one jump per move the velocity cannot be higher than jumpRange
 	 */
 	@Override
-	public void setVelocity(float velocity) {
+	public void setVelocity(float velocity) throws Exception {
 		
 		if (this.getVelocity() <= this.getJumpRange()) {
 			super.setVelocity(velocity);
@@ -118,7 +123,8 @@ public class Frog extends MovingStreetObject{
 	 * currently it moves <jumpRange> units randomly in x or positive y direction
 	 * After movement the IntervalCounter gets reset
 	 */
-	public void move() {
+	public void calculateMove() {
+		
 		this.setIntervalCounter(this.getIntervalCounter() - 1);
 		
 		if (this.getIntervalCounter() == 0) {
@@ -128,14 +134,15 @@ public class Frog extends MovingStreetObject{
 			int movementSign = rd.nextInt(2) * 2 - 1; // Randomly -1 or +1
 			
 			if (xMovement) {
-				this.setX(this.getX() + movementSign * this.getJumpRange()*20);
+				this.setIntendedX(this.getX() + movementSign * this.getJumpRange()*20);
 			}
 			else {
-				this.setY(this.getY() + this.getJumpRange());
+				this.setIntendedY(this.getY() + this.getJumpRange());
 			}
 			
 			this.setIntervalCounter(this.getJumpInterval());
 		}
+
 	}
 	
 }
