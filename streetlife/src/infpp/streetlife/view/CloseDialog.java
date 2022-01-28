@@ -8,31 +8,29 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
-import javax.swing.JTextPane;
-import java.awt.Font;
 import java.awt.Image;
-import java.awt.Rectangle;
-import java.awt.TexturePaint;
 
-import javax.swing.JTextArea;
-import javax.imageio.ImageIO;
-import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.SwingConstants;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
 import java.awt.event.ActionEvent;
-import java.awt.Window.Type;
-
+/**
+ * The CloseDialog is a custom PopUp window that asks the user, if he/she really wants to close the application. Disposes itself on close/cancel, but stops the application on okay.
+ * @author Cornelius
+ * @version 1.0
+ * @since 2022-01-28
+ *
+ */
 public class CloseDialog extends JDialog {
 
+	// JPanel everything is based upon
 	private final JPanel contentPanel = new JPanel();
 
+	//path to the used image
 	private final String FROG_PATH = "/frog_sad.png";
 
 	/**
-	 * Launch the application.
+	 * Launch the application. Used for debug
 	 */
 	public static void main(String[] args) {
 		try {
@@ -45,7 +43,7 @@ public class CloseDialog extends JDialog {
 	}
 
 	/**
-	 * Create the dialog.
+	 * Create and build the dialog-window.
 	 */
 	public CloseDialog() {
 		setType(Type.POPUP);
@@ -72,6 +70,8 @@ public class CloseDialog extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			buttonPane.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 			{
+				
+				//If Button "okay" is pressed, stop the main thread
 				JButton okButton = new JButton("OK");
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
@@ -83,6 +83,7 @@ public class CloseDialog extends JDialog {
 				getRootPane().setDefaultButton(okButton);
 			}
 			{
+				//If Button "cancel" is pressed, dispose the window and act normal
 				JButton cancelButton = new JButton("Cancel");
 				cancelButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {

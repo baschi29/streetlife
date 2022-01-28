@@ -18,16 +18,30 @@ import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
+
+/**
+ * The HelpDialog is a custom PopUp window that tells the user some "helpful" information. Sources its information from a local file
+ * @author Cornelius
+ * @version 1.0
+ * @since 2022-01-28
+ *
+ */
+
 public class HelpDialog extends JDialog {
 
+	//path used for the information for the JTextArea
 	private final String HELP_PATH = "txt/help.txt";
-
+	
+	//path used for the image used
+	private final String FROG_PATH = "/frog_sad.png";
+	
+	//JPanel everything is based upon
 	private final JPanel contentPanel = new JPanel();
 
-	private final String FROG_PATH = "/frog_sad.png";
+
 
 	/**
-	 * Launch the application.
+	 * Launch the application. Used for debug
 	 */
 	public static void main(String[] args) {
 		try {
@@ -40,7 +54,7 @@ public class HelpDialog extends JDialog {
 	}
 
 	/**
-	 * Create the dialog.
+	 * Create and built the dialog.
 	 */
 	public HelpDialog() {
 		setType(Type.POPUP);
@@ -55,8 +69,6 @@ public class HelpDialog extends JDialog {
 		
 		String labelcontent = this.loadFile(HELP_PATH);
 		
-		
-		//JLabel lblNewLabel = new JLabel(labelcontent);
 		JTextArea txtrD = new JTextArea(5, 20);
 		txtrD.setText(labelcontent);
 		txtrD.setLineWrap(true);
@@ -85,20 +97,14 @@ public class HelpDialog extends JDialog {
 				buttonPane.add(okButton);
 				getRootPane().setDefaultButton(okButton);
 			}
-			{
-//				JButton cancelButton = new JButton("Cancel");
-//				cancelButton.addActionListener(new ActionListener() {
-//					public void actionPerformed(ActionEvent e) {
-//						dispose();
-//					}
-//				});
-//				cancelButton.setHorizontalAlignment(SwingConstants.RIGHT);
-//				cancelButton.setActionCommand("Cancel");
-//				buttonPane.add(cancelButton);
-			}
 		}
 	}
 
+	/**
+	 * loads a file, scanning and building a string from the content
+	 * @param filepath
+	 * @return string with contents from the file
+	 */
 	private String loadFile(String filepath) {
 		Scanner sc;
 		String str = "";
@@ -110,7 +116,7 @@ public class HelpDialog extends JDialog {
 			}
 			
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
+			System.out.println("Error: File not found!");
 			e.printStackTrace();
 		}
 		return str;

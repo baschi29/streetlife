@@ -7,9 +7,15 @@ import java.util.ArrayList;
 
 import infpp.streetlife.controller.Controller;
 import infpp.streetlife.model.Model;
-import infpp.streetlife.model.StreetLifeModel;
 import infpp.streetlife.model.StreetObject;
 
+/**
+ * The StreetLifeView implements the interface, manages the in/outputs and controls the gui. Basically used for connecting the gui to the view-interface
+ * @author Cornelius
+ * @version 1.4
+ * @since 2022-01-28
+ *
+ */
 public class StreetLifeView implements View {
 
 	private StreetGUI gui;
@@ -73,6 +79,13 @@ public class StreetLifeView implements View {
 	@Override
 	public void addCurrentObject(StreetObject car1) {
 		this.gui.addCurrentCar(car1);
+		
+	}
+
+
+	@Override
+	public void refresh() {
+		this.gui.refresh();
 		
 	}
 }
