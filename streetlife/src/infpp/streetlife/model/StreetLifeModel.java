@@ -146,13 +146,7 @@ public class StreetLifeModel implements Model, Serializable{
 	 */
 	private void manageBorders(MovingStreetObject obj) {
 		
-		if (obj.getIntendedX() > this.getLength()) {
-			obj.setIntendedX(obj.getIntendedX() - this.getLength());
-		}
-		
-		else if (obj.getIntendedX() < 0) {
-			obj.setIntendedX(obj.getIntendedX() + this.getLength());
-		}
+		obj.setIntendedX(this.moduloCircle(obj.getIntendedX()));
 		
 		if ((obj.getIntendedY() > this.getWidth()) || (obj.getIntendedY() < 0)) {
 			
@@ -227,7 +221,7 @@ public class StreetLifeModel implements Model, Serializable{
 				boolean yCollision = false;
 				
 				for (int i = 0; i <= Math.abs(xMovement); i++) {
-					if (((obj.getX() + xDirection * i) % this.getLength() + this.getLength()) % this.getLength() == cobj.getX()) {
+					if (this.moduloCircle(obj.getX() + xDirection * i) == cobj.getX()) {
 						xCollision = true;
 						break;
 					}
@@ -343,5 +337,14 @@ public class StreetLifeModel implements Model, Serializable{
 	private void setSavedFrogs(int savedFrogs) {
 		this.savedFrogs = savedFrogs;
 	}
-
+	
+	/**
+	 * Will always return a positive value to enable circling through the canvas
+	 * @param old old x or y position to perform modulo on
+	 * @return new new x or y position after performing modulo
+	 */
+	private int moduloCircle(int old) {
+		return ((old % this.getLength() + this.getLength()) % this.getLength());
+	}
+	
 }
