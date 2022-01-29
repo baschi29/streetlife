@@ -46,8 +46,8 @@ public class StreetLifeModel implements Model, Serializable{
 	 */
 	public StreetLifeModel(int width, int length) {
 		
-		this.setWidth(width);
-		this.setLength(length);
+		this.setWidth(width - 1);
+		this.setLength(length - 1);
 		this.streetObjects = new ArrayList<StreetObject>();
 		
 	}
