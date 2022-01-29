@@ -186,21 +186,13 @@ public class StreetLifeModel implements Model, Serializable{
 			
 			if (obj.getHardness() <= cobj.getHardness()) {
 				
-				if (Math.abs(obj.getX() - cobj.getX()) <= Math.abs(xMovement)) {
+				if (xMovement != 0) {
 					
 					obj.setIntendedX(cobj.getX() - xDirection);
 					
 				}
 				
-				else if (cobj.getX() - ((obj.getIntendedX() % this.getLength() + this.getLength()) % this.getLength()) <= 0) {
-					
-					obj.setIntendedX(cobj.getX() - xDirection);
-					
-				}
-				
-				//else if ()
-				
-				else if (Math.abs(obj.getY() - cobj.getY()) <= Math.abs(yMovement)) {
+				if (yMovement != 0) {
 					
 					obj.setIntendedY(cobj.getY() - yDirection);
 					
