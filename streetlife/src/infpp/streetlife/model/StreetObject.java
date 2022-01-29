@@ -168,4 +168,9 @@ public abstract class StreetObject implements Serializable {
 		this.hardness = hardness;
 	}
 	
+	/**
+	 * ticks the object one time
+	 */
+	public abstract void tick();
+	
 }

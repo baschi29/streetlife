@@ -28,9 +28,9 @@ public interface Model {
 	abstract public int getLength();
 	
 	/**
-	 * Moves the whole Streetlife for 1 step according to the models rules
+	 * ticks the whole Streetlife for 1 step according to the models rules, includes movement
 	 */
-	abstract public void move();
+	abstract public void tick();
 	
 	/**
 	 * @param obj object to be added to the model

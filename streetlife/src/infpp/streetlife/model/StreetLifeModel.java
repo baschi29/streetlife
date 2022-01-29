@@ -109,18 +109,19 @@ public class StreetLifeModel implements Model, Serializable{
 	}
 	
 	/**
-	 * moves the whole Streetlife for 1 step according to the models rules
+	 * ticks the whole Streetlife for 1 step according to the models rules
 	 * all new positions of all objects get calculated, verified and then set
 	 */
 	@Override
-	public void move() {
+	public void tick() {
 		
 		for (StreetObject obj : this.streetObjects) {
-	
+			
+			obj.tick();
+			
 			if (obj instanceof MovingStreetObject) {
 				
 				MovingStreetObject mobj = (MovingStreetObject) obj;
-				mobj.calculateMove();
 				this.manageCollisions(mobj);
 				this.manageBorders(mobj);
 				

@@ -113,7 +113,7 @@ public class StreetLifeController implements Controller {
 	public void step() throws Exception{
 		
 		try {
-				this.model.move();
+				this.model.tick();
 			}
 		 catch (Exception e) {
 			// fetches any errors during the running-phase
