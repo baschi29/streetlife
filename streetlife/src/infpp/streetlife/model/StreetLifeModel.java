@@ -93,7 +93,7 @@ public class StreetLifeModel implements Model, Serializable{
 		
 		while (tryCounter <= 10) {
 			
-			HashSet<StreetObject> collisions = this.findCollisions(obj, 0, 0);
+			HashSet<StreetObject> collisions = this.findCollisions(obj);
 			
 			if (collisions.isEmpty()) {
 				this.streetObjects.add(obj);
@@ -187,23 +187,17 @@ public class StreetLifeModel implements Model, Serializable{
 			if (obj.getHardness() <= cobj.getHardness()) {
 				
 				if (xMovement != 0) {
-					
 					obj.setIntendedX(cobj.getX() - xDirection);
-					
 				}
 				
 				if (yMovement != 0) {
-					
 					obj.setIntendedY(cobj.getY() - yDirection);
-					
 				}
 				
 			}
 			
 			if (obj.getHardness() > cobj.getHardness()) {
-				
 				cobj.setDeleted(true);
-				
 			}
 			
 		}
@@ -211,7 +205,14 @@ public class StreetLifeModel implements Model, Serializable{
 		
 	}
 	
-	//TODO
+	/**
+	 * Detects if there is an collision with an existing object on the current position
+	 * and on the way the x and y movements describe
+	 * @param obj object to check for collisions
+	 * @param xMovement xMovement of the object
+	 * @param yMovement yMovement of the object
+	 * @return collisions set of other object with collision
+	 */
 	private HashSet<StreetObject> findCollisions(StreetObject obj, int xMovement, int yMovement) {
 		
 		HashSet<StreetObject> collisions = new HashSet<>();
@@ -226,21 +227,17 @@ public class StreetLifeModel implements Model, Serializable{
 				boolean yCollision = false;
 				
 				for (int i = 0; i <= Math.abs(xMovement); i++) {
-					
-					if ((obj.getX() + xDirection * i) % this.getLength() == cobj.getX()) {
+					if (((obj.getX() + xDirection * i) % this.getLength() + this.getLength()) % this.getLength() == cobj.getX()) {
 						xCollision = true;
 						break;
 					}
-					
 				}
 				
 				for (int i = 0; i <= Math.abs(yMovement); i++) {
-					
 					if ((obj.getY() + yDirection * i) == cobj.getY()) {
 						yCollision = true;
 						break;
 					}
-					
 				}
 				
 				if (xCollision && yCollision) {
@@ -252,6 +249,16 @@ public class StreetLifeModel implements Model, Serializable{
 		}
 		
 		return collisions;
+	}
+	
+	/**
+	 * Detects if there is an collision with an existing object on the current position
+	 * x and y movements are therefore set to 0
+	 * @param obj object to check for collisions
+	 * @return collisions set of other objects with collision
+	 */
+	private HashSet<StreetObject> findCollisions(StreetObject obj) {
+		return this.findCollisions(obj, 0, 0);
 	}
 	
 	/**
