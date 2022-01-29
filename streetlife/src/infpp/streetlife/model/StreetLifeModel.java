@@ -146,7 +146,7 @@ public class StreetLifeModel implements Model, Serializable{
 	 */
 	private void manageBorders(MovingStreetObject obj) {
 		
-		obj.setIntendedX(this.moduloCircle(obj.getIntendedX()));
+		obj.setIntendedX(this.moduloCircleX(obj.getIntendedX()));
 		
 		if ((obj.getIntendedY() > this.getWidth()) || (obj.getIntendedY() < 0)) {
 			
@@ -221,7 +221,7 @@ public class StreetLifeModel implements Model, Serializable{
 				boolean yCollision = false;
 				
 				for (int i = 0; i <= Math.abs(xMovement); i++) {
-					if (this.moduloCircle(obj.getX() + xDirection * i) == cobj.getX()) {
+					if (this.moduloCircleX(obj.getX() + xDirection * i) == cobj.getX()) {
 						xCollision = true;
 						break;
 					}
@@ -343,7 +343,7 @@ public class StreetLifeModel implements Model, Serializable{
 	 * @param old old x or y position to perform modulo on
 	 * @return new new x or y position after performing modulo
 	 */
-	private int moduloCircle(int old) {
+	private int moduloCircleX(int old) {
 		return ((old % this.getLength() + this.getLength()) % this.getLength());
 	}
 	
