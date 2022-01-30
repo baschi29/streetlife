@@ -22,7 +22,7 @@ public class StreetLifeMain {
 	public static void main(String[] args) {
 		try {
 		StartUpDialog dia = new StartUpDialog();
-		dia.setDefaultCloseOperation(JDialog.EXIT_ON_CLOSE);
+		dia.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		dia.setVisible(true);
 		}
 		catch (Exception e) {
