@@ -150,7 +150,7 @@ public class StreetLifeModel implements Model, Serializable{
 	/**
 	 * Detects if there is an collision with an existing object on the current position
 	 * and on the way the x and y movements describe
-	 * Objects with a negative hardness level are unable to collide
+	 * Objects with a negative hardness level are only able to collide with objects the same hardness
 	 * @param obj object to check for collisions
 	 * @param xMovement xMovement of the object
 	 * @param yMovement yMovement of the object

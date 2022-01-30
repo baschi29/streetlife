@@ -68,7 +68,6 @@ public abstract class MovingStreetObject extends StreetObject{
 		
 		this.setX(this.getIntendedX());
 		this.setY(this.getIntendedY());
-		
 	}
 	
 	/**
@@ -84,6 +83,7 @@ public abstract class MovingStreetObject extends StreetObject{
 		int yMovement = this.getIntendedY() - this.getY();
 		int xDirection = (int) Math.signum(xMovement);
 		int yDirection = (int) Math.signum(yMovement);
+		this.setxSlowedDown(false);
 		
 		HashSet<StreetObject> collisions = this.getModel().findCollisions(this, xMovement, yMovement);
 		
@@ -92,25 +92,27 @@ public abstract class MovingStreetObject extends StreetObject{
 			if (this.getHardness() <= cobj.getHardness()) {
 				
 				if (xMovement != 0) {
-					this.setIntendedX(cobj.getX() - xDirection);
+					this.handleXCollision(cobj, xDirection);
 					this.setxSlowedDown(true);
-				}
-				else {
-					this.setxSlowedDown(false);
 				}
 				
 				if (yMovement != 0) {
-					this.setIntendedY(cobj.getY() - yDirection);
+					this.handleYCollision(cobj, yDirection);
 				}
-				
 			}
 			
 			if (this.getHardness() > cobj.getHardness()) {
 				cobj.setDeleted(true);
 			}
-			
 		}
-		
+	}
+	
+	protected void handleXCollision(StreetObject obj, int xDirection) {
+		this.setIntendedX(obj.getX() - xDirection);
+	}
+	
+	protected void handleYCollision(StreetObject obj, int yDirection) {
+		this.setIntendedY(obj.getY() - yDirection);
 	}
 	
 	/**
