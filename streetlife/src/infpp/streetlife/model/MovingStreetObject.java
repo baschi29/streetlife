@@ -45,10 +45,14 @@ public abstract class MovingStreetObject extends StreetObject{
 	 * A tick of a MovingStreetObject causes it to calculate it's next move
 	 */
 	public void tick() {
-		this.calculateMove();
-		this.manageCollisions();
-		this.manageBorders();
-		this.move();
+		
+		if (!this.isDeleted()) {
+			this.calculateMove();
+			this.manageCollisions();
+			this.manageBorders();
+			this.move();
+		}
+		
 	}
 	
 	/**
