@@ -108,11 +108,17 @@ public abstract class MovingStreetObject extends StreetObject{
 	}
 	
 	protected void handleXCollision(StreetObject obj, int xDirection) {
-		this.setIntendedX(obj.getX() - xDirection);
+		
+		if (this.getX() != obj.getX()) {
+			this.setIntendedX(obj.getX() - xDirection);
+		}
 	}
 	
 	protected void handleYCollision(StreetObject obj, int yDirection) {
-		this.setIntendedY(obj.getY() - yDirection);
+		
+		if (this.getY() != obj.getY()) {
+			this.setIntendedY(obj.getY() - yDirection);
+		}
 	}
 	
 	/**

@@ -107,10 +107,10 @@ public class Car extends MovingStreetObject {
 	}
 	
 	@Override
-	protected void handleYCollision(StreetObject obj, int yDirection) {
+	protected void handleXCollision(StreetObject obj, int xDirection) {
 		
 		if (!this.isSwitchingLanes()) {
-			super.handleYCollision(obj, yDirection);
+			super.handleXCollision(obj, xDirection);
 		}
 	}
 	
