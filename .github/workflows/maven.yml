@@ -39,7 +39,7 @@ jobs:
           distribution: 'temurin'
           cache: maven
       - run: mvn -B package --file streetlife/pom.xml -DskipTests
-      - run: ls && mkdir staging && cp target/*streetlife*.jar staging
+      - run: ls && mkdir staging && cp target/streetlife staging
       - uses: actions/upload-artifact@v1
         with:
           name: Package
