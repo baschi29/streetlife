@@ -20,8 +20,8 @@ public class Car extends MovingStreetObject {
 	 * @param name name of the car
 	 * @param velocity velocity of car
 	 */
-	public Car(int x, int y, String name, float velocity) throws Exception{
-		super(x, y, name, 2, velocity);
+	public Car(Model model, int x, int y, String name, float velocity) throws Exception{
+		super(model, x, y, name, 2, velocity);
 		
 	}
 	

@@ -137,16 +137,16 @@ public class StreetLifeController implements Controller {
 	public void addMovingObject(String str) throws Exception{
 		
 		if (str == "Frog") {
-			this.addObject(new Frog(10, 4, "Frog", 4, 1));
+			this.addObject(new Frog(this.model, 10, 4, "Frog", 4, 1));
 		}
 		else if (str == "Fiat") {
-			this.addObject(new Car(0,1,"Fiat", 1));
+			this.addObject(new Car(this.model, 0, 1, "Fiat", 1));
 		}
 		else if (str == "Ford") {
-			this.addObject(new Car(0,3,"Ford", 2));
+			this.addObject(new Car(this.model, 0, 3, "Ford", 2));
 		}
 		else if (str == "Ferrari") {
-			this.addObject(new Car(0,3,"Ferrari", 5));
+			this.addObject(new Car(this.model, 0, 3, "Ferrari", 5));
 		}
 		else {
 			throw new IllegalArgumentException("Tried adding Object that isn't predefined");

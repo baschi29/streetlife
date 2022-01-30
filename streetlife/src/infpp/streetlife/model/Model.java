@@ -4,6 +4,7 @@
 package infpp.streetlife.model;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 
 /**
  * @author Basti, Cornelius
@@ -43,6 +44,16 @@ public interface Model {
 	abstract public void deleteObject(StreetObject obj) throws Exception;
 	
 	/**
+	 * resets the number of saved frogs to 0
+	 */
+	public void resetSavedFrogs();
+	
+	/**
+	 * increments the number of saved frogs by 1
+	 */
+	public void incrementSavedFrogs();
+	
+	/**
 	 * @return savedFrogs number of Frogs saved by reaching a safe space
 	 */
 	abstract public int getSavedFrogs();
@@ -51,4 +62,31 @@ public interface Model {
 	 * @return description returns the description of the street as a String with width, length and the description of the car
 	 */
 	abstract public String toString();
+	
+	/**
+	 * Detects if there is an collision with an existing object on the current position
+	 * and on the way the x and y movements describe
+	 * Objects with a negative hardness level are unable to collide
+	 * @param obj object to check for collisions
+	 * @param xMovement xMovement of the object
+	 * @param yMovement yMovement of the object
+	 * @return collisions set of other object with collision
+	 */
+	public HashSet<StreetObject> findCollisions(StreetObject obj, int xMovement, int yMovement);
+	
+	/**
+	 * Detects if there is an collision with an existing object on the current position
+	 * x and y movements are therefore set to 0
+	 * @param obj object to check for collisions
+	 * @return collisions set of other objects with collision
+	 */
+	public HashSet<StreetObject> findCollisions(StreetObject obj);
+	
+	/**
+	 * Will always return a positive value to enable circling through the canvas
+	 * @param old old x or y position to perform modulo on
+	 * @return new new x or y position after performing modulo
+	 */
+	public int moduloCircleX(int old);
+	
 }

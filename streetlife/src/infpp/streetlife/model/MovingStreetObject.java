@@ -3,6 +3,8 @@
  */
 package infpp.streetlife.model;
 
+import java.util.HashSet;
+
 /**
  * Class for moving Street Objects. Every moving Street object has a velocity and a move() method.
  */
@@ -30,8 +32,8 @@ public abstract class MovingStreetObject extends StreetObject{
 	 * @param velocity velocity of the object
 	 * @param hardness hardness of the object
 	 */
-	public MovingStreetObject(int x, int y, String name, int hardness, float velocity) throws Exception {
-		super(x, y, name, hardness);
+	public MovingStreetObject(Model model, int x, int y, String name, int hardness, float velocity) throws Exception {
+		super(model, x, y, name, hardness);
 		this.setIntendedX(x);
 		this.setIntendedY(y);
 		this.setVelocity(velocity);
@@ -42,6 +44,9 @@ public abstract class MovingStreetObject extends StreetObject{
 	 */
 	public void tick() {
 		this.calculateMove();
+		this.manageCollisions();
+		this.manageBorders();
+		this.move();
 	}
 	
 	/**
@@ -59,7 +64,67 @@ public abstract class MovingStreetObject extends StreetObject{
 		this.setY(this.getIntendedY());
 		
 	}
-
+	
+	/**
+	 * Checks if the new intended position of an object leads to a collision
+	 * If there is one, the collision is dealed with based on the hardness level of the involving objects:
+	 * Objects with lower or the same hardness level will move till they reach the point exactly before the collision
+	 * Objects with higher hardness level will move like there is no collision, the other object will get removed
+	 * @param obj object to be checked for collisions
+	 */
+	private void manageCollisions() {
+		
+		int xMovement = this.getIntendedX() - this.getX();
+		int yMovement = this.getIntendedY() - this.getY();
+		int xDirection = (int) Math.signum(xMovement);
+		int yDirection = (int) Math.signum(yMovement);
+		
+		HashSet<StreetObject> collisions = this.getModel().findCollisions(this, xMovement, yMovement);
+		
+		for (StreetObject cobj: collisions) {
+			
+			if (this.getHardness() <= cobj.getHardness()) {
+				
+				if (xMovement != 0) {
+					this.setIntendedX(cobj.getX() - xDirection);
+				}
+				
+				if (yMovement != 0) {
+					this.setIntendedY(cobj.getY() - yDirection);
+				}
+				
+			}
+			
+			if (this.getHardness() > cobj.getHardness()) {
+				cobj.setDeleted(true);
+			}
+			
+		}
+		
+	}
+	
+	/**
+	 * Manages the x and y borders of the street for moving street objects
+	 * Objects leaving the street on the right or left reappear at the other site
+	 * Objects leaving in y direction get deleted from the model. If the object is a frog it will get added to the saved frogs count
+	 * @param obj object which x and y positions should get verified according to the border laws
+	 */
+	private void manageBorders() {
+		
+		this.setIntendedX(this.getModel().moduloCircleX(this.getIntendedX()));
+		
+		if ((this.getIntendedY() > this.getModel().getWidth()) || (this.getIntendedY() < 0)) {
+			
+			if (this instanceof Frog) {
+				this.getModel().incrementSavedFrogs();
+			}
+			
+			this.setDeleted(true);
+			
+		}
+		
+	}
+	
 	/**
 	 * @return velocity velocity of the moving object
 	 */

@@ -42,8 +42,8 @@ public class Frog extends MovingStreetObject{
 	 * @param jumpInterval number of movement calls it takes for the frog to jump
 	 * @param jumpRange distance the frog is able to jump
 	 */
-	public Frog(int x, int y, String name, int jumpRange, float velocity) throws Exception{
-		super(x, y, name, 1, velocity);
+	public Frog(Model model, int x, int y, String name, int jumpRange, float velocity) throws Exception{
+		super(model, x, y, name, 1, velocity);
 		this.setJumpRange(jumpRange);
 		this.setVelocity(velocity);
 		
@@ -142,7 +142,7 @@ public class Frog extends MovingStreetObject{
 			
 			this.setIntervalCounter(this.getJumpInterval());
 		}
-
+		
 	}
 	
 }

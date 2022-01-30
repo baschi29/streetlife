@@ -6,8 +6,6 @@ package infpp.streetlife.model;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.Serializable;
-
-import java.io.*;
 import javax.imageio.ImageIO;
 
 /**
@@ -20,8 +18,12 @@ public abstract class StreetObject implements Serializable {
 	 * Version number
 	 */
 	private static final long serialVersionUID = 366898580346801333L;
-
-
+	
+	/**
+	 * Holds the model the object exists in
+	 */
+	private Model model;
+	
 	/**
 	 * x position of the object
 	 */
@@ -61,8 +63,9 @@ public abstract class StreetObject implements Serializable {
 	 * @param name name of the object
 	 * @param hardness hardness of the object
 	 */
-	public StreetObject(int x, int y, String name, int hardness) {
+	public StreetObject(Model model, int x, int y, String name, int hardness) {
 		
+		this.setModel(model);
 		this.setX(x);
 		this.setY(y);
 		this.setName(name);
@@ -171,5 +174,19 @@ public abstract class StreetObject implements Serializable {
 	 * ticks the object one time
 	 */
 	public abstract void tick();
+
+	/**
+	 * @return model model the objects exists in
+	 */
+	public Model getModel() {
+		return model;
+	}
+
+	/**
+	 * @param model sets a new model for the object
+	 */
+	public void setModel(Model model) {
+		this.model = model;
+	}
 	
 }

@@ -115,82 +115,11 @@ public class StreetLifeModel implements Model, Serializable{
 	@Override
 	public void tick() {
 		
-		for (StreetObject obj : this.streetObjects) {
-			
+		for (StreetObject obj : this.streetObjects) {	
 			obj.tick();
-			
-			if (obj instanceof MovingStreetObject) {
-				
-				MovingStreetObject mobj = (MovingStreetObject) obj;
-				this.manageCollisions(mobj);
-				this.manageBorders(mobj);
-				mobj.move();
-				
-			}
 		}
 		
 		this.deleteDeletionPendingObjects();
-	}
-	
-	/**
-	 * Manages the x and y borders of the street for moving street objects
-	 * Objects leaving the street on the right or left reappear at the other site
-	 * Objects leaving in y direction get deleted from the model. If the object is a frog it will get added to the saved frogs count
-	 * @param obj object which x and y positions should get verified according to the border laws
-	 */
-	private void manageBorders(MovingStreetObject obj) {
-		
-		obj.setIntendedX(this.moduloCircleX(obj.getIntendedX()));
-		
-		if ((obj.getIntendedY() > this.getWidth()) || (obj.getIntendedY() < 0)) {
-			
-			if (obj instanceof Frog) {
-				this.setSavedFrogs(this.getSavedFrogs() + 1);
-			}
-			
-			obj.setDeleted(true);
-			
-		}
-		
-	}
-	
-	/**
-	 * Checks if the new intended position of an object leads to a collision
-	 * If there is one, the collision is dealed with based on the hardness level of the involving objects:
-	 * Objects with lower or the same hardness level will move till they reach the point exactly before the collision
-	 * Objects with higher hardness level will move like there is no collision, the other object will get removed
-	 * @param obj object to be checked for collisions
-	 */
-	private void manageCollisions(MovingStreetObject obj) {
-		
-		int xMovement = obj.getIntendedX() - obj.getX();
-		int yMovement = obj.getIntendedY() - obj.getY();
-		int xDirection = (int) Math.signum(xMovement);
-		int yDirection = (int) Math.signum(yMovement);
-		
-		HashSet<StreetObject> collisions = this.findCollisions(obj, xMovement, yMovement);
-		
-		for (StreetObject cobj: collisions) {
-			
-			if (obj.getHardness() <= cobj.getHardness()) {
-				
-				if (xMovement != 0) {
-					obj.setIntendedX(cobj.getX() - xDirection);
-				}
-				
-				if (yMovement != 0) {
-					obj.setIntendedY(cobj.getY() - yDirection);
-				}
-				
-			}
-			
-			if (obj.getHardness() > cobj.getHardness()) {
-				cobj.setDeleted(true);
-			}
-			
-		}
-		
-		
 	}
 	
 	/**
@@ -202,7 +131,8 @@ public class StreetLifeModel implements Model, Serializable{
 	 * @param yMovement yMovement of the object
 	 * @return collisions set of other object with collision
 	 */
-	private HashSet<StreetObject> findCollisions(StreetObject obj, int xMovement, int yMovement) {
+	@Override
+	public HashSet<StreetObject> findCollisions(StreetObject obj, int xMovement, int yMovement) {
 		
 		HashSet<StreetObject> collisions = new HashSet<>();
 		int xDirection = (int) Math.signum(xMovement);
@@ -249,7 +179,8 @@ public class StreetLifeModel implements Model, Serializable{
 	 * @param obj object to check for collisions
 	 * @return collisions set of other objects with collision
 	 */
-	private HashSet<StreetObject> findCollisions(StreetObject obj) {
+	@Override
+	public HashSet<StreetObject> findCollisions(StreetObject obj) {
 		return this.findCollisions(obj, 0, 0);
 	}
 	
@@ -341,8 +272,26 @@ public class StreetLifeModel implements Model, Serializable{
 	 * @param old old x or y position to perform modulo on
 	 * @return new new x or y position after performing modulo
 	 */
-	private int moduloCircleX(int old) {
+	@Override
+	public int moduloCircleX(int old) {
 		return ((old % this.getLength() + this.getLength()) % this.getLength());
+	}
+
+	/**
+	 * resets the number of saved frogs to 0
+	 */
+	@Override
+	public void resetSavedFrogs() {
+		this.setSavedFrogs(0);
+		
+	}
+
+	/**
+	 * increments the number of saved frogs by 1
+	 */
+	@Override
+	public void incrementSavedFrogs() {
+		this.setSavedFrogs(this.getSavedFrogs() + 1);
 	}
 	
 }
