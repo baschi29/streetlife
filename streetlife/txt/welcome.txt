@@ -1,0 +1,1 @@
+Welcome to Froschsimulator, a slighty cursed program made for ProgOO WS2021/22 at CAU Kiel. Please create a new street or select a previos saved file.
