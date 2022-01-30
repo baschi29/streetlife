@@ -196,6 +196,7 @@ public class StreetLifeModel implements Model, Serializable{
 	/**
 	 * Detects if there is an collision with an existing object on the current position
 	 * and on the way the x and y movements describe
+	 * Objects with a negative hardness level are unable to collide
 	 * @param obj object to check for collisions
 	 * @param xMovement xMovement of the object
 	 * @param yMovement yMovement of the object
@@ -207,29 +208,32 @@ public class StreetLifeModel implements Model, Serializable{
 		int xDirection = (int) Math.signum(xMovement);
 		int yDirection = (int) Math.signum(yMovement);
 		
-		for (StreetObject cobj: this.streetObjects) {
+		if (obj.getHardness() >= 0 && !obj.isDeleted()) {
 			
-			if ((obj != cobj) && !cobj.isDeleted()) {
+			for (StreetObject cobj: this.streetObjects) {
 				
-				boolean xCollision = false;
-				boolean yCollision = false;
-				
-				for (int i = 0; i <= Math.abs(xMovement); i++) {
-					if (this.moduloCircleX(obj.getX() + xDirection * i) == cobj.getX()) {
-						xCollision = true;
-						break;
+				if ((obj != cobj) && !cobj.isDeleted() && (cobj.getHardness() >= 0)) {
+					boolean xCollision = false;
+					boolean yCollision = false;
+					
+					for (int i = 0; i <= Math.abs(xMovement); i++) {
+						if (this.moduloCircleX(obj.getX() + xDirection * i) == cobj.getX()) {
+							xCollision = true;
+							break;
+						}
 					}
-				}
-				
-				for (int i = 0; i <= Math.abs(yMovement); i++) {
-					if ((obj.getY() + yDirection * i) == cobj.getY()) {
-						yCollision = true;
-						break;
+					
+					for (int i = 0; i <= Math.abs(yMovement); i++) {
+						if ((obj.getY() + yDirection * i) == cobj.getY()) {
+							yCollision = true;
+							break;
+						}
 					}
-				}
-				
-				if (xCollision && yCollision) {
-					collisions.add(cobj);
+					
+					if (xCollision && yCollision) {
+						collisions.add(cobj);
+					}
+					
 				}
 				
 			}
