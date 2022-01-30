@@ -88,4 +88,12 @@ public class StreetLifeView implements View {
 		this.gui.refresh();
 		
 	}
+
+
+	@Override
+	public void setSize(int i, int j) {
+		this.gui.setSize(i, j);
+		this.gui.setSizeDisplay(j, i, this.controller.getLaneNumber()); //TODO
+		
+	}
 }

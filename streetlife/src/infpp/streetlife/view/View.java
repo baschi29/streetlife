@@ -63,5 +63,12 @@ public interface View {
 	 * refreshes the whole view, essentially getting things up-to-date and repaint the window
 	 */
 	public abstract void refresh();
+
+	/**
+	 * sets the Size of the gui
+	 * @param i	width of the gui,x-coord
+	 * @param j height of the gui,y-coord
+	 */
+	public abstract void setSize(int i, int j);
 	
 }	
