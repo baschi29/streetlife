@@ -74,9 +74,10 @@ class DrawingSpace extends JPanel
         		//calcs the size of the image, essentially finding the middle for accurate movement.
         		//then set the object on the new x/y values
         		
-        		//mp for lane size ("Space between the cars"), so that the cars dont overlap each other.
-        		int currentY = (int) this.getSize().getHeight();
-        		final int LANE_SIZE = 50; 
+        		
+        		final int LANE_SIZE = 10; //mp for lane size ("Space between the cars"), so that the cars dont overlap each other.
+        		final int OFFSET_Y = 100; //offset for the whole street, so that the cars are properly on the canvas
+        		int currentY = (int) this.getSize().getHeight()-OFFSET_Y;
         		g2d.drawImage(obj.getImg(), obj.getX()+(obj.getImg().getWidth()/2), currentY - (obj.getY()*LANE_SIZE-(obj.getImg().getHeight()/2)), obj.getImg().getWidth(),obj.getImg().getHeight(), null);
         	}
     	} 
