@@ -40,7 +40,7 @@
          </dependencies>
         <version>1.0</version>
         <configuration>
-          <tag>test</tag>
+          <tag>${project.version}</tag>
           <connectionType>connection</connectionType>
         </configuration>
         <executions>
