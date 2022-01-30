@@ -61,5 +61,12 @@ public interface Controller {
 	 * @param path path to file
 	 */
 	abstract public void loadFromFile(String path) throws Exception;
+
+
+	/**
+	 * gets the number of lanes the model is currently set at.
+	 * @return int number of lanes
+	 */
+	public abstract int getLaneNumber();
 	
 }
