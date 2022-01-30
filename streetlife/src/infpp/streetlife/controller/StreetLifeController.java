@@ -69,7 +69,6 @@ public class StreetLifeController implements Controller {
 	 */
 	
 	private void initiate() throws Exception{	
-		//this.view = new AsciiView();
 		//this.view = new TextView();
 		this.model = new StreetLifeModel(numLanes, sizeStreet);
 		this.view = new StreetLifeView(model);
