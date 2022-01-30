@@ -106,6 +106,13 @@ public class TextView implements View {
 		this.build();
 		
 	}
+
+
+	@Override
+	public void setSize(int i, int j) {
+		// TODO Automatisch generierter Methodenstub
+		
+	}
 	
 	
 }
