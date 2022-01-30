@@ -3,6 +3,8 @@
  */
 package infpp.streetlife;
 
+import javax.swing.JDialog;
+
 import infpp.streetlife.controller.Controller;
 import infpp.streetlife.controller.StreetLifeController;
 import infpp.streetlife.view.StartUpDialog;
@@ -20,6 +22,7 @@ public class StreetLifeMain {
 	public static void main(String[] args) {
 		try {
 		StartUpDialog dia = new StartUpDialog();
+		dia.setDefaultCloseOperation(JDialog.EXIT_ON_CLOSE);
 		dia.setVisible(true);
 		}
 		catch (Exception e) {
