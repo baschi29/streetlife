@@ -124,16 +124,9 @@ public class StreetLifeModel implements Model, Serializable{
 				MovingStreetObject mobj = (MovingStreetObject) obj;
 				this.manageCollisions(mobj);
 				this.manageBorders(mobj);
+				mobj.move();
 				
 			}
-		}
-		
-		for (StreetObject obj : this.streetObjects) {
-			
-			if (obj instanceof MovingStreetObject) {
-				((MovingStreetObject) obj).move();
-			}
-			
 		}
 		
 		this.deleteDeletionPendingObjects();
