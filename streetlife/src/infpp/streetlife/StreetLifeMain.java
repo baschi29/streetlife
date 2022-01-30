@@ -23,7 +23,7 @@ public class StreetLifeMain {
 		
 		
 		if (args.length == 0) { //if no args are given, use some default values
-			NUMBER_OF_LANES = 8;
+			NUMBER_OF_LANES = 4;
 			SIZE_OF_STREET = 1200;
 			NUMBER_OF_TICKS = 10;
 			
