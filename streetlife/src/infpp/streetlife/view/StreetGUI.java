@@ -157,9 +157,9 @@ public class StreetGUI extends JFrame implements ActionListener{
 		buttonPanel.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		contentPane.add(buttonPanel, BorderLayout.NORTH);
 		GridBagLayout gbl_buttonPanel = new GridBagLayout();
-		gbl_buttonPanel.columnWidths = new int[]{0, 0, 0, 0, 67, 87, 154, 196, 229, 0, 0};
+		gbl_buttonPanel.columnWidths = new int[]{0, 0, 0, 0, 67, 87, 154, 171, 233, 0, 0};
 		gbl_buttonPanel.rowHeights = new int[]{0, 0, 0};
-		gbl_buttonPanel.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 1.0, 0.0, Double.MIN_VALUE};
+		gbl_buttonPanel.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0, 0.0, 0.0, Double.MIN_VALUE};
 		gbl_buttonPanel.rowWeights = new double[]{0.0, 0.0, Double.MIN_VALUE};
 		buttonPanel.setLayout(gbl_buttonPanel);
 		ImageIcon imgStart = new ImageIcon(this.getClass().getResource(PLAY_PATH));
