@@ -19,9 +19,9 @@ public class StreetLifeModel implements Model, Serializable{
 	private static final long serialVersionUID = -1052906946115022938L;
 	
 	/**
-	 * 
+	 * catches the declared lane_widht from the interface
 	 */
-	private final int laneYExtension = 5;
+	private final int laneYExtension = LANE_WIDTH;
 	
 	private Lane firstLane;
 	

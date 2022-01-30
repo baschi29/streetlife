@@ -13,6 +13,11 @@ import java.util.HashSet;
 public interface Model {
 
 	/**
+	 * declares the width of the lanes used, should not be edited if you don't know what you do
+	 */
+	public final int LANE_WIDTH = 5;
+	
+	/**
 	 * Returns the Model State in Form of a List of all objects
 	 * @return ArrayList List of all objects present
 	 */
