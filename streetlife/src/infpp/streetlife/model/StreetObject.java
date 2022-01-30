@@ -35,6 +35,12 @@ public abstract class StreetObject implements Serializable {
 	private int y;
 	
 	/**
+	 * amount of pixel the object extents symmetrically in y
+	 * defaults to 0
+	 */
+	private int yExtension = 0;
+	
+	/**
 	 * name of the object
 	 */
 	private String name;
@@ -46,7 +52,7 @@ public abstract class StreetObject implements Serializable {
 	private int hardness;
 	
 	/**
-	 * marks the object as deleted, deletion happens, when method XXX is called in StreetLifeModel
+	 * marks the object as deleted, deletion happens, when method deleteDeletionPendingObjects() is called in StreetLifeModel
 	 */
 	private boolean deleted;
 	
@@ -58,6 +64,7 @@ public abstract class StreetObject implements Serializable {
 	
 	/**
 	 * Constructor of the class
+	 * @param model the model the object exists in
 	 * @param x x position of the object
 	 * @param y y position of the object
 	 * @param name name of the object
@@ -187,6 +194,20 @@ public abstract class StreetObject implements Serializable {
 	 */
 	public void setModel(Model model) {
 		this.model = model;
+	}
+
+	/**
+	 * @return yExtension amount of pixel the object extents symmetrically in y direction
+	 */
+	public int getYExtension() {
+		return this.yExtension;
+	}
+
+	/**
+	 * @param yExtension new yExtension value
+	 */
+	public void setYExtension(int yExtension) {
+		this.yExtension = yExtension;
 	}
 	
 }

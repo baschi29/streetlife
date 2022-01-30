@@ -24,6 +24,8 @@ public abstract class MovingStreetObject extends StreetObject{
 	
 	private int intendedY;
 	
+	private boolean xSlowedDown = false;
+	
 	/**
 	 * Constructor of the Class
 	 * @param x x position of the object
@@ -87,6 +89,10 @@ public abstract class MovingStreetObject extends StreetObject{
 				
 				if (xMovement != 0) {
 					this.setIntendedX(cobj.getX() - xDirection);
+					this.setxSlowedDown(true);
+				}
+				else {
+					this.setxSlowedDown(false);
 				}
 				
 				if (yMovement != 0) {
@@ -171,6 +177,20 @@ public abstract class MovingStreetObject extends StreetObject{
 	 */
 	public void setIntendedY(int intendedY) {
 		this.intendedY = intendedY;
+	}
+
+	/**
+	 * @return xSlowedDown
+	 */
+	public boolean isxSlowedDown() {
+		return this.xSlowedDown;
+	}
+
+	/**
+	 * @param xSlowedDown das zu setzende Objekt xSlowedDown
+	 */
+	public void setxSlowedDown(boolean xSlowedDown) {
+		this.xSlowedDown = xSlowedDown;
 	}
 	
 }

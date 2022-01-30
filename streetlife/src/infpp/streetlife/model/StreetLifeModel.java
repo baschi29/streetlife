@@ -19,6 +19,13 @@ public class StreetLifeModel implements Model, Serializable{
 	private static final long serialVersionUID = -1052906946115022938L;
 	
 	/**
+	 * 
+	 */
+	private final int laneYExtension = 5;
+	
+	private Lane firstLane;
+	
+	/**
 	 * Width of the street
 	 */
 	private int width;
@@ -40,16 +47,34 @@ public class StreetLifeModel implements Model, Serializable{
 	
 	/**
 	 * Constructor of the class
-	 * @param width width of the street = number of lanes
+	 * @param lanes number of lanes
 	 * @param length length of the street
-	 * @view the gui the model should be displayed in
 	 */
-	public StreetLifeModel(int width, int length) {
+	public StreetLifeModel(int lanes, int length) throws Exception{
 		
-		this.setWidth(width - 1);
+		this.setWidth((lanes * this.laneYExtension) - 1);
 		this.setLength(length - 1);
 		this.streetObjects = new ArrayList<StreetObject>();
 		
+		Lane bot = null;
+		Lane top = null;
+		
+		for (int i = 1; i <= lanes; i++) {
+			
+			Lane current = new Lane(this, i * this.laneYExtension - (this.laneYExtension / 2 + 1), this.laneYExtension, bot, top);
+			this.addObject(current);
+			
+			if (bot != null) {
+				bot.setTopLane(current);
+			}
+			else {
+				this.setFirstLane(current);
+			}
+			
+			bot = current;
+			
+		}
+		System.out.println(this.toString());
 	}
 
 	
@@ -100,7 +125,7 @@ public class StreetLifeModel implements Model, Serializable{
 				return;
 			}
 			
-			obj.setX(obj.getX() + 1);
+			obj.setX(obj.getX() + 10);
 			tryCounter += 1;
 		}
 		
@@ -292,6 +317,23 @@ public class StreetLifeModel implements Model, Serializable{
 	@Override
 	public void incrementSavedFrogs() {
 		this.setSavedFrogs(this.getSavedFrogs() + 1);
+	}
+
+
+	/**
+	 * @return firstLane
+	 */
+	@Override
+	public Lane getFirstLane() {
+		return this.firstLane;
+	}
+
+
+	/**
+	 * @param firstLane das zu setzende Objekt firstLane
+	 */
+	private void setFirstLane(Lane firstLane) {
+		this.firstLane = firstLane;
 	}
 	
 }

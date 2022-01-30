@@ -89,4 +89,6 @@ public interface Model {
 	 */
 	public int moduloCircleX(int old);
 	
+	public Lane getFirstLane();
+	
 }
