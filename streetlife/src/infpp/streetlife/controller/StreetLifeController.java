@@ -76,12 +76,16 @@ public class StreetLifeController implements Controller {
 		
 		this.view.setModel(model);
 		this.view.setController(this);
-		this.view.build();
+		this.view.setSize(1200,800);
+		
 		this.view.setPossibleCars(this.possibleCars);
 		
 		this.addMovingObject("Fiat");
 		this.addMovingObject("Ford");
 		this.addMovingObject("Ferrari");
+		
+		//the build of the view should be the last action, so there are no conflicts!
+		this.view.build();
 	}
 	
 
@@ -213,6 +217,11 @@ public class StreetLifeController implements Controller {
 		this.model = (Model) ois.readObject();
 		ois.close();
 		
+	}
+
+	@Override
+	public int getLaneNumber() {
+		return this.numLanes;
 	}
 
 }
