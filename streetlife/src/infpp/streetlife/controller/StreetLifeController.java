@@ -13,6 +13,8 @@ import infpp.streetlife.view.*;
  */
 public class StreetLifeController implements Controller {
 	
+	
+
 	/**
 	 * StreetLifeModel the controller uses
 	 */
@@ -34,6 +36,16 @@ public class StreetLifeController implements Controller {
 	private int sizeStreet;
 	
 	/**
+	 * speed of the simulation, 0 = slowest, 1 = faster, 2 = faster, etc
+	 */
+	private int simSpeed;
+	
+	/**
+	 * defines if default car-setup should be used or if the street should start empty
+	 */
+	
+	private boolean default_cars;
+	/**
 	 * List of predefined Cars that can be added to the model
 	 */
 	private ArrayList<String> possibleCars;
@@ -44,18 +56,21 @@ public class StreetLifeController implements Controller {
 	 * @param sizeStreet specifies the length of the Street
 	 * @param numTicks specifies the amount of ticks
 	 */
-	public StreetLifeController(int numLanes, int sizeStreet, int numTicks){
+	public StreetLifeController(int numLanes, int sizeStreet, int simSpeed, boolean default_cars){
 
 		
 		this.numLanes = numLanes;
 		this.sizeStreet = sizeStreet;
+		this.simSpeed = simSpeed;
+		this.default_cars = default_cars;
+		
 		this.possibleCars = new ArrayList<>();
 		this.possibleCars.add("Fiat");
 		this.possibleCars.add("Ford");
 		this.possibleCars.add("Ferrari");
 		
 	    try {
-			this.initiate();
+			this.initiate(default_cars);
 			
 		} catch (Exception e) {
 			// fetch any errors during building-phase
@@ -68,7 +83,7 @@ public class StreetLifeController implements Controller {
 	 * initiates the model with some cars, and adds the view to it
 	 */
 	
-	private void initiate() throws Exception{	
+	private void initiate(boolean default_cars) throws Exception{	
 		//this.view = new TextView();
 		this.model = new StreetLifeModel(numLanes, sizeStreet);
 		this.view = new StreetLifeView(model);
@@ -76,14 +91,15 @@ public class StreetLifeController implements Controller {
 		
 		this.view.setModel(model);
 		this.view.setController(this);
-		this.view.setSize(1200,800);
+		this.view.setSize(this.sizeStreet,this.numLanes*this.model.LANE_WIDTH);
 		
 		this.view.setPossibleCars(this.possibleCars);
 		
-		this.addMovingObject("Fiat");
-		this.addMovingObject("Ford");
-		this.addMovingObject("Ferrari");
-		
+		if(default_cars) {
+			this.addMovingObject("Fiat");
+			this.addMovingObject("Ford");
+			this.addMovingObject("Ferrari");
+		}
 		//the build of the view should be the last action, so there are no conflicts!
 		this.view.build();
 	}
