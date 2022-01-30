@@ -4,7 +4,6 @@
 package infpp.streetlife.controller;
 
 import java.util.ArrayList;
-import java.util.*;
 import java.io.*;
 import infpp.streetlife.model.*;
 import infpp.streetlife.view.*;
