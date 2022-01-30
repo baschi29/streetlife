@@ -5,6 +5,7 @@ package infpp.streetlife;
 
 import infpp.streetlife.controller.Controller;
 import infpp.streetlife.controller.StreetLifeController;
+import infpp.streetlife.view.StartUpDialog;
 
 /**
  * Class for starting the StreetLifeController
@@ -13,37 +14,52 @@ import infpp.streetlife.controller.StreetLifeController;
 public class StreetLifeMain {
 
 	/**
-	 * Creates an instance of StreetLifeController and starts it.
-	 * @param args command line arguments, [number_of_lanes,size_of_street,number_of_ticks]
+	 * Creates an instance of the StartUp-Dialog and sets its visibility to true.
+	 * @param args command line arguments
 	 */
 	public static void main(String[] args) {
-		int NUMBER_OF_LANES ; //number of lanes the street should have
-		int SIZE_OF_STREET;   // size or length of displayed street
-		int NUMBER_OF_TICKS;  // number of ticks the simulation should run for, equals the sim time
-		
-		
-		if (args.length == 0) { //if no args are given, use some default values
-			NUMBER_OF_LANES = 8;
-			SIZE_OF_STREET = 1200;
-			NUMBER_OF_TICKS = 10;
-			
+		try {
+		StartUpDialog dia = new StartUpDialog();
+		dia.setVisible(true);
 		}
-		else {
-			NUMBER_OF_LANES = Integer.parseInt(args[0]);
-			SIZE_OF_STREET = Integer.parseInt(args[1]);
-			NUMBER_OF_TICKS = Integer.parseInt(args[2]);
-			
+		catch (Exception e) {
+			System.out.println("Error during startup!");
+			e.printStackTrace();
 		}
-			
-			Controller controller = new StreetLifeController(NUMBER_OF_LANES,SIZE_OF_STREET,NUMBER_OF_TICKS);
-			try {
-				controller.start();
-			}
-			catch (Exception e) {
-				System.out.println("Error starting the controller");
-				e.printStackTrace();
-			}
-
+	}
+	
+	/**
+	 * starts the StreetLife-Simulation with default parameters. Useful for debug.
+	 */
+	public static void startStreetLife() {
+		Controller controller = new StreetLifeController(5,1000,1,true);
+		try {
+			controller.start();
+		}
+		catch (Exception e) {
+			System.out.println("Error starting the controller");
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * actually starts the StreetLife-Simulation with parameters
+	 * @param number_of_lanes	the amount of lanes the street should use
+	 * @param size_of_street	the length of the street, equal to the size of the window
+	 * @param sim_speed			the speed the simulation should run
+	 * @param default_cars		true if default cars should be added
+	 */
+	
+	public static void startStreetLife(int number_of_lanes,int size_of_street,int sim_speed, boolean default_cars) {
+		
+		Controller controller = new StreetLifeController(number_of_lanes,size_of_street,sim_speed,default_cars);
+		try {
+			controller.start();
+		}
+		catch (Exception e) {
+			System.out.println("Error starting the controller");
+			e.printStackTrace();
+		}
 	}
 
 }
