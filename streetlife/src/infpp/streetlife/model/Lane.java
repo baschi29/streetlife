@@ -17,12 +17,12 @@ public class Lane extends StreetObject{
 	/**
 	 * Lane below the current lane
 	 */
-	private Lane botLane;
+	private Lane botLane = this;
 	
 	/**
 	 * Lane above the current lane
 	 */
-	private Lane topLane;
+	private Lane topLane = this;
 	
 	/**
 	 * Constructor
@@ -34,8 +34,15 @@ public class Lane extends StreetObject{
 	 */
 	public Lane(Model model, int y, int yExtension, Lane botLane, Lane topLane) {
 		super(model, 0, y, "Lane", -1);
-		this.setBotLane(botLane);
-		this.setTopLane(topLane);
+		
+		if (botLane != null) {
+			this.setBotLane(botLane);
+		}
+		
+		if (topLane != null) {
+			this.setTopLane(topLane);
+		}
+		
 		this.setYExtension(yExtension);
 	}
 	
@@ -44,7 +51,11 @@ public class Lane extends StreetObject{
 	 */
 	@Override
 	public void tick() {}
-
+	
+	public boolean hasBotLane() {
+		return (this.getBotLane() != this);
+	}
+	
 	/**
 	 * @return botLane Lane below the current lane
 	 */
@@ -58,7 +69,11 @@ public class Lane extends StreetObject{
 	public void setBotLane(Lane botLane) {
 		this.botLane = botLane;
 	}
-
+	
+	public boolean hasTopLane() {
+		return (this.getTopLane() != this);
+	}
+	
 	/**
 	 * @return topLane Lane above the current lane
 	 */
