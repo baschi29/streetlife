@@ -32,6 +32,8 @@ import javax.swing.border.EmptyBorder;
 import infpp.streetlife.controller.Controller;
 import infpp.streetlife.model.Model;
 import infpp.streetlife.model.StreetObject;
+import javax.swing.JSpinner;
+import javax.swing.SpinnerNumberModel;
 /**
  *  The StreetGUI represents the graphical interface of the street with the display area, control buttons, menu bar etc. 
  *  Essentially the swing/AWT-part of the overall view.
@@ -75,6 +77,10 @@ public class StreetGUI extends JFrame implements ActionListener{
 	private JLayeredPane layeredPane;
 	
 	private DrawingSpace tp;
+	private JSpinner FrogSpinner;
+	private JLabel lblSizeLabel;
+	private JLabel lblSizeDisplay;
+	private JSeparator separator_1;
 	
 	
 	/**
@@ -151,9 +157,9 @@ public class StreetGUI extends JFrame implements ActionListener{
 		buttonPanel.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		contentPane.add(buttonPanel, BorderLayout.NORTH);
 		GridBagLayout gbl_buttonPanel = new GridBagLayout();
-		gbl_buttonPanel.columnWidths = new int[]{0, 0, 0, 0, 101, 377, 229, 0, 0};
+		gbl_buttonPanel.columnWidths = new int[]{0, 0, 0, 0, 67, 87, 154, 196, 229, 0, 0};
 		gbl_buttonPanel.rowHeights = new int[]{0, 0, 0};
-		gbl_buttonPanel.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, Double.MIN_VALUE};
+		gbl_buttonPanel.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 1.0, 0.0, Double.MIN_VALUE};
 		gbl_buttonPanel.rowWeights = new double[]{0.0, 0.0, Double.MIN_VALUE};
 		buttonPanel.setLayout(gbl_buttonPanel);
 		ImageIcon imgStart = new ImageIcon(this.getClass().getResource(PLAY_PATH));
@@ -188,11 +194,33 @@ public class StreetGUI extends JFrame implements ActionListener{
 		gbc_btnStepButton.gridy = 0;
 		buttonPanel.add(btnStep, gbc_btnStepButton);
 		
+		separator_1 = new JSeparator();
+		GridBagConstraints gbc_separator_1 = new GridBagConstraints();
+		gbc_separator_1.gridheight = 2;
+		gbc_separator_1.insets = new Insets(0, 0, 0, 5);
+		gbc_separator_1.gridx = 3;
+		gbc_separator_1.gridy = 0;
+		buttonPanel.add(separator_1, gbc_separator_1);
+		
+		lblSizeLabel = new JLabel("Current Street Size:");
+		GridBagConstraints gbc_lblSizeLabel = new GridBagConstraints();
+		gbc_lblSizeLabel.insets = new Insets(0, 0, 5, 5);
+		gbc_lblSizeLabel.gridx = 4;
+		gbc_lblSizeLabel.gridy = 0;
+		buttonPanel.add(lblSizeLabel, gbc_lblSizeLabel);
+		
+		lblSizeDisplay = new JLabel("0 x 0 ");
+		GridBagConstraints gbc_lblSizeDisplay = new GridBagConstraints();
+		gbc_lblSizeDisplay.insets = new Insets(0, 0, 5, 5);
+		gbc_lblSizeDisplay.gridx = 5;
+		gbc_lblSizeDisplay.gridy = 0;
+		buttonPanel.add(lblSizeDisplay, gbc_lblSizeDisplay);
+		
 		JLabel lblInsert = new JLabel("Insert Car");
 		GridBagConstraints gbc_lblInsert = new GridBagConstraints();
 		gbc_lblInsert.insets = new Insets(0, 0, 5, 5);
 		gbc_lblInsert.anchor = GridBagConstraints.EAST;
-		gbc_lblInsert.gridx = 5;
+		gbc_lblInsert.gridx = 7;
 		gbc_lblInsert.gridy = 0;
 		buttonPanel.add(lblInsert, gbc_lblInsert);
 		
@@ -203,7 +231,7 @@ public class StreetGUI extends JFrame implements ActionListener{
 		GridBagConstraints gbc_comboBoxInsert = new GridBagConstraints();
 		gbc_comboBoxInsert.fill = GridBagConstraints.HORIZONTAL;
 		gbc_comboBoxInsert.insets = new Insets(0, 0, 5, 5);
-		gbc_comboBoxInsert.gridx = 6;
+		gbc_comboBoxInsert.gridx = 8;
 		gbc_comboBoxInsert.gridy = 0;
 		buttonPanel.add(comboBoxInsert, gbc_comboBoxInsert);
 		
@@ -213,7 +241,7 @@ public class StreetGUI extends JFrame implements ActionListener{
 		GridBagConstraints gbc_btnInsert = new GridBagConstraints();
 		btnInsert.addActionListener(this);
 		gbc_btnInsert.insets = new Insets(0, 0, 5, 0);
-		gbc_btnInsert.gridx = 7;
+		gbc_btnInsert.gridx = 9;
 		gbc_btnInsert.gridy = 0;
 		buttonPanel.add(btnInsert, gbc_btnInsert);
 		
@@ -221,17 +249,25 @@ public class StreetGUI extends JFrame implements ActionListener{
 		btnFrog.addActionListener(this);
 		GridBagConstraints gbc_btnFrog = new GridBagConstraints();
 		gbc_btnFrog.fill = GridBagConstraints.HORIZONTAL;
-		gbc_btnFrog.gridwidth = 3;
+		gbc_btnFrog.gridwidth = 2;
 		gbc_btnFrog.insets = new Insets(0, 0, 0, 5);
 		gbc_btnFrog.gridx = 0;
 		gbc_btnFrog.gridy = 1;
 		buttonPanel.add(btnFrog, gbc_btnFrog);
 		
+		FrogSpinner = new JSpinner();
+		FrogSpinner.setModel(new SpinnerNumberModel(0, 0, 15, 1));
+		GridBagConstraints gbc_FrogSpinner = new GridBagConstraints();
+		gbc_FrogSpinner.insets = new Insets(0, 0, 0, 5);
+		gbc_FrogSpinner.gridx = 2;
+		gbc_FrogSpinner.gridy = 1;
+		buttonPanel.add(FrogSpinner, gbc_FrogSpinner);
+		
 		JLabel lblDelete = new JLabel("Delete Car");
 		GridBagConstraints gbc_lblDelete = new GridBagConstraints();
 		gbc_lblDelete.insets = new Insets(0, 0, 0, 5);
 		gbc_lblDelete.anchor = GridBagConstraints.EAST;
-		gbc_lblDelete.gridx = 5;
+		gbc_lblDelete.gridx = 7;
 		gbc_lblDelete.gridy = 1;
 		buttonPanel.add(lblDelete, gbc_lblDelete);
 		
@@ -241,14 +277,14 @@ public class StreetGUI extends JFrame implements ActionListener{
 		GridBagConstraints gbc_comboBoxDelete = new GridBagConstraints();
 		gbc_comboBoxDelete.fill = GridBagConstraints.HORIZONTAL;
 		gbc_comboBoxDelete.insets = new Insets(0, 0, 0, 5);
-		gbc_comboBoxDelete.gridx = 6;
+		gbc_comboBoxDelete.gridx = 8;
 		gbc_comboBoxDelete.gridy = 1;
 		buttonPanel.add(comboBoxDelete, gbc_comboBoxDelete);
 		
 		btnDelete = new JButton("Delete");
 		btnDelete.addActionListener(this);
 		GridBagConstraints gbc_btnDelete = new GridBagConstraints();
-		gbc_btnDelete.gridx = 7;
+		gbc_btnDelete.gridx = 9;
 		gbc_btnDelete.gridy = 1;
 		buttonPanel.add(btnDelete, gbc_btnDelete);
 		
@@ -280,6 +316,21 @@ public class StreetGUI extends JFrame implements ActionListener{
 	 */
 	public void setModel(Model model) {
 		this.model= model;
+		
+	}
+	
+	/**
+	 * /**
+	 * sets the size that should be displayed on the gui
+	 *
+	 * @param x the width of the street
+	 * @param y the height of the street
+	 * @param ln the number of lanes used in current model
+	 */
+	public void setSizeDisplay(int x, int y, int ln) {
+		String currentSize = Integer.toString(x) + " x " + Integer.toString(y) + "\n LaneNumber: " + Integer.toString(ln);
+		this.lblSizeDisplay.setText(currentSize);
+		refresh();
 		
 	}
 	
@@ -405,7 +456,8 @@ public class StreetGUI extends JFrame implements ActionListener{
 		//if the frog-button is pressed, unleash the beasts
 		else if (e.getSource() == btnFrog) {
 			try {
-				this.controller.releaseTheFrogs(5); //TODO currently set to a constant number
+				int frogAmount = (int) this.FrogSpinner.getValue();
+				this.controller.releaseTheFrogs(frogAmount); 
 			}
 			catch (Exception exc) {
 				//launch an errorDialog for notifying the user
