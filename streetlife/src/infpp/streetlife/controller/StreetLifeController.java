@@ -70,8 +70,8 @@ public class StreetLifeController implements Controller {
 	
 	private void initiate() throws Exception{	
 		//this.view = new TextView();
-		this.model = new StreetLifeModel(numLanes, sizeStreet);
-		this.view = new StreetLifeView(model);
+		this.model = new StreetLifeModel(this.numLanes, this.sizeStreet);
+		this.view = new StreetLifeView(this.model);
 	
 		
 		this.view.setModel(model);
