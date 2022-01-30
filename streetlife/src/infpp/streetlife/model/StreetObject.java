@@ -17,8 +17,7 @@ import javax.imageio.ImageIO;
 public abstract class StreetObject implements Serializable {
 	
 	/**
-
-	 * 
+	 * Version number
 	 */
 	private static final long serialVersionUID = 366898580346801333L;
 
