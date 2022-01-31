@@ -14,6 +14,7 @@ import java.io.InputStream;
 import java.util.Scanner;
 
 import javax.imageio.ImageIO;
+import javax.management.InvalidAttributeValueException;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -285,21 +286,26 @@ public class StartUpDialog  extends JDialog implements ActionListener {
 		
 		//if launch is pressed, aquire everything needed and start the simulation
 		if (e.getSource() == btnLaunchButton) {
+			try {
+				int number_of_lanes = Integer.parseInt(this.textFieldLanes.getText());
+				int size_of_street = Integer.parseInt(this.textFieldLength.getText());
 			
-			int number_of_lanes = Integer.parseInt(this.textFieldLanes.getText());
-			int size_of_street = Integer.parseInt(this.textFieldLength.getText());
+				int sim_speed = this.comboBoxSimTime.getSelectedIndex();
+				boolean default_cars = this.tglbtnNewToggleButton.isSelected();
 			
-			int sim_speed = this.comboBoxSimTime.getSelectedIndex();
-			boolean default_cars = this.tglbtnNewToggleButton.isSelected();
+				System.out.println(number_of_lanes);
+				System.out.println(size_of_street);
+				System.out.println(sim_speed);
+				System.out.println(default_cars);
 			
-			System.out.println(number_of_lanes);
-			System.out.println(size_of_street);
-			System.out.println(sim_speed);
-			System.out.println(default_cars);
+				StreetLifeMain.startStreetLife(number_of_lanes, size_of_street, sim_speed, default_cars);
 			
-			StreetLifeMain.startStreetLife(number_of_lanes, size_of_street, sim_speed, default_cars);
-			
-			this.dispose();
+				this.dispose();
+			}
+			catch(Exception exc) {
+				ErrorDialog dia = new ErrorDialog(new InvalidAttributeValueException("Please enter the required values"));
+				dia.setVisible(true);
+			}
 		}
 		
 		//if the debug button is pressed, start the simulation with default values

@@ -7,7 +7,7 @@ import javax.swing.ImageIcon;
 
 import java.awt.image.BufferedImage;
 /**
- * The FileLoader does exactly what the name suggest: loading files. Used everywhere as a utility class to load Image/ImageIcons from resourcepaths. Uses Resourcestreams to ensure nice and smoot .jar-packing
+ * The FileLoader does exactly what the name suggest: loading files. Used everywhere as a utility class to load Image/ImageIcons from resourcepaths. Uses Resourcestreams to ensure nice and smooth .jar-packing
  * @author Cornelius
  *
  */

@@ -64,12 +64,13 @@ public class StreetLifeController implements Controller {
 		this.simSpeed = simSpeed;
 		this.default_cars = default_cars;
 		
+		
 		this.possibleCars = new ArrayList<>();
 		this.possibleCars.add("Fiat");
 		this.possibleCars.add("Ford");
 		this.possibleCars.add("Ferrari");
 		
-	    try {
+		try {
 			this.initiate(default_cars);
 			
 		} catch (Exception e) {
@@ -96,9 +97,15 @@ public class StreetLifeController implements Controller {
 		this.view.setPossibleCars(this.possibleCars);
 		
 		if(default_cars) {
+			try {
 			this.addMovingObject("Fiat");
 			this.addMovingObject("Ford");
 			this.addMovingObject("Ferrari");
+			}
+			catch (Exception exc) {
+				ErrorDialog dia = new ErrorDialog(exc);
+				dia.setVisible(true);
+			}
 		}
 		//the build of the view should be the last action, so there are no conflicts!
 		this.view.build();
