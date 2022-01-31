@@ -9,13 +9,7 @@
     <sourceDirectory>src</sourceDirectory>
     <resources>
       <resource>
-        <directory>img</directory>
-        <excludes>
-          <exclude>**/*.java</exclude>
-        </excludes>
-      </resource>
-      <resource>
-        <directory>txt</directory>
+        <directory>resources</directory>
         <excludes>
           <exclude>**/*.java</exclude>
         </excludes>
