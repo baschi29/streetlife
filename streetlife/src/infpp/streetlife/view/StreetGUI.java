@@ -26,14 +26,15 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
+import javax.swing.JSpinner;
+import javax.swing.SpinnerNumberModel;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.EmptyBorder;
 
+import infpp.streetlife.FileLoader;
 import infpp.streetlife.controller.Controller;
 import infpp.streetlife.model.Model;
 import infpp.streetlife.model.StreetObject;
-import javax.swing.JSpinner;
-import javax.swing.SpinnerNumberModel;
 /**
  *  The StreetGUI represents the graphical interface of the street with the display area, control buttons, menu bar etc. 
  *  Essentially the swing/AWT-part of the overall view.
@@ -45,14 +46,14 @@ import javax.swing.SpinnerNumberModel;
 public class StreetGUI extends JFrame implements ActionListener{
 
 	//used resources with paths
-	private final String FROG_PATH = "/frog.png";
-	private final String STREET_PATH = "/asphalt.png";
-	private final String PLAY_PATH = "/play.png";
-	private final String PAUSE_PATH = "/pause.png";
-	private final String STEP_PATH = "/next.png";
-	private final String QUIT_PATH = "/close.png";
-	private final String SAVE_PATH = "/save.png";
-	private final String LOAD_PATH = "/load.png";
+	private final String FROG_PATH = "img/frog.png";
+	private final String STREET_PATH = "img/asphalt.png";
+	private final String PLAY_PATH = "img/play.png";
+	private final String PAUSE_PATH = "img/pause.png";
+	private final String STEP_PATH = "img/next.png";
+	private final String QUIT_PATH = "img/close.png";
+	private final String SAVE_PATH = "img/save.png";
+	private final String LOAD_PATH = "img/load.png";
 	
 	//global buttons/menuItems used for actionlistener
 	private JButton btnInsert;
@@ -82,6 +83,8 @@ public class StreetGUI extends JFrame implements ActionListener{
 	private JLabel lblSizeDisplay;
 	private JSeparator separator_1;
 	
+	private FileLoader fl = new FileLoader();
+	
 	
 	/**
 	 * Launch the application. Used for debug
@@ -101,16 +104,19 @@ public class StreetGUI extends JFrame implements ActionListener{
 
 	/**
 	 * Create the frame.
+	 * @throws IOException 
 	 */
-	public StreetGUI(Model model) {
+	public StreetGUI(Model model) throws IOException {
 		this.model = model;
 		
 		setPreferredSize(new Dimension(1200,800));
 		setTitle("Froschsimulator 2022");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1200, 600);
-		Image img = new ImageIcon(this.getClass().getResource(FROG_PATH)).getImage();
+		
+		Image img = fl.loadImageIcon(FROG_PATH).getImage();
 		this.setIconImage(img);
+		
 		
 		
 		JMenuBar menuBar = new JMenuBar();
@@ -120,12 +126,12 @@ public class StreetGUI extends JFrame implements ActionListener{
 		menuBar.add(mnFileMenu);
 		
 		this.mntmFileMenuItemLoad = new JMenuItem("Load");
-		ImageIcon imgLoad = new ImageIcon(this.getClass().getResource(LOAD_PATH));
+		ImageIcon imgLoad = fl.loadImageIcon(LOAD_PATH);
 		mntmFileMenuItemLoad.setIcon(imgLoad);
 		mnFileMenu.add(mntmFileMenuItemLoad);
 		
 		this.mntmFileMenuItemSave = new JMenuItem("Save");
-		ImageIcon imgSave = new ImageIcon(this.getClass().getResource(SAVE_PATH));
+		ImageIcon imgSave = fl.loadImageIcon(SAVE_PATH);
 		mntmFileMenuItemSave.setIcon(imgSave);
 		mnFileMenu.add(mntmFileMenuItemSave);
 		
@@ -133,7 +139,7 @@ public class StreetGUI extends JFrame implements ActionListener{
 		mnFileMenu.add(separator);
 		
 		this.mntmFileMenuQuit = new JMenuItem("Quit");
-		ImageIcon imgQuit = new ImageIcon(this.getClass().getResource(QUIT_PATH));
+		ImageIcon imgQuit = fl.loadImageIcon(QUIT_PATH);
 		mntmFileMenuQuit.setIcon(imgQuit);
 		mntmFileMenuQuit.addActionListener(this);
 		mnFileMenu.add(mntmFileMenuQuit);
@@ -162,8 +168,8 @@ public class StreetGUI extends JFrame implements ActionListener{
 		gbl_buttonPanel.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0, 0.0, 0.0, Double.MIN_VALUE};
 		gbl_buttonPanel.rowWeights = new double[]{0.0, 0.0, Double.MIN_VALUE};
 		buttonPanel.setLayout(gbl_buttonPanel);
-		ImageIcon imgStart = new ImageIcon(this.getClass().getResource(PLAY_PATH));
-		ImageIcon imgPause = new ImageIcon(this.getClass().getResource(PAUSE_PATH));
+		ImageIcon imgStart = fl.loadImageIcon(PLAY_PATH);
+		ImageIcon imgPause = fl.loadImageIcon(PAUSE_PATH);
 		
 		this.btnStart = new JButton("Start");
 		btnStart.setIcon(imgStart);
@@ -184,7 +190,7 @@ public class StreetGUI extends JFrame implements ActionListener{
 		buttonPanel.add(btnStop, gbc_btnStop);
 		
 		this.btnStep = new JButton("Step");
-		ImageIcon imgStep = new ImageIcon(this.getClass().getResource(STEP_PATH));
+		ImageIcon imgStep = fl.loadImageIcon(STEP_PATH);
 		btnStep.setIcon(imgStep);
 		btnStep.addActionListener(this);
 
@@ -292,16 +298,12 @@ public class StreetGUI extends JFrame implements ActionListener{
 		tp =  new DrawingSpace(model.getModelState());
 		
 		//painting the background, making sure that the image gets properly tiled
-		BufferedImage asphalt;
-		try {
-			//reading the image file as new BufferedImage Image
-			asphalt = ImageIO.read(this.getClass().getResource(STREET_PATH));
+		BufferedImage asphalt = fl.loadImage(STREET_PATH);
+		
 			
-			// creating a TexturePaint object out of the Image and telling the DrawingSpace to used it as the background
-			tp.setTexture(new TexturePaint(asphalt, new Rectangle(0,0,asphalt.getWidth(),asphalt.getHeight())));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		// creating a TexturePaint object out of the Image and telling the DrawingSpace to used it as the background
+		tp.setTexture(new TexturePaint(asphalt, new Rectangle(0,0,asphalt.getWidth(),asphalt.getHeight())));
+		
 		
 		contentPane.add(tp);		
 		pack();

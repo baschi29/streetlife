@@ -72,7 +72,10 @@ public class StartUpDialog  extends JDialog implements ActionListener {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+			
+		
 	}
+		
 
 	/**
 	 * Create and build the dialog-window.

@@ -8,6 +8,8 @@ import java.io.IOException;
 import java.io.Serializable;
 import javax.imageio.ImageIO;
 
+import infpp.streetlife.FileLoader;
+
 /**
  * abstract class for objects on the street. Acts as superclass for every moving object such as cars or animals
  */
@@ -23,6 +25,11 @@ public abstract class StreetObject implements Serializable {
 	 * Holds the model the object exists in
 	 */
 	private Model model;
+	
+	/**
+	 * Default Resource used for the car
+	 */
+	private final String CAR_PATH = "img/car.png";
 	
 	/**
 	 * x position of the object
@@ -79,7 +86,8 @@ public abstract class StreetObject implements Serializable {
 		this.setHardness(hardness);
 		
 		 try { 
-	           img = ImageIO.read(getClass().getResource("/car.png"));
+			 FileLoader fl = new FileLoader();
+	           img = fl.loadImage(CAR_PATH);
 	        } catch(IOException ioe){
 	        	System.out.println("Unable to open file");
 	        	}

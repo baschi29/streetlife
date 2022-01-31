@@ -9,6 +9,8 @@ import infpp.streetlife.controller.Controller;
 import infpp.streetlife.controller.StreetLifeController;
 import infpp.streetlife.view.StartUpDialog;
 
+import java.awt.EventQueue;
+
 /**
  * Class for starting the StreetLifeController
  * @author Cornelius
@@ -20,6 +22,10 @@ public class StreetLifeMain {
 	 * @param args command line arguments
 	 */
 	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+		public void run() {
+
+		
 		try {
 		StartUpDialog dia = new StartUpDialog();
 		dia.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
@@ -29,7 +35,9 @@ public class StreetLifeMain {
 			System.out.println("Error during startup!");
 			e.printStackTrace();
 		}
-	}
+		}
+	});
+}
 	
 	/**
 	 * starts the StreetLife-Simulation with default parameters. Useful for debug.

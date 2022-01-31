@@ -3,6 +3,7 @@
  */
 package infpp.streetlife.view;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import infpp.streetlife.controller.Controller;
@@ -25,7 +26,11 @@ public class StreetLifeView implements View {
 	
 	
 	public StreetLifeView(Model model) {
-		this.gui = new StreetGUI(model);
+		try {
+			this.gui = new StreetGUI(model);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		this.setModel(model);
 	}
 	

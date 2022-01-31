@@ -8,6 +8,8 @@ import java.util.Random;
 
 import javax.imageio.ImageIO;
 
+import infpp.streetlife.FileLoader;
+
 /**
  * Class for frogs. A Car has a position (x,y), a specified name and a specific jump interval and
  * jump range
@@ -35,6 +37,11 @@ public class Frog extends MovingStreetObject{
 	private int jumpRange;
 	
 	/**
+	 * Image of the Frog, so that it doesnt look like a car
+	 */
+	private final String FROG_PATH = "img/frog_small.png";
+	
+	/**
 	 * Constructor, hardness for all frogs is set to 1
 	 * @param x initial x position of the frog
 	 * @param y initial y position of the frog
@@ -48,7 +55,8 @@ public class Frog extends MovingStreetObject{
 		this.setVelocity(velocity);
 		
 		try { 
-	           this.img = ImageIO.read(getClass().getResource("/frog_small.png"));
+			FileLoader fl = new FileLoader();
+	           this.img = fl.loadImage(FROG_PATH);
 	        } catch(IOException ioe){
 	        	System.out.println("Unable to open file");
 	        	}
