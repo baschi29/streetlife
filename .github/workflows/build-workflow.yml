@@ -42,4 +42,5 @@ jobs:
       - run: mkdir staging && cp -r streetlife/target/streetlife*.jar staging
       - uses: actions/upload-artifact@v1
         with:
+          name: jar
           path: staging
