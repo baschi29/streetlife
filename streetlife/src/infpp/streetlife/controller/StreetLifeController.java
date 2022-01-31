@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.io.*;
 import infpp.streetlife.model.*;
 import infpp.streetlife.view.*;
+import java.util.Random;
 
 /**
  *
@@ -163,7 +164,9 @@ public class StreetLifeController implements Controller {
 	public void addMovingObject(String str) throws Exception{
 		
 		if (str == "Frog") {
-			this.addObject(new Frog(this.model, 10, 0, "Frog", 4, 1));
+			Random random = new Random();
+			
+			this.addObject(new Frog(this.model, random.nextInt(this.model.getLength()), 0, "Frog", 4, 1));
 		}
 		else if (str == "Fiat") {
 			this.addObject(new Car(this.model, 0, this.model.getFirstLane(), "Fiat", 1));

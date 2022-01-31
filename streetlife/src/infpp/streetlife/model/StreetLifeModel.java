@@ -116,7 +116,7 @@ public class StreetLifeModel implements Model, Serializable{
 	public void addObject(StreetObject obj) throws Exception{
 		
 		int tryCounter = 0;
-		Random randomOffset = new Random();
+		Random random = new Random();
 		
 		while (tryCounter <= 10) {
 			
@@ -127,7 +127,7 @@ public class StreetLifeModel implements Model, Serializable{
 				return;
 			}
 			
-			obj.setX(obj.getX() + randomOffset.ints(0, (int)(this.getLength() / 40)).findFirst().getAsInt());
+			obj.setX(obj.getX() + random.nextInt((int)(this.getLength() / 40)));
 			tryCounter += 1;
 		}
 		
