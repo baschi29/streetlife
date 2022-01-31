@@ -5,6 +5,7 @@ package infpp.streetlife.model;
 
 import java.util.ArrayList;
 import java.io.*;
+import java.util.Random;
 import java.util.HashSet;
 
 /**
@@ -115,6 +116,7 @@ public class StreetLifeModel implements Model, Serializable{
 	public void addObject(StreetObject obj) throws Exception{
 		
 		int tryCounter = 0;
+		Random randomOffset = new Random();
 		
 		while (tryCounter <= 10) {
 			
@@ -125,7 +127,7 @@ public class StreetLifeModel implements Model, Serializable{
 				return;
 			}
 			
-			obj.setX(obj.getX() + 10);
+			obj.setX(obj.getX() + randomOffset.ints(0, (int)(this.getLength() / 40)).findFirst().getAsInt());
 			tryCounter += 1;
 		}
 		
