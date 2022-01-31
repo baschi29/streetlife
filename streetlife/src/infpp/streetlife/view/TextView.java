@@ -11,7 +11,7 @@ import infpp.streetlife.model.StreetObject;
 
 /**
  * Simple text display on the system console, could be used for debug if gui gets bricked
- * @author basti, Cornelius
+ * @author Bastian, Cornelius
  * 
  */
 public class TextView implements View {

@@ -13,7 +13,7 @@ import java.awt.EventQueue;
 
 /**
  * Class for starting the StreetLifeController
- * @author Cornelius
+ * @author Cornelius, Bastian
  */
 public class StreetLifeMain {
 

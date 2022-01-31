@@ -7,7 +7,7 @@ import java.util.*;
 import infpp.streetlife.model.*;
 
 /**
- * @author Cornelius, Basti
+ * @author Cornelius, Bastian
  * The Controller-interface defines the main method every controller should implement for the model to actually work
  */
 public interface Controller {

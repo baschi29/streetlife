@@ -29,7 +29,7 @@ public class StreetLifeController implements Controller {
 	/**
 	 * Number of Lanes the model is initialized with
 	 */
-	private int numLanes; //TODO Basti
+	private int numLanes; //TODO Bastian
 	
 	/**
 	 * Size of the Street (x direction)

@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 
 /**
- * @author Basti, Cornelius
+ * @author Bastian, Cornelius
  *
  */
 public interface Model {

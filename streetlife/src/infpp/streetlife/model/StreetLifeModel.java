@@ -9,7 +9,7 @@ import java.util.Random;
 import java.util.HashSet;
 
 /**
- * @author Basti, Cornelius
+ * @author Bastian, Cornelius
  * Class representing the world all other objects exist in
  */
 public class StreetLifeModel implements Model, Serializable{

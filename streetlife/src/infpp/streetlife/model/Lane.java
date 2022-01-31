@@ -4,7 +4,7 @@
 package infpp.streetlife.model;
 
 /**
- * @author basti
+ * @author Bastian
  *
  */
 public class Lane extends StreetObject{
