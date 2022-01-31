@@ -1,0 +1,35 @@
+<configuration xmlns="http://jgitver.github.io/maven/configuration/1.1.0"
+	    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	    xsi:schemaLocation="http://jgitver.github.io/maven/configuration/1.1.0 https://jgitver.github.io/maven/configuration/jgitver-configuration-v1_1_0.xsd">
+
+    <!-- One of MAVEN, CONFIGURABLE, PATTERN -->
+    <strategy>MAVEN</strategy>
+
+    <!-- One of MAX, LATEST, NEAREST -->
+    <policy>MAX</policy>
+
+    <!-- Boolean -->
+    <autoIncrementPatch>true</autoIncrementPatch>
+
+    <!-- Boolean -->
+    <useCommitDistance>true</useCommitDistance>
+
+    <!-- Boolean -->
+    <useDirty>false</useDirty>
+
+    <!-- Boolean -->
+    <useGitCommitId>false</useGitCommitId>
+
+    <!-- String, comma separate multiple branches -->
+    <nonQualifierBranches>master</nonQualifierBranches>
+
+    <!-- Boolean -->
+    <useDefaultBranchingPolicy>true</useDefaultBranchingPolicy>
+
+    <!-- String, only for PATTERN strategy" -->
+    <versionPattern>${v}${&lt;meta.QUALIFIED_BRANCH_NAME}${&lt;meta.COMMIT_DISTANCE}</versionPattern>
+    <!-- Usages of "<" are escaped with "&lt;" -->
+
+    <!-- String, only for PATTERN strategy -->
+    <tagVersionPattern>${v}</tagVersionPattern>
+</configuration>
