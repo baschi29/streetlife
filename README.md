@@ -1,4 +1,4 @@
 # streetlife
-[![Build Status](https://github.com/baschi29/streetlife/actions/workflows/maven.yml/badge.svg)](https://github.com/baschi29/streetlife/actions/workflows/maven.yml)
+[![Build Status](https://github.com/baschi29/streetlife/actions/workflows/build-workflow.yml/badge.svg?branch=master)](https://github.com/baschi29/streetlife/actions/workflows/build-workflow.yml)
 
 For educational purposes
