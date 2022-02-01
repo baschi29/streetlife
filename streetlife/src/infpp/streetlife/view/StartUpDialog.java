@@ -35,7 +35,7 @@ import infpp.streetlife.FileLoader;
 import infpp.streetlife.StreetLifeMain;
 /**
  * The StartUpDialog is the first thing the user interacts with. It is a custom PopUp window , that handles inputs for all the parameters and finally starts the controller. ${date}
- * @author Cornelius
+ * @author Cornelius, Bastian
  * @version 1.0
  * @since 2022-01-28
  *

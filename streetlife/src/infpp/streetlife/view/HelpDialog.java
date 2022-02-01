@@ -24,7 +24,7 @@ import infpp.streetlife.FileLoader;
 
 /**
  * The HelpDialog is a custom PopUp window that tells the user some "helpful" information. Sources its information from a local file
- * @author Cornelius
+ * @author Cornelius, Bastian
  * @version 1.0
  * @since 2022-01-28
  *

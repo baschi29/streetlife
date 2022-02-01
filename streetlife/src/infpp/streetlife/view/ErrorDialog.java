@@ -24,7 +24,7 @@ import javax.swing.border.EmptyBorder;
 import infpp.streetlife.FileLoader;
 /**
  * The ErrorDialog is a custom PopUp window that notifies the user after encountering an error. Includes a system-notification for extra attention.
- * @author Cornelius
+ * @author Cornelius, Bastian
  * @version 1.0
  * @since 2022-01-28
  *

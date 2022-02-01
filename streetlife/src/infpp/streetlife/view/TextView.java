@@ -11,7 +11,7 @@ import infpp.streetlife.model.StreetObject;
 
 /**
  * Simple text display on the system console, could be used for debug if gui gets bricked
- * @author Bastian, Cornelius
+ * @author Cornelius, Bastian
  * @deprecated not used atm
  * 
  */

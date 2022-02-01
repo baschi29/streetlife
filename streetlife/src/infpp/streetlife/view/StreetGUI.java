@@ -38,7 +38,7 @@ import infpp.streetlife.model.StreetObject;
 /**
  *  The StreetGUI represents the graphical interface of the street with the display area, control buttons, menu bar etc. 
  *  Essentially the swing/AWT-part of the overall view.
- * @author Cornelius
+ * @author Cornelius, Bastian
  * @version 1.18
  * @since 2022-01-28
  *

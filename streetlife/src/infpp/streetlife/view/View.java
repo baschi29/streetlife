@@ -8,7 +8,7 @@ import infpp.streetlife.model.Model;
 import infpp.streetlife.model.StreetObject;
 
 /**
- * @author Cornelius
+ * @author Cornelius, Bastian
  *
  */
 public interface View {

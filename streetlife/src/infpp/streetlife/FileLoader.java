@@ -10,7 +10,7 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 /**
  * The FileLoader does exactly what the name suggest: loading files. Used everywhere as a utility class to load Image/ImageIcons from resourcepaths. Uses Resourcestreams to ensure nice and smooth .jar-packing
- * @author Cornelius
+ * @author Cornelius, Bastian
  * @version 1.3
  * @since 2022-02-01
  *

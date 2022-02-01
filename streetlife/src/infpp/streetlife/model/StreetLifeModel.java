@@ -9,8 +9,8 @@ import java.util.Random;
 import java.util.HashSet;
 
 /**
- * @author Bastian, Cornelius
  * Class representing the world all other objects exist in
+ * @author Cornelius, Bastian
  */
 public class StreetLifeModel implements Model, Serializable{
 	

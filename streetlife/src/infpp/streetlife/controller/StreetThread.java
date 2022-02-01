@@ -4,7 +4,7 @@
 package infpp.streetlife.controller;
 
 /**
- * @author Cornelius
+ * @author Cornelius, Bastian
  *
  */
 public class StreetThread extends Thread{

@@ -8,7 +8,7 @@ import infpp.streetlife.model.StreetObject;
 
 /**
  * ComboBoxRenderer are a custom CellRenderer for JComboBoxes used for StreetObjects. Controls the string-print inside the combobox
- * @author Cornelius
+ * @author Cornelius, Bastian
  * @version 1.0
  * @since 2022-01-28
  *

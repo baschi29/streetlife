@@ -14,7 +14,7 @@ import java.awt.event.*;
 
 /**
  * A custom JPanel for display of moving images over a background. Controls the correct tiling of the background and movement of the objects "on top"
- * @author Cornelius
+ * @author Cornelius, Bastian
  * @version 1.0
  * @since 2022-01-28
  */

@@ -12,7 +12,7 @@ import infpp.streetlife.model.StreetObject;
 
 /**
  * The StreetLifeView implements the interface, manages the in/outputs and controls the gui. Basically used for connecting the gui to the view-interface
- * @author Cornelius
+ * @author Cornelius, Bastian
  * @version 1.4
  * @since 2022-01-28
  *

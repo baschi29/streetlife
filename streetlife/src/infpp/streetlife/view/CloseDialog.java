@@ -20,7 +20,7 @@ import java.io.IOException;
 import java.awt.event.ActionEvent;
 /**
  * The CloseDialog is a custom PopUp window that asks the user, if he/she really wants to close the application. Disposes itself on close/cancel, but stops the application on okay.
- * @author Cornelius
+ * @author Cornelius, Bastian
  * @version 1.0
  * @since 2022-01-28
  *

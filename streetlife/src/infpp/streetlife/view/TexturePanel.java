@@ -10,7 +10,7 @@ import javax.swing.JPanel;
  * Class TexturePanel to create a custom swing JPanel for displaying resizable pictures.
  * Currently unused and replaced by the DrawingSpace
  * @deprecated
- * @author Cornelius
+ * @author Cornelius, Bastian
  * @version 1.1
  * @since 2022-01-28
  */
