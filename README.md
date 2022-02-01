@@ -4,6 +4,8 @@
 ## General info
 Streetlife is a simple Java-Program for educational purposes, programmed for OOP 2021/22 at CAU Kiel
 
+![Screenshot main window](./scshot_mainframe.jpg)
+
 ## Technologies
 Project is created with
 *JDK 11.0.14
