@@ -12,6 +12,7 @@ import infpp.streetlife.model.StreetObject;
 /**
  * Simple text display on the system console, could be used for debug if gui gets bricked
  * @author Bastian, Cornelius
+ * @deprecated not used atm
  * 
  */
 public class TextView implements View {
