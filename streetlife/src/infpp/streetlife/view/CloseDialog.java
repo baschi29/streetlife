@@ -7,12 +7,16 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import infpp.streetlife.FileLoader;
+
 import javax.swing.JLabel;
 import java.awt.Image;
 
 import javax.swing.ImageIcon;
 import javax.swing.SwingConstants;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.awt.event.ActionEvent;
 /**
  * The CloseDialog is a custom PopUp window that asks the user, if he/she really wants to close the application. Disposes itself on close/cancel, but stops the application on okay.
@@ -27,7 +31,9 @@ public class CloseDialog extends JDialog {
 	private final JPanel contentPanel = new JPanel();
 
 	//path to the used image
-	private final String FROG_PATH = "/frog_sad.png";
+	private final String FROG_PATH = "img/frog_sad.png";
+	
+	private FileLoader fl = new FileLoader();
 
 	/**
 	 * Launch the application. Used for debug
@@ -53,18 +59,27 @@ public class CloseDialog extends JDialog {
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(new BorderLayout(0, 0));
 		
-		ImageIcon img = new ImageIcon(this.getClass().getResource(FROG_PATH));
-		this.setIconImage(img.getImage());
+		ImageIcon img;
+		try {
+			img = fl.loadImageIcon(FROG_PATH);
+			this.setIconImage(img.getImage());
+			
+			{
+				JLabel imgpanel = new JLabel();
+				imgpanel.setIcon(new ImageIcon(img.getImage().getScaledInstance(128, 128, Image.SCALE_DEFAULT)));
+				contentPanel.add(imgpanel, BorderLayout.WEST);
+				
+			}
+			
+		} catch (IOException e1) {
+			
+			e1.printStackTrace();
+		}
+		
 		
 		JLabel lblNewLabel = new JLabel("<html>" + "Wait! You are about to leave the fabalous world of Froschsimulator 2022. Do you really wish to proceed, resulting in the execution of your lovely frog?" + "</html>");
 		contentPanel.add(lblNewLabel, BorderLayout.CENTER);
-		{
-			JLabel imgpanel = new JLabel();
-			imgpanel.setIcon(new ImageIcon(img.getImage().getScaledInstance(128, 128, Image.SCALE_DEFAULT)));
-			contentPanel.add(imgpanel, BorderLayout.WEST);
-			
-			
-		}
+		
 		{
 			JPanel buttonPane = new JPanel();
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);

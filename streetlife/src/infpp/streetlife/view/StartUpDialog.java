@@ -10,6 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.Scanner;
 
@@ -30,6 +31,7 @@ import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
 
+import infpp.streetlife.FileLoader;
 import infpp.streetlife.StreetLifeMain;
 /**
  * The StartUpDialog is the first thing the user interacts with. It is a custom PopUp window , that handles inputs for all the parameters and finally starts the controller. ${date}
@@ -47,7 +49,7 @@ public class StartUpDialog  extends JDialog implements ActionListener {
 	private final String[] simspeeds = {"Snail","Slow","Fast","Speedy Gonzales"};
 
 	//path for the welcome message
-	private final String WELCOME_PATH = "txt/welcome.txt";
+	private final String WELCOME_PATH = "resources/txt/welcome.txt";
 
 	//path to the used image
 	private final String FROG_PATH = "img/frog.png";
@@ -61,6 +63,8 @@ public class StartUpDialog  extends JDialog implements ActionListener {
 	private JButton btnDebugButton;
 	
 	JToggleButton tglbtnNewToggleButton;
+	
+	private FileLoader fl = new FileLoader();
 
 	/**
 	 * Launch the application. Used for debug
@@ -89,7 +93,7 @@ public class StartUpDialog  extends JDialog implements ActionListener {
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(new BorderLayout(0, 0));
 		try {
-			ImageIcon img = new ImageIcon(ImageIO.read(this.getClass().getClassLoader().getResourceAsStream(FROG_PATH)));
+			ImageIcon img = fl.loadImageIcon(FROG_PATH);
 			this.setIconImage(img.getImage());
 			
 			{
@@ -115,7 +119,12 @@ public class StartUpDialog  extends JDialog implements ActionListener {
 			{
 				JTextPane textAreaWelcome = new JTextPane();
 				textAreaWelcome.setFont(new Font("Arial", Font.BOLD, 13));
-				String labelcontent = this.loadFile(WELCOME_PATH);
+				String labelcontent = "File not found";
+				try {
+					labelcontent = fl.loadFileAsString(WELCOME_PATH);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 				textAreaWelcome.setText(labelcontent);
 				textAreaWelcome.setEditable(false);
 				
@@ -316,22 +325,5 @@ public class StartUpDialog  extends JDialog implements ActionListener {
 			this.dispose();
 		}
 	}
-		
-	private String loadFile(String filepath) {
-		InputStream in;
-		Scanner sc;
-		String str = "";
-		try {
-			in = this.getClass().getClassLoader().getResourceAsStream(filepath);
-			sc = new Scanner(in);
-			while(sc.hasNextLine()){
-			    str += sc.nextLine();                     
-			}
-			
-		} catch (Exception e) {
-			System.out.println("Error: File not found!");
-			e.printStackTrace();
-		}
-		return str;
-	}
+	
 }

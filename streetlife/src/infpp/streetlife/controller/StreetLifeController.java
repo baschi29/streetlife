@@ -249,5 +249,7 @@ public class StreetLifeController implements Controller {
 	public int getLaneNumber() {
 		return this.numLanes;
 	}
+	
+	
 
 }
