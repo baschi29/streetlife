@@ -12,7 +12,7 @@ import infpp.streetlife.view.StartUpDialog;
 import java.awt.EventQueue;
 
 /**
- * Class for starting the StreetLifeController
+ * Class for starting the StreetLifeController and opening the StartUpDialog
  * @author Cornelius, Bastian
  */
 public class StreetLifeMain {

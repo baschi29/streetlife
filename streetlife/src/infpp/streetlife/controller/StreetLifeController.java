@@ -10,7 +10,8 @@ import infpp.streetlife.view.*;
 import java.util.Random;
 
 /**
- *
+ * The controller initializes the model and the view and controls the model
+ * @author Cornelius, Bastian
  */
 public class StreetLifeController implements Controller {
 	
@@ -46,6 +47,7 @@ public class StreetLifeController implements Controller {
 	 */
 	
 	private boolean default_cars;
+	
 	/**
 	 * List of predefined Cars that can be added to the model
 	 */
@@ -72,7 +74,7 @@ public class StreetLifeController implements Controller {
 		this.possibleCars.add("Ferrari");
 		
 		try {
-			this.initiate(default_cars);
+			this.initiate(this.default_cars);
 			
 		} catch (Exception e) {
 			// fetch any errors during building-phase
@@ -82,7 +84,7 @@ public class StreetLifeController implements Controller {
 	}
 
 	/**
-	 * initiates the model with some cars, and adds the view to it
+	 * Initiates the model (with default cars if default_cars = true) and the view
 	 */
 	
 	private void initiate(boolean default_cars) throws Exception{	
@@ -93,15 +95,16 @@ public class StreetLifeController implements Controller {
 		
 		this.view.setModel(model);
 		this.view.setController(this);
-		this.view.setSize(this.sizeStreet,this.numLanes*this.model.LANE_WIDTH);
+		this.view.setSize(this.sizeStreet,this.numLanes*Model.LANE_WIDTH);
 		
 		this.view.setPossibleCars(this.possibleCars);
 		
+		// adds one object of every possible car defined
 		if(default_cars) {
 			try {
-			this.addMovingObject("Fiat");
-			this.addMovingObject("Ford");
-			this.addMovingObject("Ferrari");
+				for (String str : this.getListOfCars()) {
+					this.addMovingObject(str);
+				}
 			}
 			catch (Exception exc) {
 				ErrorDialog dia = new ErrorDialog(exc);
@@ -112,15 +115,12 @@ public class StreetLifeController implements Controller {
 		this.view.build();
 	}
 	
-
-
 	/**
 	 * starts the simulation
 	 */
 	@Override
 	public void start() throws Exception{
-		
-		
+		//TODO	
 	}
 
 	/**
@@ -144,7 +144,7 @@ public class StreetLifeController implements Controller {
 		 catch (Exception e) {
 			// fetches any errors during the running-phase
 			e.printStackTrace();
-			throw new Exception("Failed to execute step. Please check console for error logs.");
+			throw new Exception("Failed to execute step. This should not happen. Please check console for error logs.");
 		}
 	}
 	
@@ -244,7 +244,10 @@ public class StreetLifeController implements Controller {
 		ois.close();
 		
 	}
-
+	
+	/**
+	 * @return int number of Lanes the model gets initialized with
+	 */
 	@Override
 	public int getLaneNumber() {
 		return this.numLanes;

@@ -37,12 +37,13 @@ public class Frog extends MovingStreetObject{
 	private int jumpRange;
 	
 	/**
-	 * Image of the Frog, so that it doesnt look like a car
+	 * Image of the Frog, so that it doesn't look like a car
 	 */
 	private final String FROG_PATH = "img/frog_small.png";
 	
 	/**
 	 * Constructor, hardness for all frogs is set to 1
+	 * @param model model the object exists in
 	 * @param x initial x position of the frog
 	 * @param y initial y position of the frog
 	 * @param name name of the frog
@@ -78,16 +79,16 @@ public class Frog extends MovingStreetObject{
 	}
 
 	/**
-	 * @return jumpRange 
+	 * @return jumpRange range of one jump of the frog
 	 */
 	public int getJumpRange() {
 		return jumpRange;
 	}
 
 	/**
-	 * @param jumpRange distance the frog is able to jump
+	 * @param jumpRange Range of one jump of the frog
 	 */
-	public void setJumpRange(int jumpRange) {
+	private void setJumpRange(int jumpRange) {
 		this.jumpRange = jumpRange;
 	}
 	

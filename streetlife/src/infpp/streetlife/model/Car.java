@@ -5,6 +5,7 @@ package infpp.streetlife.model;
 
 /**
  * Class for cars. A Car has a position (x,y), a specified name and a specific velocity. It also states a current lane.
+ * @author Cornelius, Bastian
  */
 public class Car extends MovingStreetObject {
 	
@@ -13,6 +14,9 @@ public class Car extends MovingStreetObject {
 	 */
 	private static final long serialVersionUID = -1398620670097379507L;
 	
+	/**
+	 * defines the percentage of the x velocity used for the lane switching velocity
+	 */
 	private static final double laneSwitchQuota = 0.5;
 	
 	/**
@@ -20,6 +24,9 @@ public class Car extends MovingStreetObject {
 	 */
 	private Lane lane;
 	
+	/**
+	 * velocity used for switching lanes, calculated via laneSwitchQuota and x velocity
+	 */
 	private int laneSwitchVelocity;
 	
 	/**
@@ -37,10 +44,11 @@ public class Car extends MovingStreetObject {
 	
 	/**
 	 * Constructor of the class, hardness for all cars is set to 2
+	 * @param model model the object exists in
 	 * @param x x position of the car
-	 * @param y y position of the car
+	 * @param lane lane the car starts on
 	 * @param name name of the car
-	 * @param velocity velocity of car
+	 * @param velocity x velocity of car
 	 */
 	public Car(Model model, int x, Lane lane, String name, float velocity) throws Exception{
 		super(model, x, lane.getY(), name, 2, velocity);
@@ -51,6 +59,7 @@ public class Car extends MovingStreetObject {
 	
 	/**
 	 * A car can move from left to right, defined by its velocity
+	 * If a car has the isSwitchingLanes status it moves in y direction to its desired lane
 	 */
 	public void calculateMove() {
 		
@@ -72,6 +81,10 @@ public class Car extends MovingStreetObject {
 		
 	}
 	
+	/**
+	 * Calculates if the car wants to switch lanes
+	 * Cars want to switch lanes if they get slowed down or when there is a lane below them
+	 */
 	private void calculateLaneSwitching() {
 		
 		if (!this.isSwitchingLanes()) {
@@ -106,6 +119,10 @@ public class Car extends MovingStreetObject {
 		}
 	}
 	
+	/**
+	 * hot fix for weird lane switching collision bugs
+	 * if a car switches lanes there is currently no collision detection in x direction
+	 */
 	@Override
 	protected void handleXCollision(StreetObject obj, int xDirection) {
 		
@@ -115,56 +132,56 @@ public class Car extends MovingStreetObject {
 	}
 	
 	/**
-	 * @return lane
+	 * @return lane current lane of the car
 	 */
 	public Lane getLane() {
 		return lane;
 	}
 
 	/**
-	 * @param lane das zu setzende Objekt lane
+	 * @param lane new lane of the car
 	 */
-	public void setLane(Lane lane) {
+	private void setLane(Lane lane) {
 		this.lane = lane;
 	}
 
 	/**
-	 * @return laneSwitchIntention
+	 * @return laneSwitchIntention intention of the car to switch lanes
 	 */
 	public int getLaneSwitchIntention() {
 		return this.laneSwitchIntention;
 	}
 
 	/**
-	 * @param laneSwitchIntention das zu setzende Objekt laneSwitchIntention
+	 * @param laneSwitchIntention intention of the car to switch lanes
 	 */
-	public void setLaneSwitchIntention(int laneSwitchIntention) {
+	private void setLaneSwitchIntention(int laneSwitchIntention) {
 		this.laneSwitchIntention = laneSwitchIntention;
 	}
 
 	/**
-	 * @return switchingLanes
+	 * @return switchingLanes returns if the car is currently switching lanes
 	 */
 	public boolean isSwitchingLanes() {
 		return this.switchingLanes;
 	}
 
 	/**
-	 * @param switchingLanes das zu setzende Objekt switchingLanes
+	 * @param switchingLanes sets if the car is currently switching lanes
 	 */
-	public void setSwitchingLanes(boolean switchingLanes) {
+	private void setSwitchingLanes(boolean switchingLanes) {
 		this.switchingLanes = switchingLanes;
 	}
 
 	/**
-	 * @return laneSwitchVelocity
+	 * @return laneSwitchVelocity velocity of the car while changing lanes
 	 */
 	public int getLaneSwitchVelocity() {
 		return this.laneSwitchVelocity;
 	}
 
 	/**
-	 * @param laneSwitchVelocity das zu setzende Objekt laneSwitchVelocity
+	 * @param laneSwitchVelocity velocity of the car while changing lanes
 	 */
 	private void setLaneSwitchVelocity(int laneSwitchVelocity) {
 		this.laneSwitchVelocity = laneSwitchVelocity;
