@@ -52,7 +52,7 @@ public class ErrorDialog extends JDialog {
 		
 		this.createSystemTray();
 		
-		setType(Type.POPUP);
+		setType(Type.NORMAL);
 		setBounds(100, 100, 440, 210);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));

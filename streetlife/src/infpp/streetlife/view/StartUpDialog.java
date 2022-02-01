@@ -82,7 +82,7 @@ public class StartUpDialog  extends JDialog implements ActionListener {
 	 * Create and build the dialog-window.
 	 */
 	public StartUpDialog() {
-		setType(Type.POPUP);
+		setType(Type.NORMAL);
 		setBounds(100, 100, 623, 379);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));

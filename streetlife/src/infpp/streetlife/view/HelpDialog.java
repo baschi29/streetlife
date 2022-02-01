@@ -57,7 +57,7 @@ public class HelpDialog extends JDialog {
 	 * Create and built the dialog.
 	 */
 	public HelpDialog() {
-		setType(Type.POPUP);
+		setType(Type.NORMAL);
 		setBounds(100, 100, 440, 210);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));

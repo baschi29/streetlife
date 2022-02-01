@@ -46,7 +46,7 @@ public class CloseDialog extends JDialog {
 	 * Create and build the dialog-window.
 	 */
 	public CloseDialog() {
-		setType(Type.POPUP);
+		setType(Type.NORMAL);
 		setBounds(100, 100, 440, 210);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
