@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"infpp.streetlife"},{"l":"infpp.streetlife.controller"},{"l":"infpp.streetlife.model"},{"l":"infpp.streetlife.view"}]
