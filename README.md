@@ -1,10 +1,16 @@
-# streetlife - simulation of car traffic
+<div style="text-align: center;">
+  
+![frog icon](https://github.com/baschi29/streetlife/blob/master/images/frog.png)
+  
+</div>
+
+# streetlife - simulation of car traffic and frog interaction
 [![Build Status](https://github.com/baschi29/streetlife/actions/workflows/build-workflow.yml/badge.svg?branch=master)](https://github.com/baschi29/streetlife/actions/workflows/build-workflow.yml)
 
 ## General info
 Streetlife is a simple Java-Program for educational purposes, programmed for OOP 2021/22 at CAU Kiel
 
-![Screenshot main window](streetlife/images/scshot_mainframe.jpg ' ')
+![Screenshot main window](https://github.com/baschi29/streetlife/blob/master/images/scshot_mainframe.JPG)
 
 ## Technologies
 Project is created with
