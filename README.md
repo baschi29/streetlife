@@ -28,4 +28,6 @@ Project is created with
 ## Setup
 To run this software, download the .jar from the releases and start with java
 
-
+## Build from source
+- clone git repository
+- build jar using maven via pom.xml
