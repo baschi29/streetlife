@@ -94,11 +94,12 @@ class DrawingSpace extends JPanel
     	int length = 30; //getWidth();
     	int width = LANE_SIZE/2;
         
-    	//first stripe is always without breaks
+    	//first and last stripe is always without breaks
     	lanes.fillRect(startx ,starty,getWidth(),width);
+    	lanes.fillRect(startx ,starty - (laneNumber+1)*lane_width ,getWidth(),width);
     	
     	//paint the dotted stripes on the canvas
-    	for(int y = 1; y < laneNumber+2; y++) {
+    	for(int y = 1; y < laneNumber+1; y++) {
         	
     		for(int x = 0; x < getWidth(); x += stripe_gap) {
     			lanes.fillRect(startx + x ,starty - y*lane_width ,length,width);
