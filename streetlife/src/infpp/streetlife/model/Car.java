@@ -51,7 +51,7 @@ public class Car extends MovingStreetObject {
 	 * @param velocity x velocity of car
 	 */
 	public Car(Model model, int x, Lane lane, String name, float velocity) throws Exception{
-		super(model, x, lane.getY(), name, 2, velocity);
+		super(model, x, lane.getCenterY(), name, 2, velocity);
 		this.setLane(lane);
 		this.setLaneSwitchVelocity((int) (Car.laneSwitchQuota * this.getVelocity()));
 		
@@ -63,19 +63,19 @@ public class Car extends MovingStreetObject {
 	 */
 	public void calculateMove() {
 		
-		this.setIntendedX((int) (this.getX() + this.getVelocity()*20));
+		this.setIntendedX((int) (this.getCenterX() + this.getVelocity()*20));
 		this.calculateLaneSwitching();
 		
 		if (this.isSwitchingLanes()) {
 			
-			this.setIntendedY(this.getY() + this.getLaneSwitchIntention() * this.getLaneSwitchVelocity());
+			this.setIntendedY(this.getCenterY() + this.getLaneSwitchIntention() * this.getLaneSwitchVelocity());
 			
-			if (this.getIntendedY() > this.getLane().getTopLane().getY()) {
-				this.setIntendedY(this.getLane().getTopLane().getY());
+			if (this.getIntendedY() > this.getLane().getTopLane().getCenterY()) {
+				this.setIntendedY(this.getLane().getTopLane().getCenterY());
 			}
 			
-			else if (this.getIntendedY() < this.getLane().getBotLane().getY()) {
-				this.setIntendedY(this.getLane().getBotLane().getY());
+			else if (this.getIntendedY() < this.getLane().getBotLane().getCenterY()) {
+				this.setIntendedY(this.getLane().getBotLane().getCenterY());
 			}
 		}
 		

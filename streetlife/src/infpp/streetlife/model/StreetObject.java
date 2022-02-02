@@ -7,6 +7,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.Serializable;
 import javax.imageio.ImageIO;
+import java.util.HashSet;
 
 import infpp.streetlife.FileLoader;
 
@@ -112,30 +113,60 @@ public abstract class StreetObject implements Serializable {
 	public void setName(String name) {
 		this.name = name;
 	}
-
+	
 	/**
-	 * @return x x position of the object
+	 * @return x x center position of the object
 	 */
-	public int getX() {
-		return x;
+	public int getCenterX() {
+		return this.x;
+	}
+	
+	/**
+	 * @return xSet all x positions of the object
+	 */
+	public HashSet<Integer> getX() {
+		
+		int halfxDimension = this.getXDimension() / 2;
+		HashSet<Integer> xSet = new HashSet<>();
+		
+		for (int i = -halfxDimension; i <= halfxDimension; i++) {
+			xSet.add(this.getCenterX() + i);
+		}
+		
+		return xSet;
 	}
 
 	/**
-	 * @param x new x position of the object
+	 * @param x new x center position of the object
 	 */
 	public void setX(int x) {
 		this.x = x;
 	}
 
 	/**
-	 * @return y y position of the object
+	 * @return y y center position of the object
 	 */
-	public int getY() {
+	public int getCenterY() {
 		return y;
 	}
 
 	/**
-	 * @param y new y position of the object
+	 * @return ySet all y positions of the object
+	 */
+	public HashSet<Integer> getY() {
+		
+		int halfYDimension = this.getYDimension() / 2;
+		HashSet<Integer> ySet = new HashSet<>();
+		
+		for (int i = -halfYDimension; i <= halfYDimension; i++) {
+			ySet.add(this.getCenterY() + i);
+		}
+		
+		return ySet;
+	}
+	
+	/**
+	 * @param y new y center position of the object
 	 */
 	public void setY(int y) {
 		this.y = y;
@@ -227,15 +258,14 @@ public abstract class StreetObject implements Serializable {
 	/**
 	 * @return xDimension amount of pixel the object extents symmetrically in x direction
 	 */
-	public int getxDimension() {
+	public int getXDimension() {
 		return xDimension;
 	}
 
 	/**
 	 * @param xDimension new xDimension value
 	 */
-	public void setxDimension(int xDimension) {
+	public void setXDimension(int xDimension) {
 		this.xDimension = xDimension;
 	}
-	
 }
