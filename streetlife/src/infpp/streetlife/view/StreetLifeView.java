@@ -37,6 +37,7 @@ public class StreetLifeView implements View {
 	
 	@Override
 	public void build() {
+		this.gui.setLaneNumber(this.controller.getLaneNumber());
 		gui.setVisible(true);
 	}
 

@@ -85,6 +85,8 @@ public class StreetGUI extends JFrame implements ActionListener{
 	
 	private FileLoader fl = new FileLoader();
 	
+	private int NumberOfLanes;
+	
 	
 	/**
 	 * Launch the application. Used for debug
@@ -330,6 +332,7 @@ public class StreetGUI extends JFrame implements ActionListener{
 	 * @param ln the number of lanes used in current model
 	 */
 	public void setSizeDisplay(int x, int y, int ln) {
+		this.NumberOfLanes = ln;
 		String currentSize = Integer.toString(x) + " x " + Integer.toString(y) + "\n LaneNumber: " + Integer.toString(ln);
 		this.lblSizeDisplay.setText(currentSize);
 		refresh();
@@ -481,12 +484,17 @@ public class StreetGUI extends JFrame implements ActionListener{
 			}
 		}
 		
-		//regardless of the action, refresh the gui to keep everything up-to-day
+		//regardless of the action, refresh the gui to keep everything up-to-date
 		this.tp.refresh();
 	}
 
 	public void refresh() {
 		this.repaint();
+		
+	}
+
+	public void setLaneNumber(int laneNumber) {
+		this.tp.setLaneNumber(laneNumber);
 		
 	}
 

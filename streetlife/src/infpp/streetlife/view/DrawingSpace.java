@@ -26,10 +26,14 @@ class DrawingSpace extends JPanel
 
     private ArrayList<StreetObject> streetobjs;
 	private TexturePaint paint;
+	private int numLanes = 1;
 
-	//Creates a new DrawingSpacePanel, needs an array of objects that should be displayed
-    public DrawingSpace(ArrayList<StreetObject> streetobjs){      
-       
+	/**
+	 * Creates a new DrawingSpacePanel
+	 * @param streetobjs Objects that should be displayed
+	 * @param NumberOfLanes Number of Lanes the Street should have
+	 */
+    public DrawingSpace(ArrayList<StreetObject> streetobjs){
         this.streetobjs = streetobjs;
     }
 
@@ -57,6 +61,10 @@ class DrawingSpace extends JPanel
     	repaint();
     }
     
+    public void setLaneNumber(int NumberOfLanes) {
+    	this.numLanes = NumberOfLanes;
+    }
+    
     /**
      * paints everything on the Panel, automatically called during build process
      * @param g used graphics
@@ -77,7 +85,9 @@ class DrawingSpace extends JPanel
         
         
         //draw lane stripes
-        int laneNumber = getHeight() % 5;
+        
+        //num of lanes the drawingspace should fit
+        int laneNumber = this.numLanes;
         
         Graphics2D lanes = (Graphics2D) g;
         lanes.setPaint(Color.WHITE);
@@ -96,10 +106,10 @@ class DrawingSpace extends JPanel
         
     	//first and last stripe is always without breaks
     	lanes.fillRect(startx ,starty,getWidth(),width);
-    	lanes.fillRect(startx ,starty - (laneNumber+1)*lane_width ,getWidth(),width);
+    	lanes.fillRect(startx ,starty - (laneNumber)*lane_width ,getWidth(),width);
     	
     	//paint the dotted stripes on the canvas
-    	for(int y = 1; y < laneNumber+1; y++) {
+    	for(int y = 1; y < laneNumber; y++) {
         	
     		for(int x = 0; x < getWidth(); x += stripe_gap) {
     			lanes.fillRect(startx + x ,starty - y*lane_width ,length,width);
