@@ -42,10 +42,16 @@ public abstract class StreetObject implements Serializable {
 	private int y;
 	
 	/**
-	 * amount of pixel the object extents symmetrically in y
+	 * amount of pixel the object extents symmetrically in y direction
 	 * defaults to 0
 	 */
 	private int yDimension = 0;
+	
+	/**
+	 * amount of pixel the object extents symmetrically in x direction
+	 * defaults to 0
+	 */
+	private int xDimension = 0;
 	
 	/**
 	 * name of the object
@@ -216,6 +222,20 @@ public abstract class StreetObject implements Serializable {
 	 */
 	public void setYDimension(int yDimension) {
 		this.yDimension = yDimension;
+	}
+
+	/**
+	 * @return xDimension amount of pixel the object extents symmetrically in x direction
+	 */
+	public int getxDimension() {
+		return xDimension;
+	}
+
+	/**
+	 * @param xDimension new xDimension value
+	 */
+	public void setxDimension(int xDimension) {
+		this.xDimension = xDimension;
 	}
 	
 }
