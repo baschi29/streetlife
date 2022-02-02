@@ -126,7 +126,6 @@ public class Frog extends MovingStreetObject{
 		this.intervalCounter = intervalCounter;
 	}
 	
-	//TODO: vernünftige Move Methode für Frosch schreiben
 	/**
 	 * A frog moves every <jumpInterval> movement calls
 	 * currently it moves <jumpRange> units randomly in x or positive y direction

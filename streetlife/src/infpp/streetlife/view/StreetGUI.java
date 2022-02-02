@@ -400,7 +400,7 @@ public class StreetGUI extends JFrame implements ActionListener{
 			System.out.println("Start pressed"); //Debug
 			
 			try {
-				//this.controller.start();		//TODO not yet implemented
+				this.controller.start();
 			}
 			catch (Exception exc) {
 				//launch an errorDialog for notifying the user
@@ -426,7 +426,7 @@ public class StreetGUI extends JFrame implements ActionListener{
 		
 		//if stop is pressed, stop the model thread
 		else if (e.getSource() == btnStop) {
-			System.out.println("Stop pressed"); //TODO
+			System.out.println("Stop pressed");
 			try {
 				this.controller.stop();
 			}
@@ -479,7 +479,7 @@ public class StreetGUI extends JFrame implements ActionListener{
 		}
 		
 		//if help is pressed, launch a new help window
-		else if (e.getSource() == mntmHelpMenuAbout) { //TODO
+		else if (e.getSource() == mntmHelpMenuAbout) {
 			try {
 				HelpDialog dia = new HelpDialog();
 				dia.setVisible(true);

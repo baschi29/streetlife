@@ -4,6 +4,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Scanner;
 
 import javax.imageio.ImageIO;
@@ -59,17 +60,23 @@ public class FileLoader {
 	 * @throws IOException
 	 */
 	public String loadFileAsString(String filepath) throws IOException{
+		
+		InputStream in;
 		Scanner sc;
 		String str = "";
 		
 		try {
-			sc = new Scanner(new File(filepath));
+			
+			in = this.getClass().getClassLoader().getResourceAsStream(filepath);
+			sc = new Scanner(in);
 			
 			while(sc.hasNextLine()){
 				str += sc.nextLine();     
 			}
+			
+			sc.close();
 			return str;
-		} catch (FileNotFoundException e) {
+		} catch (Exception e) {
 			throw new IOException("Error during File Loading");
 		}
 	}

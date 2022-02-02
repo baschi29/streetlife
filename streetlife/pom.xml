@@ -5,6 +5,9 @@
   <version>0.0.1-SNAPSHOT</version>
   <name>Streetlife</name>
   <description>Streetlife project for OOP WS21_22</description>
+  <properties>
+   <project.build.sourceEncoding>ASCII</project.build.sourceEncoding>
+ </properties>
   <build>
     <sourceDirectory>src</sourceDirectory>
     <resources>

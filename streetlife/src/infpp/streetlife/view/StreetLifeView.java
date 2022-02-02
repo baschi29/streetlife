@@ -100,7 +100,7 @@ public class StreetLifeView implements View {
 	public void setSize(int i, int j) {
 		int actual_j = j*20;
 		this.gui.setSize(i, actual_j);
-		this.gui.setSizeDisplay(actual_j, i, this.controller.getLaneNumber()); //TODO
+		this.gui.setSizeDisplay(actual_j, i, this.controller.getLaneNumber());
 		
 	}
 }
