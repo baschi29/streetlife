@@ -1,7 +1,10 @@
 package infpp.streetlife.view;
 
 import java.awt.Graphics;
+import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.Paint;
+import java.awt.Shape;
 import java.awt.TexturePaint;
 import java.util.ArrayList;
 
@@ -59,13 +62,51 @@ class DrawingSpace extends JPanel
      * @param g used graphics
      */
     @Override public void paintComponent(Graphics g){
-        super.paintComponent(g);        
+        super.paintComponent(g);    
+        
+        final int LANE_SIZE = 10; //mp for lane size ("Space between the cars"), so that the cars dont overlap each other.
+		final int OFFSET_Y = 100; //offset for the whole street, so that the cars are properly on the canvas
+        
+        //set Background
         Graphics2D g2d = (Graphics2D) g;
         g2d.setPaint(paint);
         g2d.fillRect(0, 0, getWidth(), getHeight());
         
         //Draws a static background image (bg), deprecated
         //g.drawImage(bg, 0, 0, bgWidth, bgHeight, null);
+        
+        
+        //draw lane stripes
+        int laneNumber = getHeight() % 5;
+        
+        Graphics2D lanes = (Graphics2D) g;
+        lanes.setPaint(Color.WHITE);
+        
+        //start pos of the stripes
+    	int startx = 0;
+    	int starty = (getHeight()-OFFSET_Y/2-5) ;
+    	
+    	//width of lanes, distance between the stripes
+    	int lane_width = 5 * LANE_SIZE;
+    	int stripe_gap = 40;
+    	
+    	//length and width of the stripes
+    	int length = 30; //getWidth();
+    	int width = LANE_SIZE/2;
+        
+    	//first stripe is always without breaks
+    	lanes.fillRect(startx ,starty,getWidth(),width);
+    	
+    	//paint the dotted stripes on the canvas
+    	for(int y = 1; y < laneNumber+2; y++) {
+        	
+    		for(int x = 0; x < getWidth(); x += stripe_gap) {
+    			lanes.fillRect(startx + x ,starty - y*lane_width ,length,width);
+    		}	
+    	
+    	}
+        
+        
         
         for (StreetObject obj : streetobjs) {
         	
@@ -75,18 +116,14 @@ class DrawingSpace extends JPanel
         		//then set the object on the new x/y values
         		
         		
-        		final int LANE_SIZE = 10; //mp for lane size ("Space between the cars"), so that the cars dont overlap each other.
-        		final int OFFSET_Y = 100; //offset for the whole street, so that the cars are properly on the canvas
+        		
         		int currentY = (int) this.getSize().getHeight()-OFFSET_Y;
         		g2d.drawImage(obj.getImg(), obj.getX()+(obj.getImg().getWidth()/2), currentY - (obj.getY()*LANE_SIZE-(obj.getImg().getHeight()/2)), obj.getImg().getWidth(),obj.getImg().getHeight(), null);
         	}
+        	
     	} 
        
-        
-        
-        
-        
-        
+     
     }
     
     
