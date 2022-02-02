@@ -10,6 +10,8 @@ import java.awt.Rectangle;
 import java.awt.TexturePaint;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -113,13 +115,20 @@ public class StreetGUI extends JFrame implements ActionListener{
 		
 		setPreferredSize(new Dimension(1200,800));
 		setTitle("Froschsimulator 2022");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1200, 600);
 		
 		Image img = fl.loadImageIcon(FROG_PATH).getImage();
 		this.setIconImage(img);
-		
-		
+
+		//dont just quit when closing, but ask the user if he/she is sure
+		this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		this.addWindowListener(new WindowAdapter()
+			{
+				public void windowClosing(WindowEvent e)
+				{
+					closeProgram();
+				 }
+			});
 		
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
@@ -324,7 +333,6 @@ public class StreetGUI extends JFrame implements ActionListener{
 	}
 	
 	/**
-	 * /**
 	 * sets the size that should be displayed on the gui
 	 *
 	 * @param x the width of the street
@@ -384,8 +392,7 @@ public class StreetGUI extends JFrame implements ActionListener{
 		
 		//if quit is pressed, open a new CloseDialog to make sure
 		if (e.getSource() == mntmFileMenuQuit) {
-			CloseDialog dia = new CloseDialog();
-			dia.setVisible(true);
+			this.closeProgram();
 		}
 		
 		//if start is pressed, start the model thread
@@ -488,17 +495,32 @@ public class StreetGUI extends JFrame implements ActionListener{
 		this.tp.refresh();
 	}
 
+
+	/**
+	 * refreshes the gui to get everything up-to-date
+	 */
 	public void refresh() {
 		this.repaint();
 		
 	}
-
+	
+	/**
+	 * sets the number of lanes that should be displayed
+	 * @param laneNumber
+	 */
 	public void setLaneNumber(int laneNumber) {
 		this.tp.setLaneNumber(laneNumber);
 		
 	}
-
 	
+	/**
+	 * opens a new confirmation dialog for closing the program
+	 */
+	private void closeProgram() {
+		CloseDialog dia = new CloseDialog();
+		dia.setVisible(true);
+		
+	}
 
  }
 	
