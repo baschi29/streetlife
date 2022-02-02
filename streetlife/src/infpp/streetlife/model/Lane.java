@@ -32,7 +32,7 @@ public class Lane extends StreetObject{
 	 * @param y y position of the object
 	 * @param name name of the object
 	 */
-	public Lane(Model model, int y, int yExtension, Lane botLane, Lane topLane) {
+	public Lane(Model model, int y, int yDimension, Lane botLane, Lane topLane) {
 		super(model, 0, y, "Lane", -1);
 		
 		if (botLane != null) {
@@ -43,7 +43,7 @@ public class Lane extends StreetObject{
 			this.setTopLane(topLane);
 		}
 		
-		this.setYExtension(yExtension);
+		this.setYDimension(yDimension);
 	}
 	
 	/**

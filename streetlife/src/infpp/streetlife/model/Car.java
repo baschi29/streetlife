@@ -97,7 +97,7 @@ public class Car extends MovingStreetObject {
 				this.setLaneSwitchIntention(-1);
 			}
 			
-			if (this.getLaneSwitchIntention() != 0 && this.getModel().findCollisions(this, 0, this.getLaneSwitchIntention() * this.getLane().getYExtension()).isEmpty()) {
+			if (this.getLaneSwitchIntention() != 0 && this.getModel().findCollisions(this, 0, this.getLaneSwitchIntention() * this.getLane().getYDimension()).isEmpty()) {
 				this.setSwitchingLanes(true);
 			}
 		}

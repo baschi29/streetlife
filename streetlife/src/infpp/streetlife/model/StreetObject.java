@@ -45,7 +45,7 @@ public abstract class StreetObject implements Serializable {
 	 * amount of pixel the object extents symmetrically in y
 	 * defaults to 0
 	 */
-	private int yExtension = 0;
+	private int yDimension = 0;
 	
 	/**
 	 * name of the object
@@ -205,17 +205,17 @@ public abstract class StreetObject implements Serializable {
 	}
 
 	/**
-	 * @return yExtension amount of pixel the object extents symmetrically in y direction
+	 * @return yDimension amount of pixel the object extents symmetrically in y direction
 	 */
-	public int getYExtension() {
-		return this.yExtension;
+	public int getYDimension() {
+		return this.yDimension;
 	}
 
 	/**
-	 * @param yExtension new yExtension value
+	 * @param yDimension new yDimension value
 	 */
-	public void setYExtension(int yExtension) {
-		this.yExtension = yExtension;
+	public void setYDimension(int yDimension) {
+		this.yDimension = yDimension;
 	}
 	
 }

@@ -22,7 +22,7 @@ public class StreetLifeModel implements Model, Serializable{
 	/**
 	 * catches the declared lane_widht from the interface
 	 */
-	private final int laneYExtension = LANE_WIDTH;
+	private final int laneYDimension = LANE_WIDTH;
 	
 	private Lane firstLane;
 	
@@ -53,7 +53,7 @@ public class StreetLifeModel implements Model, Serializable{
 	 */
 	public StreetLifeModel(int lanes, int length) throws Exception{
 		
-		this.setWidth((lanes * this.laneYExtension) - 1);
+		this.setWidth((lanes * this.laneYDimension) - 1);
 		this.setLength(length - 1);
 		this.streetObjects = new ArrayList<StreetObject>();
 		
@@ -62,7 +62,7 @@ public class StreetLifeModel implements Model, Serializable{
 		
 		for (int i = 1; i <= lanes; i++) {
 			
-			Lane current = new Lane(this, i * this.laneYExtension - (this.laneYExtension / 2 + 1), this.laneYExtension, bot, top);
+			Lane current = new Lane(this, i * this.laneYDimension - (this.laneYDimension / 2 + 1), this.laneYDimension, bot, top);
 			this.addObject(current);
 			
 			if (bot != null) {
