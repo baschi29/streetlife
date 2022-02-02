@@ -97,7 +97,7 @@ public class Car extends MovingStreetObject {
 				this.setLaneSwitchIntention(-1);
 			}
 			
-			if (this.getLaneSwitchIntention() != 0 && this.getModel().findCollisions(this, 0, this.getLaneSwitchIntention() * this.getLane().getYDimension()).isEmpty()) {
+			if (this.getLaneSwitchIntention() != 0 && this.getModel().findCollisions(this, 0, this.getLaneSwitchIntention() * this.getLane().getYDimension()).get(1).isEmpty()) {
 				this.setSwitchingLanes(true);
 			}
 		}
@@ -116,18 +116,6 @@ public class Car extends MovingStreetObject {
 				this.setSwitchingLanes(false);
 				this.setLane(this.getLane().getBotLane());
 			}
-		}
-	}
-	
-	/**
-	 * hot fix for weird lane switching collision bugs
-	 * if a car switches lanes there is currently no collision detection in x direction
-	 */
-	@Override
-	protected void handleXCollision(StreetObject obj, int xDirection) {
-		
-		if (!this.isSwitchingLanes()) {
-			super.handleXCollision(obj, xDirection);
 		}
 	}
 	

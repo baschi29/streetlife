@@ -4,6 +4,7 @@
 package infpp.streetlife.model;
 
 import java.util.HashSet;
+import java.util.ArrayList;
 
 /**
  * Class for moving Street Objects. Every moving Street object has a velocity and a move() method.
@@ -85,24 +86,28 @@ public abstract class MovingStreetObject extends StreetObject{
 		int yDirection = (int) Math.signum(yMovement);
 		this.setxSlowedDown(false);
 		
-		HashSet<StreetObject> collisions = this.getModel().findCollisions(this, xMovement, yMovement);
+		ArrayList<HashSet<StreetObject>> collisions = this.getModel().findCollisions(this, xMovement, yMovement);
 		
-		for (StreetObject cobj: collisions) {
+		// handling of x collisions
+		for (int i = 0; i < collisions.size(); i++) {
 			
-			if (this.getHardness() <= cobj.getHardness()) {
+			for (StreetObject cobj : collisions.get(i)) {
 				
-				if (xMovement != 0) {
-					this.handleXCollision(cobj, xDirection);
-					this.setxSlowedDown(true);
+				if (this.getHardness() <= cobj.getHardness()) {
+					
+					if (i == 0) {
+						this.handleXCollision(cobj, xDirection);
+						this.setxSlowedDown(true);
+					}
+					
+					if (i == 1) {
+						this.handleYCollision(cobj, yDirection);
+					}
 				}
 				
-				if (yMovement != 0) {
-					this.handleYCollision(cobj, yDirection);
+				else if (this.getHardness() > cobj.getHardness()) {
+					cobj.setDeleted(true);
 				}
-			}
-			
-			if (this.getHardness() > cobj.getHardness()) {
-				cobj.setDeleted(true);
 			}
 		}
 	}
