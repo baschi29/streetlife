@@ -33,7 +33,7 @@ import infpp.streetlife.FileLoader;
 public class HelpDialog extends JDialog {
 
 	//path used for the information for the JTextArea
-	private final String HELP_PATH = "resources/txt/help.txt";
+	private final String HELP_PATH = "txt/help.txt";
 	
 	//path used for the image used
 	private final String FROG_PATH = "img/frog_sad.png";

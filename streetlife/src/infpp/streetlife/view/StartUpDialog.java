@@ -49,7 +49,7 @@ public class StartUpDialog  extends JDialog implements ActionListener {
 	private final String[] simspeeds = {"Snail","Slow","Fast","Speedy Gonzales"};
 
 	//path for the welcome message
-	private final String WELCOME_PATH = "resources/txt/welcome.txt";
+	private final String WELCOME_PATH = "txt/welcome.txt";
 
 	//path to the used image
 	private final String FROG_PATH = "img/frog.png";
