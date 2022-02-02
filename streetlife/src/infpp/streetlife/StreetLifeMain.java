@@ -28,7 +28,6 @@ public class StreetLifeMain {
 		
 		try {
 		StartUpDialog dia = new StartUpDialog();
-		dia.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		dia.setVisible(true);
 		}
 		catch (Exception e) {
