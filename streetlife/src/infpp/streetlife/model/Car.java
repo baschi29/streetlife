@@ -56,6 +56,8 @@ public class Car extends MovingStreetObject {
 		super(model, x, lane.getCenterY(), name, 2, velocity);
 		this.setLane(lane);
 		this.setLaneSwitchVelocity((int) (Car.laneSwitchQuota * this.getVelocity()));
+		this.setYDimension(3);
+		this.setXDimension(75);
 		
 	}
 	

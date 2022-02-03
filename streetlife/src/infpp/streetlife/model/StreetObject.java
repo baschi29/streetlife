@@ -255,6 +255,7 @@ public abstract class StreetObject implements Serializable {
 	 */
 	public void setYDimension(int yDimension) {
 		this.yDimension = yDimension;
+		this.setY(this.getCenterY());
 	}
 
 	/**
@@ -269,5 +270,6 @@ public abstract class StreetObject implements Serializable {
 	 */
 	public void setXDimension(int xDimension) {
 		this.xDimension = xDimension;
+		this.setX(this.getCenterX());
 	}
 }
