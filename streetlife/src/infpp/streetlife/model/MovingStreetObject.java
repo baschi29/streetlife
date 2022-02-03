@@ -22,19 +22,28 @@ public abstract class MovingStreetObject extends StreetObject{
 	 */
 	private float velocity;
 	
+	/**
+	 * the center x coordinate the object intends to be on after movement
+	 */
 	private int intendedX;
 	
+	/**
+	 * the center y coordinate the object intends to be on after movement
+	 */
 	private int intendedY;
 	
+	/**
+	 * true if the object wasn't able to move at full speed at the previous movement
+	 */
 	private boolean xSlowedDown = false;
 	
 	/**
 	 * Constructor of the Class
-	 * @param x x position of the object
-	 * @param y y position of the object
+	 * @param x x center position of the object
+	 * @param y y center position of the object
 	 * @param name name of the object
-	 * @param velocity velocity of the object
 	 * @param hardness hardness of the object
+	 * @param velocity velocity of the object
 	 */
 	public MovingStreetObject(Model model, int x, int y, String name, int hardness, float velocity) throws Exception {
 		super(model, x, y, name, hardness);
@@ -58,13 +67,12 @@ public abstract class MovingStreetObject extends StreetObject{
 	}
 	
 	/**
-	 * Calculates the intended new x and y positions for the object after the movement
+	 * Calculates the intended new x and y center positions for the object after the movement
 	 */
 	public abstract void calculateMove();
 	
 	/**
-	 * The move method moves a MovingStreetObject to their intended x and y positions
-	 * It is the responsibility of the model to verify if the intended positions are valid
+	 * The move method moves a MovingStreetObject to their intended x and y center positions
 	 */
 	public void move() {
 		
@@ -77,7 +85,6 @@ public abstract class MovingStreetObject extends StreetObject{
 	 * If there is one, the collision is dealed with based on the hardness level of the involving objects:
 	 * Objects with lower or the same hardness level will move till they reach the point exactly before the collision
 	 * Objects with higher hardness level will move like there is no collision, the other object will get removed
-	 * @param obj object to be checked for collisions
 	 */
 	private void manageCollisions() {
 		
@@ -132,7 +139,12 @@ public abstract class MovingStreetObject extends StreetObject{
 		}
 	}
 	
-	protected void handleXCollision(StreetObject obj, int xDirection) {
+	/**
+	 * Handles X Collision with an object with same or higher hardness
+	 * @param obj object the x collision is with
+	 * @param xDirection x direction in which the current object moves
+	 */
+	private void handleXCollision(StreetObject obj, int xDirection) {
 		
 		if (!this.isInsideXDimension(obj.getX())) {
 			if (Math.signum(xDirection) < 0) {
@@ -144,6 +156,11 @@ public abstract class MovingStreetObject extends StreetObject{
 		}
 	}
 	
+	/**
+	 * Handles Y Collision with and object with same or higher hardness
+	 * @param obj object the y collision is with
+	 * @param yDirection y direction in which the current object moves
+	 */
 	protected void handleYCollision(StreetObject obj, int yDirection) {
 		
 		if (!this.isInsideYDimension(obj.getY())) {
@@ -160,7 +177,6 @@ public abstract class MovingStreetObject extends StreetObject{
 	 * Manages the x and y borders of the street for moving street objects
 	 * Objects leaving the street on the right or left reappear at the other site
 	 * Objects leaving in y direction get deleted from the model. If the object is a frog it will get added to the saved frogs count
-	 * @param obj object which x and y positions should get verified according to the border laws
 	 */
 	private void manageBorders() {
 		
@@ -173,9 +189,7 @@ public abstract class MovingStreetObject extends StreetObject{
 			}
 			
 			this.setDeleted(true);
-			
 		}
-		
 	}
 	
 	/**
@@ -187,7 +201,6 @@ public abstract class MovingStreetObject extends StreetObject{
 
 	/**
 	 * @param velocity sets the velocity of the moving object
-	 * negative velocities are highly illegal
 	 */
 	public void setVelocity(float velocity) throws Exception{
 		if (velocity >= 0) {
@@ -199,42 +212,42 @@ public abstract class MovingStreetObject extends StreetObject{
 	}
 
 	/**
-	 * @return intendedX intended x position after movement
+	 * @return intendedX intended x center position after movement
 	 */
 	public int getIntendedX() {
 		return intendedX;
 	}
 
 	/**
-	 * @param intendedX sets intended x position after movement
+	 * @param intendedX sets intended x center position after movement
 	 */
 	public void setIntendedX(int intendedX) {
 		this.intendedX = intendedX;
 	}
 
 	/**
-	 * @return intendedY intended y position after movement
+	 * @return intendedY intended y center position after movement
 	 */
 	public int getIntendedY() {
 		return intendedY;
 	}
 
 	/**
-	 * @param intendedY sets intended y position after movement
+	 * @param intendedY sets intended y center position after movement
 	 */
 	public void setIntendedY(int intendedY) {
 		this.intendedY = intendedY;
 	}
 
 	/**
-	 * @return xSlowedDown
+	 * @return xSlowedDown returns if the object wasn't able to move at full speed at the previous movement
 	 */
 	public boolean isxSlowedDown() {
 		return this.xSlowedDown;
 	}
 
 	/**
-	 * @param xSlowedDown das zu setzende Objekt xSlowedDown
+	 * @param xSlowedDown sets if the object wasn't able to move at full speed at the previous movement
 	 */
 	public void setxSlowedDown(boolean xSlowedDown) {
 		this.xSlowedDown = xSlowedDown;

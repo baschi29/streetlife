@@ -87,7 +87,7 @@ public class Car extends MovingStreetObject {
 	
 	/**
 	 * Calculates if the car wants to switch lanes
-	 * Cars want to switch lanes if they get slowed down or when there is a lane below them
+	 * Cars want to switch lanes if they get slowed down (up) or when there is a lane below them (down)
 	 */
 	private void calculateLaneSwitching() {
 		

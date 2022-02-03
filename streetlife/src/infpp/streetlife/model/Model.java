@@ -94,6 +94,9 @@ public interface Model {
 	 */
 	public int moduloCircleX(int old);
 	
+	/**
+	 * @return returns the lane at the very bottom of the model aka. the first lane
+	 */
 	public Lane getFirstLane();
 	
 }
