@@ -47,8 +47,8 @@ public abstract class MovingStreetObject extends StreetObject{
 	 */
 	public MovingStreetObject(Model model, int x, int y, String name, int hardness, float velocity) throws Exception {
 		super(model, x, y, name, hardness);
-		this.setIntendedX(x);
-		this.setIntendedY(y);
+		this.setIntendedCenterX(x);
+		this.setIntendedCenterY(y);
 		this.setVelocity(velocity);
 	}
 	
@@ -76,8 +76,8 @@ public abstract class MovingStreetObject extends StreetObject{
 	 */
 	public void move() {
 		
-		this.setCenterX(this.getIntendedX());
-		this.setCenterY(this.getIntendedY());
+		this.setCenterX(this.getIntendedCenterX());
+		this.setCenterY(this.getIntendedCenterY());
 	}
 	
 	/**
@@ -88,8 +88,8 @@ public abstract class MovingStreetObject extends StreetObject{
 	 */
 	private void manageCollisions() {
 		
-		int xCenterMovement = this.getIntendedX() - this.getCenterX();
-		int yCenterMovement = this.getIntendedY() - this.getCenterY();
+		int xCenterMovement = this.getIntendedCenterX() - this.getCenterX();
+		int yCenterMovement = this.getIntendedCenterY() - this.getCenterY();
 		int xDirection = (int) Math.signum(xCenterMovement);
 		int yDirection = (int) Math.signum(yCenterMovement);
 		
@@ -148,10 +148,10 @@ public abstract class MovingStreetObject extends StreetObject{
 		
 		if (!this.isInsideXDimension(obj.getX())) {
 			if (Math.signum(xDirection) < 0) {
-				this.setIntendedX(Collections.max(obj.getX()) + (this.getXDimension() / 2 + 1));
+				this.setIntendedCenterX(Collections.max(obj.getX()) + (this.getXDimension() / 2 + 1));
 			}
 			else {
-				this.setIntendedX(Collections.min(obj.getX()) - (this.getXDimension() / 2 + 1));
+				this.setIntendedCenterX(Collections.min(obj.getX()) - (this.getXDimension() / 2 + 1));
 			}
 		}
 	}
@@ -165,10 +165,10 @@ public abstract class MovingStreetObject extends StreetObject{
 		
 		if (!this.isInsideYDimension(obj.getY())) {
 			if (Math.signum(yDirection) < 0) {
-				this.setIntendedY(Collections.max(obj.getY()) + (this.getYDimension() / 2 + 1));
+				this.setIntendedCenterY(Collections.max(obj.getY()) + (this.getYDimension() / 2 + 1));
 			}
 			else {
-				this.setIntendedY(Collections.min(obj.getY()) - (this.getYDimension() / 2 + 1));
+				this.setIntendedCenterY(Collections.min(obj.getY()) - (this.getYDimension() / 2 + 1));
 			}
 		}
 	}
@@ -180,9 +180,9 @@ public abstract class MovingStreetObject extends StreetObject{
 	 */
 	private void manageBorders() {
 		
-		this.setIntendedX(this.getModel().moduloCircleX(this.getIntendedX()));
+		this.setIntendedCenterX(this.getModel().moduloCircleX(this.getIntendedCenterX()));
 		
-		if ((this.getIntendedY() > this.getModel().getWidth()) || (this.getIntendedY() < 0)) {
+		if ((this.getIntendedCenterY() > this.getModel().getWidth()) || (this.getIntendedCenterY() < 0)) {
 			
 			if (this instanceof Frog) {
 				this.getModel().incrementSavedFrogs();
@@ -214,28 +214,28 @@ public abstract class MovingStreetObject extends StreetObject{
 	/**
 	 * @return intendedX intended x center position after movement
 	 */
-	public int getIntendedX() {
+	public int getIntendedCenterX() {
 		return intendedCenterX;
 	}
 
 	/**
 	 * @param intendedX sets intended x center position after movement
 	 */
-	public void setIntendedX(int intendedX) {
+	public void setIntendedCenterX(int intendedX) {
 		this.intendedCenterX = intendedX;
 	}
 
 	/**
 	 * @return intendedY intended y center position after movement
 	 */
-	public int getIntendedY() {
+	public int getIntendedCenterY() {
 		return intendedCenterY;
 	}
 
 	/**
 	 * @param intendedY sets intended y center position after movement
 	 */
-	public void setIntendedY(int intendedY) {
+	public void setIntendedCenterY(int intendedY) {
 		this.intendedCenterY = intendedY;
 	}
 

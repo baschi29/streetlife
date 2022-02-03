@@ -67,19 +67,19 @@ public class Car extends MovingStreetObject {
 	 */
 	public void calculateMove() {
 		
-		this.setIntendedX((int) (this.getCenterX() + this.getVelocity()*20));
+		this.setIntendedCenterX((int) (this.getCenterX() + this.getVelocity()*20));
 		this.calculateLaneSwitching();
 		
 		if (this.isSwitchingLanes()) {
 			
-			this.setIntendedY(this.getCenterY() + this.getLaneSwitchIntention() * this.getLaneSwitchVelocity());
+			this.setIntendedCenterY(this.getCenterY() + this.getLaneSwitchIntention() * this.getLaneSwitchVelocity());
 			
-			if (this.getIntendedY() > this.getLane().getTopLane().getCenterY()) {
-				this.setIntendedY(this.getLane().getTopLane().getCenterY());
+			if (this.getIntendedCenterY() > this.getLane().getTopLane().getCenterY()) {
+				this.setIntendedCenterY(this.getLane().getTopLane().getCenterY());
 			}
 			
-			else if (this.getIntendedY() < this.getLane().getBotLane().getCenterY()) {
-				this.setIntendedY(this.getLane().getBotLane().getCenterY());
+			else if (this.getIntendedCenterY() < this.getLane().getBotLane().getCenterY()) {
+				this.setIntendedCenterY(this.getLane().getBotLane().getCenterY());
 			}
 		}
 		
