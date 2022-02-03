@@ -7,8 +7,8 @@ import java.util.ArrayList;
 import java.util.HashSet;
 
 /**
+ * The Model interface defines the methods every model should implement to work with the controller and view interface
  * @author Cornelius, Bastian
- *
  */
 public interface Model {
 	
@@ -71,11 +71,11 @@ public interface Model {
 	/**
 	 * Detects if there is an collision with an existing object on the current position
 	 * and on the way the x and y movements describe
-	 * Objects with a negative hardness level are unable to collide
+	 * Objects with a negative hardness level are only able to collide with objects the same hardness
 	 * @param obj object to check for collisions
-	 * @param xMovement xMovement of the object
-	 * @param yMovement yMovement of the object
-	 * @return ArrayList array List containing Hash Set for x collision at position 1 and Hash Set for y collision
+	 * @param xMovementSet all x coordinates the object is on while moving to desired x
+	 * @param yMovementSet all y coordinates the object is on while moving to desired y
+	 * @return ArrayList array List containing Hash Set for x collision at position 1 and Hash Set for y collision at position 0
 	 */
 	public ArrayList<HashSet<StreetObject>> findCollisions(StreetObject obj, HashSet<Integer> xMovementSet, HashSet<Integer> yMovementSet);
 	
