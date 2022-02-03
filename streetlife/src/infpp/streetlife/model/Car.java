@@ -3,6 +3,8 @@
  */
 package infpp.streetlife.model;
 
+import java.util.HashSet;
+
 /**
  * Class for cars. A Car has a position (x,y), a specified name and a specific velocity. It also states a current lane.
  * @author Cornelius, Bastian
@@ -97,8 +99,17 @@ public class Car extends MovingStreetObject {
 				this.setLaneSwitchIntention(-1);
 			}
 			
-			if (this.getLaneSwitchIntention() != 0 && this.getModel().findCollisions(this, 0, this.getLaneSwitchIntention() * this.getLane().getYDimension()).get(1).isEmpty()) {
-				this.setSwitchingLanes(true);
+			if (this.getLaneSwitchIntention() != 0) {
+				
+				HashSet<Integer> laneSwitchMovementSet = new HashSet<>();
+				
+				for (int i = 0; i <= this.getLane().getYDimension(); i++) {
+					laneSwitchMovementSet.add((this.getCenterY() + i) * this.getLaneSwitchIntention());
+				}
+				
+				if (this.getModel().findCollisions(this, new HashSet<>(), laneSwitchMovementSet).get(1).isEmpty()) {
+					this.setSwitchingLanes(true);
+				}
 			}
 		}
 		

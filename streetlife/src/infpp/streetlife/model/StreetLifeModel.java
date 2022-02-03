@@ -127,7 +127,7 @@ public class StreetLifeModel implements Model, Serializable{
 				return;
 			}
 			
-			obj.setX(obj.getX() + random.nextInt((int)(this.getLength() / 40)));
+			obj.setX(obj.getCenterX() + random.nextInt((int)(this.getLength() / 40)));
 			tryCounter += 1;
 		}
 		
@@ -159,7 +159,7 @@ public class StreetLifeModel implements Model, Serializable{
 	 * @return ArrayList array List containing Hash Set for x collision at position 1 and Hash Set for y collision
 	 */
 	@Override
-	public ArrayList<HashSet<StreetObject>> findCollisions(StreetObject obj, int xMovement, int yMovement) {
+	public ArrayList<HashSet<StreetObject>> findCollisions(StreetObject obj, HashSet<Integer> xMovementSet, HashSet<Integer> yMovementSet) {
 		
 		ArrayList<HashSet<StreetObject>> collisions = new ArrayList<>();
 		HashSet<StreetObject> xCollisions = new HashSet<>();
@@ -167,30 +167,54 @@ public class StreetLifeModel implements Model, Serializable{
 		collisions.add(xCollisions);
 		collisions.add(yCollisions);
 		
-		int xDirection = (int) Math.signum(xMovement);
-		int yDirection = (int) Math.signum(yMovement);
-		
 		if (obj.getHardness() >= 0 && !obj.isDeleted()) {
 			
 			for (StreetObject cobj: this.streetObjects) {
 				
 				if ((obj != cobj) && !cobj.isDeleted() && (cobj.getHardness() >= 0)) {
 					
-					for (int i = 0; i <= Math.abs(xMovement); i++) {
-						if (this.moduloCircleX(obj.getX() + xDirection * i) == cobj.getX()
-								&& obj.getY() == cobj.getY()) {	
+					HashSet<Integer> xIntersection = new HashSet<>(cobj.getX());
+					HashSet<Integer> yIntersection = new HashSet<>(cobj.getY());
+					
+					xIntersection.retainAll(xMovementSet);
+					yIntersection.retainAll(yMovementSet);
+					
+					boolean noXCollision = xIntersection.isEmpty();
+					boolean noYCollision = yIntersection.isEmpty();
+					
+					xIntersection.retainAll(obj.getX());
+					yIntersection.retainAll(obj.getY());
+					
+					boolean onSameX = !xIntersection.isEmpty();
+					boolean onSameY = !yIntersection.isEmpty();
+					
+					if (!noXCollision) {
+						if (onSameY) {
 							xCollisions.add(cobj);
-							break;
 						}
 					}
 					
-					for (int i = 0; i <= Math.abs(yMovement); i++) {
-						if ((obj.getY() + yDirection * i) == cobj.getY()
-								&& obj.getX() == cobj.getX()) {
+					if (!noYCollision) {
+						if (onSameX) {
 							yCollisions.add(cobj);
-							break;
 						}
-					}					
+					}
+					
+//					for (int i = 0; i <= Math.abs(xMovement); i++) {
+//						if (this.moduloCircleX(obj.getX() + xDirection * i) == cobj.getX()
+//								&& obj.getY() == cobj.getY()) {	
+//							xCollisions.add(cobj);
+//							break;
+//						}
+//					}
+//					
+//					for (int i = 0; i <= Math.abs(yMovement); i++) {
+//						if ((obj.getY() + yDirection * i) == cobj.getY()
+//								&& obj.getX() == cobj.getX()) {
+//							yCollisions.add(cobj);
+//							break;
+//						}
+//					}					
 				}
 			}
 		}
@@ -206,7 +230,7 @@ public class StreetLifeModel implements Model, Serializable{
 	 */
 	@Override
 	public ArrayList<HashSet<StreetObject>> findCollisions(StreetObject obj) {
-		return this.findCollisions(obj, 0, 0);
+		return this.findCollisions(obj, new HashSet<>(), new HashSet<>());
 	}
 	
 	/**

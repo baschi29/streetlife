@@ -81,13 +81,32 @@ public abstract class MovingStreetObject extends StreetObject{
 	 */
 	private void manageCollisions() {
 		
-		int xMovement = this.getIntendedX() - this.getCenterX();
-		int yMovement = this.getIntendedY() - this.getCenterY();
-		int xDirection = (int) Math.signum(xMovement);
-		int yDirection = (int) Math.signum(yMovement);
+		int xCenterMovement = this.getIntendedX() - this.getCenterX();
+		int yCenterMovement = this.getIntendedY() - this.getCenterY();
+		int xDirection = (int) Math.signum(xCenterMovement);
+		int yDirection = (int) Math.signum(yCenterMovement);
+		
+		HashSet<Integer> xMovementSet = new HashSet<>();
+		
+		for (int i = 0; i <= xCenterMovement * xDirection; i++) {
+			
+			for (int xpos : this.getX()) {
+				xMovementSet.add(this.getModel().moduloCircleX(xpos + i * xDirection));
+			}
+		}
+		
+		HashSet<Integer> yMovementSet = new HashSet<>();
+		
+		for (int i = 0; i <= yCenterMovement * yDirection; i++) {
+			
+			for (int ypos : this.getY()) {
+				yMovementSet.add(ypos + i * yDirection);
+			}
+		}
+		
 		this.setxSlowedDown(false);
 		
-		ArrayList<HashSet<StreetObject>> collisions = this.getModel().findCollisions(this, xMovement, yMovement);
+		ArrayList<HashSet<StreetObject>> collisions = this.getModel().findCollisions(this, xMovementSet, yMovementSet);
 		
 		// handling of x collisions
 		for (int i = 0; i < collisions.size(); i++) {

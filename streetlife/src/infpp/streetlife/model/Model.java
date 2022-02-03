@@ -11,7 +11,7 @@ import java.util.HashSet;
  *
  */
 public interface Model {
-
+	
 	/**
 	 * declares the width of the lanes used, should not be edited if you don't know what you do
 	 */
@@ -77,7 +77,7 @@ public interface Model {
 	 * @param yMovement yMovement of the object
 	 * @return ArrayList array List containing Hash Set for x collision at position 1 and Hash Set for y collision
 	 */
-	public ArrayList<HashSet<StreetObject>> findCollisions(StreetObject obj, int xMovement, int yMovement);
+	public ArrayList<HashSet<StreetObject>> findCollisions(StreetObject obj, HashSet<Integer> xMovementSet, HashSet<Integer> yMovementSet);
 	
 	/**
 	 * Detects if there is an collision with an existing object on the current position
