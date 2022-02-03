@@ -89,6 +89,7 @@ public class ErrorDialog extends JDialog {
 		
 		JTextArea txtrD = new JTextArea(5, 20);
 		txtrD.setText(exc.getLocalizedMessage());
+		exc.printStackTrace();
 		txtrD.setLineWrap(true);
 		txtrD.setWrapStyleWord(true);
 		txtrD.setEditable(false);

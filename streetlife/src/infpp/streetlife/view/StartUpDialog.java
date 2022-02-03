@@ -1,6 +1,7 @@
 package infpp.streetlife.view;
 
 import java.awt.BorderLayout;
+import java.awt.Desktop;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -22,6 +23,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
+import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -337,6 +339,19 @@ public class StartUpDialog  extends JDialog implements ActionListener {
 			
 			this.dispose();
 		}
+		else if (e.getSource() == btnLoadButton) {
+			
+			    JFileChooser fc = new JFileChooser("./");
+			    File file;
+			    int returnVal = fc.showOpenDialog(this);
+	            if (returnVal == JFileChooser.APPROVE_OPTION)
+	            	{
+	                	file = fc.getSelectedFile();
+	                	//System.out.println(file.getAbsolutePath());
+	                	textFieldPath.setText(file.getAbsolutePath());
+	            	}
+	            }
+	        
 	}
 	
 	/**
