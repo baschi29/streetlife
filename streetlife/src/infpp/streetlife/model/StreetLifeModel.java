@@ -127,7 +127,7 @@ public class StreetLifeModel implements Model, Serializable{
 				return;
 			}
 			
-			obj.setX(obj.getCenterX() + random.nextInt((int)(this.getLength())));
+			obj.setX(this.moduloCircleX(obj.getCenterX() + random.nextInt((int)(this.getLength()))));
 			tryCounter += 1;
 		}
 		
