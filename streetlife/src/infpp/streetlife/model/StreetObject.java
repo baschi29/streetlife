@@ -37,10 +37,14 @@ public abstract class StreetObject implements Serializable {
 	 */
 	private int x;
 	
+	private HashSet<Integer> xSet;
+	
 	/**
 	 * y position of the object
 	 */
 	private int y;
+	
+	private HashSet<Integer> ySet;
 	
 	/**
 	 * amount of pixel the object extents symmetrically in y direction
@@ -125,15 +129,7 @@ public abstract class StreetObject implements Serializable {
 	 * @return xSet all x positions of the object
 	 */
 	public HashSet<Integer> getX() {
-		
-		int halfxDimension = this.getXDimension() / 2;
-		HashSet<Integer> xSet = new HashSet<>();
-		
-		for (int i = -halfxDimension; i <= halfxDimension; i++) {
-			xSet.add(this.getCenterX() + i);
-		}
-		
-		return xSet;
+		return this.xSet;
 	}
 
 	/**
@@ -141,6 +137,13 @@ public abstract class StreetObject implements Serializable {
 	 */
 	public void setX(int x) {
 		this.x = x;
+		
+		int halfxDimension = this.getXDimension() / 2;
+		this.xSet = new HashSet<>();
+		
+		for (int i = -halfxDimension; i <= halfxDimension; i++) {
+			this.xSet.add(this.getCenterX() + i);
+		}
 	}
 
 	/**
@@ -154,15 +157,7 @@ public abstract class StreetObject implements Serializable {
 	 * @return ySet all y positions of the object
 	 */
 	public HashSet<Integer> getY() {
-		
-		int halfYDimension = this.getYDimension() / 2;
-		HashSet<Integer> ySet = new HashSet<>();
-		
-		for (int i = -halfYDimension; i <= halfYDimension; i++) {
-			ySet.add(this.getCenterY() + i);
-		}
-		
-		return ySet;
+		return this.ySet;
 	}
 	
 	/**
@@ -170,6 +165,13 @@ public abstract class StreetObject implements Serializable {
 	 */
 	public void setY(int y) {
 		this.y = y;
+		
+		int halfYDimension = this.getYDimension() / 2;
+		this.ySet = new HashSet<>();
+		
+		for (int i = -halfYDimension; i <= halfYDimension; i++) {
+			this.ySet.add(this.getCenterY() + i);
+		}
 	}
 	
 	public BufferedImage getImg() {
