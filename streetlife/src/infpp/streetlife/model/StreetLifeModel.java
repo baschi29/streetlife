@@ -45,6 +45,11 @@ public class StreetLifeModel implements Model, Serializable{
 	 * Array containing all objects that are currently present in the model
 	 */
 	private ArrayList<StreetObject> streetObjects;
+
+	/**
+	 * number of lanes used in model
+	 */
+	private int laneNumber;
 	
 	/**
 	 * Constructor of the class
@@ -53,6 +58,7 @@ public class StreetLifeModel implements Model, Serializable{
 	 */
 	public StreetLifeModel(int lanes, int length) throws Exception{
 		
+		this.laneNumber = lanes;
 		this.setWidth((lanes * this.laneYDimension) - 1);
 		this.setLength(length - 1);
 		this.streetObjects = new ArrayList<StreetObject>();
@@ -330,6 +336,12 @@ public class StreetLifeModel implements Model, Serializable{
 	 */
 	private void setFirstLane(Lane firstLane) {
 		this.firstLane = firstLane;
+	}
+
+
+	@Override
+	public int getLaneNumber() {
+		return laneNumber;
 	}
 	
 }

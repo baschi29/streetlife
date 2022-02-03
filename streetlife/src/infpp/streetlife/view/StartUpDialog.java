@@ -65,6 +65,7 @@ public class StartUpDialog  extends JDialog implements ActionListener {
 	private JButton btnLaunchButton;
 	private JButton btnLoadButton;
 	private JButton btnDebugButton;
+	private JButton btnLaunchButton_1;
 	
 	JToggleButton tglbtnNewToggleButton;
 	
@@ -267,9 +268,9 @@ public class StartUpDialog  extends JDialog implements ActionListener {
 				{
 					GridBagLayout gbl_panel_loadStreet = new GridBagLayout();
 					gbl_panel_loadStreet.columnWidths = new int[]{112, 86, 77, 0};
-					gbl_panel_loadStreet.rowHeights = new int[]{23, 0, 0, 0};
+					gbl_panel_loadStreet.rowHeights = new int[]{23, 0, 0, 0, 0};
 					gbl_panel_loadStreet.columnWeights = new double[]{0.0, 1.0, 0.0, Double.MIN_VALUE};
-					gbl_panel_loadStreet.rowWeights = new double[]{0.0, 0.0, 0.0, Double.MIN_VALUE};
+					gbl_panel_loadStreet.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 					panel_loadStreet.setLayout(gbl_panel_loadStreet);
 					
 					btnLoadButton = new JButton("Open File");
@@ -296,10 +297,18 @@ public class StartUpDialog  extends JDialog implements ActionListener {
 					btnDebugButton = new JButton("Start Debug Mode");
 					btnDebugButton.addActionListener(this);
 					GridBagConstraints gbc_btnDebugButton = new GridBagConstraints();
-					gbc_btnDebugButton.insets = new Insets(0, 0, 0, 5);
+					gbc_btnDebugButton.insets = new Insets(0, 0, 5, 5);
 					gbc_btnDebugButton.gridx = 1;
 					gbc_btnDebugButton.gridy = 2;
 					panel_loadStreet.add(btnDebugButton, gbc_btnDebugButton);
+				}
+				{
+					this.btnLaunchButton_1 = new JButton("Start from loaded File!");
+					btnLaunchButton_1.addActionListener(this);
+					GridBagConstraints gbc_btnLaunchButton_1 = new GridBagConstraints();
+					gbc_btnLaunchButton_1.gridx = 2;
+					gbc_btnLaunchButton_1.gridy = 3;
+					panel_loadStreet.add(btnLaunchButton_1, gbc_btnLaunchButton_1);
 				}
 			}
 		}
@@ -339,6 +348,21 @@ public class StartUpDialog  extends JDialog implements ActionListener {
 			
 			this.dispose();
 		}
+		
+		else if (e.getSource() == btnLaunchButton_1) {
+			try {
+				String filepath = textFieldPath.getText();
+			
+				StreetLifeMain.startStreetLife(filepath);
+			
+				this.dispose();
+			}
+			catch(Exception exc) {
+				ErrorDialog dia = new ErrorDialog(new InvalidAttributeValueException("Please enter the required values"));
+				dia.setVisible(true);
+			}
+		}
+		
 		else if (e.getSource() == btnLoadButton) {
 			
 			    JFileChooser fc = new JFileChooser("./");
