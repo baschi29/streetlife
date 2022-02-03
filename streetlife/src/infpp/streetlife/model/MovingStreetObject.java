@@ -134,7 +134,7 @@ public abstract class MovingStreetObject extends StreetObject{
 	
 	protected void handleXCollision(StreetObject obj, int xDirection) {
 		
-		if (this.getX() != obj.getX()) {
+		if (!this.isInsideXDimension(obj.getX())) {
 			if (Math.signum(xDirection) < 0) {
 				this.setIntendedX(Collections.max(obj.getX()) + (this.getXDimension() / 2 + 1));
 			}
@@ -146,7 +146,7 @@ public abstract class MovingStreetObject extends StreetObject{
 	
 	protected void handleYCollision(StreetObject obj, int yDirection) {
 		
-		if (this.getY() != obj.getY()) {
+		if (!this.isInsideYDimension(obj.getY())) {
 			if (Math.signum(yDirection) < 0) {
 				this.setIntendedY(Collections.max(obj.getY()) + (this.getYDimension() / 2 + 1));
 			}

@@ -272,4 +272,19 @@ public abstract class StreetObject implements Serializable {
 		this.xDimension = xDimension;
 		this.setX(this.getCenterX());
 	}
+	
+	public boolean isInsideXDimension(HashSet<Integer> set) {
+		return !calculateIntersection(this.getX(), set).isEmpty();
+	}
+	
+	public boolean isInsideYDimension(HashSet<Integer> set) {
+		return !calculateIntersection(this.getY(), set).isEmpty();
+	}
+	
+	// non mutating
+	private HashSet<Integer> calculateIntersection(HashSet<Integer> s1, HashSet<Integer> s2) {
+		HashSet<Integer> intersection = new HashSet<>(s2);
+		intersection.retainAll(s1);
+		return intersection;
+	}
 }
