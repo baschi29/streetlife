@@ -99,6 +99,4 @@ public interface Model {
 	 */
 	public Lane getFirstLane();
 
-	public int getLaneNumber();
-	
 }

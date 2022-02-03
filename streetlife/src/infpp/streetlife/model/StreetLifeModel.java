@@ -337,11 +337,4 @@ public class StreetLifeModel implements Model, Serializable{
 	private void setFirstLane(Lane firstLane) {
 		this.firstLane = firstLane;
 	}
-
-
-	@Override
-	public int getLaneNumber() {
-		return laneNumber;
-	}
-	
 }
