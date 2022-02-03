@@ -53,6 +53,22 @@ public class StreetLifeMain {
 	}
 	
 	/**
+	 * starts the StreetLife-Simulation from a previous save
+	 * @param filepath
+	 */
+	public static void startStreetLife(String filepath) {
+		Controller controller = new StreetLifeController(filepath);
+		try {
+			controller.start();
+		}
+		catch (Exception e) {
+			System.out.println("Error starting the controller");
+			e.printStackTrace();
+		}
+		
+	}
+	
+	/**
 	 * actually starts the StreetLife-Simulation with parameters
 	 * @param number_of_lanes	the amount of lanes the street should use
 	 * @param size_of_street	the length of the street, equal to the size of the window
@@ -71,5 +87,7 @@ public class StreetLifeMain {
 			e.printStackTrace();
 		}
 	}
+
+	
 
 }

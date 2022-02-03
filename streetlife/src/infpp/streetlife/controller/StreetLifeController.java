@@ -74,7 +74,8 @@ public class StreetLifeController implements Controller {
 		this.possibleCars.add("Ferrari");
 		
 		try {
-			this.initiate(this.default_cars);
+			this.initiateModel();
+			this.initiateView(this.default_cars);
 			
 		} catch (Exception e) {
 			// fetch any errors during building-phase
@@ -82,14 +83,53 @@ public class StreetLifeController implements Controller {
 			e.printStackTrace();
 		}
 	}
+	
+	/**
+	 * Creates a new Controller from a previous saved file
+	 * @param filepath
+	 */
+	public StreetLifeController(String filepath) {
+
+		try {
+			this.loadFromFile(filepath);
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		this.numLanes = this.model.getLaneNumber();
+		this.sizeStreet = this.model.getLength();
+		this.simSpeed = 1;
+		this.default_cars = false;
+		
+		
+		this.possibleCars = new ArrayList<>();
+		this.possibleCars.add("Fiat");
+		this.possibleCars.add("Ford");
+		this.possibleCars.add("Ferrari");
+		
+		try {
+			this.loadFromFile(filepath);
+			this.initiateView(false);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			System.out.println("Initiating of the StreetLife failed, see below for more details");
+			e.printStackTrace();
+		}
+	}
 
 	/**
 	 * Initiates the model (with default cars if default_cars = true) and the view
+	 * @throws Exception 
 	 */
 	
-	private void initiate(boolean default_cars) throws Exception{	
-		//this.view = new TextView();
+	private void initiateModel() throws Exception {
 		this.model = new StreetLifeModel(this.numLanes, this.sizeStreet);
+	}
+	
+	private void initiateView(boolean default_cars) throws Exception{	
+		//this.view = new TextView();
+		
 		this.view = new StreetLifeView(this.model);
 	
 		
