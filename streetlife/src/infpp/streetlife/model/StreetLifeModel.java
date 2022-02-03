@@ -230,7 +230,7 @@ public class StreetLifeModel implements Model, Serializable{
 	 */
 	@Override
 	public ArrayList<HashSet<StreetObject>> findCollisions(StreetObject obj) {
-		return this.findCollisions(obj, new HashSet<>(), new HashSet<>());
+		return this.findCollisions(obj, obj.getX(), obj.getY());
 	}
 	
 	/**

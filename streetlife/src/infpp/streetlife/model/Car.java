@@ -104,10 +104,13 @@ public class Car extends MovingStreetObject {
 				HashSet<Integer> laneSwitchMovementSet = new HashSet<>();
 				
 				for (int i = 0; i <= this.getLane().getYDimension(); i++) {
-					laneSwitchMovementSet.add((this.getCenterY() + i) * this.getLaneSwitchIntention());
+					
+					for (int ypos : this.getY()) {
+						laneSwitchMovementSet.add(ypos + i * this.getLaneSwitchIntention());
+					}
 				}
 				
-				if (this.getModel().findCollisions(this, new HashSet<>(), laneSwitchMovementSet).get(1).isEmpty()) {
+				if (this.getModel().findCollisions(this, new HashSet<>(this.getX()), laneSwitchMovementSet).get(1).isEmpty()) {
 					this.setSwitchingLanes(true);
 				}
 			}
@@ -115,14 +118,14 @@ public class Car extends MovingStreetObject {
 		
 		else {
 			
-			if (this.getLane().hasTopLane() && this.getY() == this.getLane().getTopLane().getY()) {
+			if (this.getLane().hasTopLane() && this.getCenterY() == this.getLane().getTopLane().getCenterY()) {
 				
 				this.setLaneSwitchIntention(0);
 				this.setSwitchingLanes(false);
 				this.setLane(this.getLane().getTopLane());
 			}
 			
-			else if (this.getLane().hasBotLane() && this.getY() == this.getLane().getBotLane().getY()) {
+			else if (this.getLane().hasBotLane() && this.getCenterY() == this.getLane().getBotLane().getCenterY()) {
 				this.setLaneSwitchIntention(0);
 				this.setSwitchingLanes(false);
 				this.setLane(this.getLane().getBotLane());

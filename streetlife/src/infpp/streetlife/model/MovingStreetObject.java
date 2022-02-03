@@ -136,10 +136,10 @@ public abstract class MovingStreetObject extends StreetObject{
 		
 		if (this.getX() != obj.getX()) {
 			if (Math.signum(xDirection) < 0) {
-				this.setIntendedX(Collections.max(obj.getX()) + this.getXDimension() / 2);
+				this.setIntendedX(Collections.max(obj.getX()) + (this.getXDimension() / 2 + 1));
 			}
 			else {
-				this.setIntendedX(Collections.min(obj.getX()) - this.getXDimension() / 2);
+				this.setIntendedX(Collections.min(obj.getX()) - (this.getXDimension() / 2 + 1));
 			}
 		}
 	}
@@ -148,10 +148,10 @@ public abstract class MovingStreetObject extends StreetObject{
 		
 		if (this.getY() != obj.getY()) {
 			if (Math.signum(yDirection) < 0) {
-				this.setIntendedY(Collections.max(obj.getY()) + this.getYDimension() / 2);
+				this.setIntendedY(Collections.max(obj.getY()) + (this.getYDimension() / 2 + 1));
 			}
 			else {
-				this.setIntendedY(Collections.min(obj.getY()) - this.getYDimension() / 2);
+				this.setIntendedY(Collections.min(obj.getY()) - (this.getYDimension() / 2 + 1));
 			}
 		}
 	}
