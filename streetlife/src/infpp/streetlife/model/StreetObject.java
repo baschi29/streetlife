@@ -35,7 +35,7 @@ public abstract class StreetObject implements Serializable {
 	/**
 	 * x position of the center of the object
 	 */
-	private int x;
+	private int centerX;
 	
 	/**
 	 * all x coordinates the object occupies
@@ -45,7 +45,7 @@ public abstract class StreetObject implements Serializable {
 	/**
 	 * y position of the center of the object
 	 */
-	private int y;
+	private int centerY;
 	
 	/**
 	 * all y coordinates the object occupies
@@ -97,8 +97,8 @@ public abstract class StreetObject implements Serializable {
 	public StreetObject(Model model, int x, int y, String name, int hardness) {
 		
 		this.setModel(model);
-		this.setX(x);
-		this.setY(y);
+		this.setCenterX(x);
+		this.setCenterY(y);
 		this.setName(name);
 		this.setHardness(hardness);
 		
@@ -128,7 +128,7 @@ public abstract class StreetObject implements Serializable {
 	 * @return x x center position of the object
 	 */
 	public int getCenterX() {
-		return this.x;
+		return this.centerX;
 	}
 	
 	/**
@@ -139,10 +139,11 @@ public abstract class StreetObject implements Serializable {
 	}
 
 	/**
+	 * Sets new center x position and updates the xSet accordingly
 	 * @param x new x center position of the object
 	 */
-	public void setX(int x) {
-		this.x = x;
+	public void setCenterX(int x) {
+		this.centerX = x;
 		
 		int halfxDimension = this.getXDimension() / 2;
 		this.xSet = new HashSet<>();
@@ -153,10 +154,11 @@ public abstract class StreetObject implements Serializable {
 	}
 
 	/**
+	 * Sets new center y position and updates the ySet accordingly
 	 * @return y y center position of the object
 	 */
 	public int getCenterY() {
-		return y;
+		return centerY;
 	}
 
 	/**
@@ -169,8 +171,8 @@ public abstract class StreetObject implements Serializable {
 	/**
 	 * @param y new y center position of the object
 	 */
-	public void setY(int y) {
-		this.y = y;
+	public void setCenterY(int y) {
+		this.centerY = y;
 		
 		int halfYDimension = this.getYDimension() / 2;
 		this.ySet = new HashSet<>();
@@ -203,9 +205,9 @@ public abstract class StreetObject implements Serializable {
 	public String toString() {
 		return this.name
 				+ " at: x = "
-				+ Integer.toString(this.x)
+				+ Integer.toString(this.centerX)
 				+ " ; y = "
-				+ Integer.toString(this.y);
+				+ Integer.toString(this.centerY);
 	}
 
 	/**
@@ -267,7 +269,7 @@ public abstract class StreetObject implements Serializable {
 	 */
 	public void setYDimension(int yDimension) {
 		this.yDimension = yDimension;
-		this.setY(this.getCenterY());
+		this.setCenterY(this.getCenterY());
 	}
 
 	/**
@@ -282,7 +284,7 @@ public abstract class StreetObject implements Serializable {
 	 */
 	public void setXDimension(int xDimension) {
 		this.xDimension = xDimension;
-		this.setX(this.getCenterX());
+		this.setCenterX(this.getCenterX());
 	}
 	
 	/**

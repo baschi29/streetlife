@@ -25,12 +25,12 @@ public abstract class MovingStreetObject extends StreetObject{
 	/**
 	 * the center x coordinate the object intends to be on after movement
 	 */
-	private int intendedX;
+	private int intendedCenterX;
 	
 	/**
 	 * the center y coordinate the object intends to be on after movement
 	 */
-	private int intendedY;
+	private int intendedCenterY;
 	
 	/**
 	 * true if the object wasn't able to move at full speed at the previous movement
@@ -53,7 +53,8 @@ public abstract class MovingStreetObject extends StreetObject{
 	}
 	
 	/**
-	 * A tick of a MovingStreetObject causes it to calculate it's next move
+	 * A tick of a MovingStreetObject causes it to calculate it's next move,
+	 * manage collisions because of the move, respect the model borders and the move accordingly
 	 */
 	public void tick() {
 		
@@ -63,7 +64,6 @@ public abstract class MovingStreetObject extends StreetObject{
 			this.manageBorders();
 			this.move();
 		}
-		
 	}
 	
 	/**
@@ -76,8 +76,8 @@ public abstract class MovingStreetObject extends StreetObject{
 	 */
 	public void move() {
 		
-		this.setX(this.getIntendedX());
-		this.setY(this.getIntendedY());
+		this.setCenterX(this.getIntendedX());
+		this.setCenterY(this.getIntendedY());
 	}
 	
 	/**
@@ -215,28 +215,28 @@ public abstract class MovingStreetObject extends StreetObject{
 	 * @return intendedX intended x center position after movement
 	 */
 	public int getIntendedX() {
-		return intendedX;
+		return intendedCenterX;
 	}
 
 	/**
 	 * @param intendedX sets intended x center position after movement
 	 */
 	public void setIntendedX(int intendedX) {
-		this.intendedX = intendedX;
+		this.intendedCenterX = intendedX;
 	}
 
 	/**
 	 * @return intendedY intended y center position after movement
 	 */
 	public int getIntendedY() {
-		return intendedY;
+		return intendedCenterY;
 	}
 
 	/**
 	 * @param intendedY sets intended y center position after movement
 	 */
 	public void setIntendedY(int intendedY) {
-		this.intendedY = intendedY;
+		this.intendedCenterY = intendedY;
 	}
 
 	/**
