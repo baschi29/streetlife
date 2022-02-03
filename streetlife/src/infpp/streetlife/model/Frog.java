@@ -118,8 +118,8 @@ public class Frog extends MovingStreetObject{
 	}
 	
 	/**
-	 * A frog moves every <jumpInterval> movement calls
-	 * currently it moves <jumpRange> units randomly in x or positive y direction
+	 * A frog moves every jumpInterval movement calls
+	 * currently it moves jumpRange units randomly in x or positive y direction
 	 * After movement the IntervalCounter gets reset
 	 */
 	public void calculateMove() {

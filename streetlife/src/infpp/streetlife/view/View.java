@@ -8,8 +8,8 @@ import infpp.streetlife.model.Model;
 import infpp.streetlife.model.StreetObject;
 
 /**
+ * The View interface defines the methods every view should implement to work with the controller and model interface
  * @author Cornelius, Bastian
- *
  */
 public interface View {
 	/**

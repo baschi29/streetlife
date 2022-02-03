@@ -30,7 +30,7 @@ public class StreetLifeController implements Controller {
 	/**
 	 * Number of Lanes the model is initialized with
 	 */
-	private int numLanes; //TODO Bastian
+	private int numLanes;
 	
 	/**
 	 * Size of the Street (x direction)
@@ -93,7 +93,6 @@ public class StreetLifeController implements Controller {
 		try {
 			this.loadFromFile(filepath);
 		} catch (Exception e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 		
@@ -112,7 +111,6 @@ public class StreetLifeController implements Controller {
 			this.loadFromFile(filepath);
 			this.initiateView(false);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			System.out.println("Initiating of the StreetLife failed, see below for more details");
 			e.printStackTrace();
 		}
