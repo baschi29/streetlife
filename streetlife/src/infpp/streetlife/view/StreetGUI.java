@@ -1,6 +1,7 @@
 package infpp.streetlife.view;
 
 import java.awt.BorderLayout;
+import java.awt.Desktop;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -13,13 +14,14 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
@@ -139,11 +141,13 @@ public class StreetGUI extends JFrame implements ActionListener{
 		this.mntmFileMenuItemLoad = new JMenuItem("Load");
 		ImageIcon imgLoad = fl.loadImageIcon(LOAD_PATH);
 		mntmFileMenuItemLoad.setIcon(imgLoad);
+		mntmFileMenuItemLoad.addActionListener(this);
 		mnFileMenu.add(mntmFileMenuItemLoad);
 		
 		this.mntmFileMenuItemSave = new JMenuItem("Save");
 		ImageIcon imgSave = fl.loadImageIcon(SAVE_PATH);
 		mntmFileMenuItemSave.setIcon(imgSave);
+		mntmFileMenuItemSave.addActionListener(this);
 		mnFileMenu.add(mntmFileMenuItemSave);
 		
 		JSeparator separator = new JSeparator();
@@ -394,6 +398,42 @@ public class StreetGUI extends JFrame implements ActionListener{
 		if (e.getSource() == mntmFileMenuQuit) {
 			this.closeProgram();
 		}
+		
+		else if (e.getSource() == mntmFileMenuItemLoad) {
+			JFileChooser fc = new JFileChooser("./");
+		    File file;
+		    int returnVal = fc.showOpenDialog(this);
+            if (returnVal == JFileChooser.APPROVE_OPTION)
+            	{
+                	file = fc.getSelectedFile();
+                	//System.out.println(file.getAbsolutePath());
+                	try {
+						this.controller.loadFromFile(file.getAbsolutePath());
+					} catch (Exception exc) {
+						ErrorDialog dia = new ErrorDialog(exc);
+						dia.setVisible(true);
+					}
+            	}
+            }
+		
+		else if (e.getSource() == mntmFileMenuItemSave) {
+			JFileChooser fc = new JFileChooser("./");
+		    File file;
+		    int returnVal = fc.showSaveDialog(this);
+            if (returnVal == JFileChooser.APPROVE_OPTION)
+            	{
+                	file = fc.getSelectedFile();
+                	//System.out.println(file.getAbsolutePath());
+                	try {
+						this.controller.saveToFile(file.getAbsolutePath());
+					} catch (Exception exc) {
+						ErrorDialog dia = new ErrorDialog(exc);
+						dia.setVisible(true);
+					}
+            	}
+            }
+		
+		
 		
 		//if start is pressed, start the model thread
 		else if (e.getSource() == btnStart) {
