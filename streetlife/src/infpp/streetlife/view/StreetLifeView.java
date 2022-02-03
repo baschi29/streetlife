@@ -38,8 +38,14 @@ public class StreetLifeView implements View {
 	 */
 	private final String FROG_PATH = "img/frog_small.png";
 	
+	/**
+	 * Image for everything else
+	 */
+	private final String ERROR_PATH = "img/missing_texture.png";
+	
 	private BufferedImage CarImg;
 	private BufferedImage FrogImg;
+	private BufferedImage ErrorImg;
 	
 	public StreetLifeView(Model model) {
 		try {
@@ -127,26 +133,31 @@ public class StreetLifeView implements View {
 			 FileLoader fl = new FileLoader();
 	           CarImg = fl.loadImage(CAR_PATH);
 	           FrogImg = fl.loadImage(FROG_PATH);
+	           ErrorImg = fl.loadImage(ERROR_PATH);
 	        } catch(IOException ioe){
 	        	System.out.println("Unable to open file");
 	        	}
 	}
 	
 	public BufferedImage getImg(String objectName) {
-		if (objectName == "Frog") {
+		String str = objectName.trim();
+		if (str == "Frog") {
 			return FrogImg; 
 		}
-		else if (objectName == "Fiat") {
+		else if (str == "Fiat") {
 			return CarImg;
 		}
-		else if (objectName == "Ford") {	
+		else if (str == "Ford") {	
 			return CarImg;
 		}
-		else if (objectName == "Ferrari") {
+		else if (str == "Ferrari") {
 			return CarImg;
 		}
 		else {
-			throw new IllegalArgumentException("Tried returning Object that isn't predefined");
+			System.out.println(objectName);
+			System.out.println(objectName.getClass());
+			return ErrorImg;
+			//throw new IllegalArgumentException("Tried returning Object that isn't predefined");
 		}
 	}
 }

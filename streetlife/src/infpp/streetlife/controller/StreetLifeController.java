@@ -279,6 +279,9 @@ public class StreetLifeController implements Controller {
 		InputStream is = new FileInputStream(path);
 		ObjectInputStream ois = new ObjectInputStream(is);
 		this.model = (Model) ois.readObject();
+		this.view.setModel(model);
+		System.out.println("model loaded");
+		//this.view.refresh();
 		ois.close();
 		
 	}

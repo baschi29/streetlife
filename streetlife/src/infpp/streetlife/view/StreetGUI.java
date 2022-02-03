@@ -334,6 +334,7 @@ public class StreetGUI extends JFrame implements ActionListener{
 	 */
 	public void setModel(Model model) {
 		this.model= model;
+		tp.setModelState(model.getModelState());
 		
 	}
 	

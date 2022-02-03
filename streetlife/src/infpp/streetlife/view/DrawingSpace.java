@@ -136,6 +136,11 @@ class DrawingSpace extends JPanel
        
      
     }
+
+	public void setModelState(ArrayList<StreetObject> modelState) {
+		this.streetobjs = modelState;
+		
+	}
     
     
 }
