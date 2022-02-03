@@ -129,7 +129,7 @@ class DrawingSpace extends JPanel
         		
         		
         		int currentY = (int) this.getSize().getHeight()-OFFSET_Y;
-        		g2d.drawImage(obj.getImg(), obj.getX()+(obj.getImg().getWidth()/2), currentY - (obj.getY()*LANE_SIZE-(obj.getImg().getHeight()/2)), obj.getImg().getWidth(),obj.getImg().getHeight(), null);
+        		g2d.drawImage(obj.getImg(), obj.getCenterX()+(obj.getImg().getWidth()/2), currentY - (obj.getCenterY()*LANE_SIZE-(obj.getImg().getHeight()/2)), obj.getImg().getWidth(),obj.getImg().getHeight(), null);
         	}
         	
     	} 
