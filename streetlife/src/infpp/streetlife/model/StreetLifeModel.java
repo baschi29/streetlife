@@ -173,48 +173,22 @@ public class StreetLifeModel implements Model, Serializable{
 				
 				if ((obj != cobj) && !cobj.isDeleted() && (cobj.getHardness() >= 0)) {
 					
-					HashSet<Integer> xIntersection = new HashSet<>(cobj.getX());
-					HashSet<Integer> yIntersection = new HashSet<>(cobj.getY());
+					boolean XCollision = cobj.isInsideXDimension(xMovementSet);
+					boolean onSameX = cobj.isInsideXDimension(obj.getX());
+					boolean YCollision = cobj.isInsideYDimension(yMovementSet);
+					boolean onSameY = cobj.isInsideYDimension(obj.getY());
 					
-					xIntersection.retainAll(xMovementSet);
-					yIntersection.retainAll(yMovementSet);
-					
-					boolean noXCollision = xIntersection.isEmpty();
-					boolean noYCollision = yIntersection.isEmpty();
-					
-					xIntersection.retainAll(obj.getX());
-					yIntersection.retainAll(obj.getY());
-					
-					boolean onSameX = !xIntersection.isEmpty();
-					boolean onSameY = !yIntersection.isEmpty();
-					
-					if (!noXCollision) {
+					if (XCollision) {
 						if (onSameY) {
 							xCollisions.add(cobj);
 						}
 					}
 					
-					if (!noYCollision) {
+					if (YCollision) {
 						if (onSameX) {
 							yCollisions.add(cobj);
 						}
-					}
-					
-//					for (int i = 0; i <= Math.abs(xMovement); i++) {
-//						if (this.moduloCircleX(obj.getX() + xDirection * i) == cobj.getX()
-//								&& obj.getY() == cobj.getY()) {	
-//							xCollisions.add(cobj);
-//							break;
-//						}
-//					}
-//					
-//					for (int i = 0; i <= Math.abs(yMovement); i++) {
-//						if ((obj.getY() + yDirection * i) == cobj.getY()
-//								&& obj.getX() == cobj.getX()) {
-//							yCollisions.add(cobj);
-//							break;
-//						}
-//					}					
+					}				
 				}
 			}
 		}
