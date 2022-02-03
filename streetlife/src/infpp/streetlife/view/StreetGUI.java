@@ -75,6 +75,7 @@ public class StreetGUI extends JFrame implements ActionListener{
 	private JPanel contentPane;
 	private Model model;
 	private Controller controller;
+	private StreetLifeView view;
 
 	private JComboBox<String> comboBoxInsert;
 	private JComboBox<StreetObject> comboBoxDelete;
@@ -552,6 +553,15 @@ public class StreetGUI extends JFrame implements ActionListener{
 		this.tp.setLaneNumber(laneNumber);
 		
 	}
+	
+	public void setView (StreetLifeView view) {
+		this.view = view;
+	}
+	
+	public StreetLifeView getView () {
+		return this.view;
+	}
+	
 	
 	/**
 	 * opens a new confirmation dialog for closing the program

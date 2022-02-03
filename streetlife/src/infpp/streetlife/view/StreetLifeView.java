@@ -3,10 +3,15 @@
  */
 package infpp.streetlife.view;
 
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Random;
 
+import infpp.streetlife.FileLoader;
 import infpp.streetlife.controller.Controller;
+import infpp.streetlife.model.Car;
+import infpp.streetlife.model.Frog;
 import infpp.streetlife.model.Model;
 import infpp.streetlife.model.StreetObject;
 
@@ -23,7 +28,18 @@ public class StreetLifeView implements View {
 	private Controller controller;
 	private Model model;
 	
+	/**
+	 * Image of the Car, so that it doesn't look like a frog
+	 */
+	private final String CAR_PATH = "img/car.png";
 	
+	/**
+	 * Image of the Frog, so that it doesn't look like a car
+	 */
+	private final String FROG_PATH = "img/frog_small.png";
+	
+	private BufferedImage CarImg;
+	private BufferedImage FrogImg;
 	
 	public StreetLifeView(Model model) {
 		try {
@@ -32,6 +48,8 @@ public class StreetLifeView implements View {
 			e.printStackTrace();
 		}
 		this.setModel(model);
+		this.initiateImages();
+		this.gui.setView(this);
 	}
 	
 	
@@ -102,5 +120,33 @@ public class StreetLifeView implements View {
 		this.gui.setSize(i, actual_j);
 		this.gui.setSizeDisplay(actual_j, i, this.controller.getLaneNumber());
 		
+	}
+	
+	private void initiateImages() {
+		try { 
+			 FileLoader fl = new FileLoader();
+	           CarImg = fl.loadImage(CAR_PATH);
+	           FrogImg = fl.loadImage(FROG_PATH);
+	        } catch(IOException ioe){
+	        	System.out.println("Unable to open file");
+	        	}
+	}
+	
+	public BufferedImage getImg(String objectName) {
+		if (objectName == "Frog") {
+			return FrogImg; 
+		}
+		else if (objectName == "Fiat") {
+			return CarImg;
+		}
+		else if (objectName == "Ford") {	
+			return CarImg;
+		}
+		else if (objectName == "Ferrari") {
+			return CarImg;
+		}
+		else {
+			throw new IllegalArgumentException("Tried returning Object that isn't predefined");
+		}
 	}
 }

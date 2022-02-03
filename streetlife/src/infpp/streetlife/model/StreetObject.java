@@ -30,7 +30,7 @@ public abstract class StreetObject implements Serializable {
 	/**
 	 * Default Resource used for the car
 	 */
-	private final String CAR_PATH = "img/car.png";
+	
 	
 	/**
 	 * x position of the center of the object
@@ -84,7 +84,7 @@ public abstract class StreetObject implements Serializable {
 	 * image that displays the object on the screen
 	 */
 
-	protected BufferedImage img;
+	
 	
 	/**
 	 * Constructor of the class
@@ -102,12 +102,7 @@ public abstract class StreetObject implements Serializable {
 		this.setName(name);
 		this.setHardness(hardness);
 		
-		 try { 
-			 FileLoader fl = new FileLoader();
-	           img = fl.loadImage(CAR_PATH);
-	        } catch(IOException ioe){
-	        	System.out.println("Unable to open file");
-	        	}
+		 
 	}
 
 	/**
@@ -180,20 +175,6 @@ public abstract class StreetObject implements Serializable {
 		for (int i = -halfYDimension; i <= halfYDimension; i++) {
 			this.ySet.add(this.getCenterY() + i);
 		}
-	}
-	
-	/**
-	 * @return img image associated with the object, may be used by view
-	 */
-	public BufferedImage getImg() {
-		return img;
-	}
-	
-	/**
-	 * @param newImg image associated with the object, may be used by view
-	 */
-	public void setImg(BufferedImage newImg) {
-		this.img = newImg;
 	}
 	
 	

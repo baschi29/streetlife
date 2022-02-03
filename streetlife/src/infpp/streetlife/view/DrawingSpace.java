@@ -1,19 +1,18 @@
 package infpp.streetlife.view;
 
-import java.awt.Graphics;
 import java.awt.Color;
+import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Paint;
-import java.awt.Shape;
 import java.awt.TexturePaint;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
+import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 
 import infpp.streetlife.model.MovingStreetObject;
 import infpp.streetlife.model.StreetObject;
-
-import java.awt.event.*;
 
 /**
  * A custom JPanel for display of moving images over a background. Controls the correct tiling of the background and movement of the objects "on top"
@@ -126,10 +125,11 @@ class DrawingSpace extends JPanel
         		//calcs the size of the image, essentially finding the middle for accurate movement.
         		//then set the object on the new x/y values
         		
-        		
+        		StreetGUI topFrame = (StreetGUI) SwingUtilities.getWindowAncestor(this);
+        		BufferedImage img = topFrame.getView().getImg(obj.getName());
         		
         		int currentY = (int) this.getSize().getHeight()-OFFSET_Y;
-        		g2d.drawImage(obj.getImg(), obj.getCenterX()+(obj.getImg().getWidth()/2), currentY - (obj.getCenterY()*LANE_SIZE-(obj.getImg().getHeight()/2)), obj.getImg().getWidth(),obj.getImg().getHeight(), null);
+        		g2d.drawImage(img, obj.getCenterX()+(img.getWidth()/2), currentY - (obj.getCenterY()*LANE_SIZE-(img.getHeight()/2)), img.getWidth(),img.getHeight(), null);
         	}
         	
     	} 

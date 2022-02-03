@@ -36,10 +36,7 @@ public class Frog extends MovingStreetObject{
 	 */
 	private int jumpRange;
 	
-	/**
-	 * Image of the Frog, so that it doesn't look like a car
-	 */
-	private final String FROG_PATH = "img/frog_small.png";
+	
 	
 	/**
 	 * Constructor, hardness for all frogs is set to 1
@@ -55,12 +52,6 @@ public class Frog extends MovingStreetObject{
 		this.setJumpRange(jumpRange);
 		this.setVelocity(velocity);
 		
-		try { 
-			FileLoader fl = new FileLoader();
-	           this.img = fl.loadImage(FROG_PATH);
-	        } catch(IOException ioe){
-	        	System.out.println("Unable to open file");
-	        	}
 	}
 
 	/**
