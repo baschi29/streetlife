@@ -201,18 +201,18 @@ public class StreetLifeController implements Controller {
 	@Override
 	public void addMovingObject(String str) throws Exception{
 		
-		if (str == "Frog") {
+		if (str.equals("Frog")) {
 			Random random = new Random();
 			
 			this.addObject(new Frog(this.model, random.nextInt(this.model.getLength()), 0, "Frog", 4, 1));
 		}
-		else if (str == "Fiat") {
+		else if (str.equals("Fiat")) {
 			this.addObject(new Car(this.model, 0, this.model.getFirstLane(), "Fiat", 1));
 		}
-		else if (str == "Ford") {
+		else if (str.equals("Ford"))  {
 			this.addObject(new Car(this.model, 0, this.model.getFirstLane(), "Ford", 2));
 		}
-		else if (str == "Ferrari") {
+		else if (str.equals("Ferrari"))  {
 			this.addObject(new Car(this.model, 0, this.model.getFirstLane(), "Ferrari", 5));
 		}
 		else {

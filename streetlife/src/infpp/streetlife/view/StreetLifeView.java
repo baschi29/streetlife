@@ -141,16 +141,16 @@ public class StreetLifeView implements View {
 	
 	public BufferedImage getImg(String objectName) {
 		String str = objectName.trim();
-		if (str == "Frog") {
+		if (str.equals("Frog")) {
 			return FrogImg; 
 		}
-		else if (str == "Fiat") {
+		else if (str.equals("Fiat")) {
 			return CarImg;
 		}
-		else if (str == "Ford") {	
+		else if (str.equals("Ford") ) {	
 			return CarImg;
 		}
-		else if (str == "Ferrari") {
+		else if (str.equals("Ferrari")) {
 			return CarImg;
 		}
 		else {
