@@ -11,7 +11,7 @@ import java.util.HashSet;
  *
  */
 public interface Model {
-
+	
 	/**
 	 * declares the width of the lanes used, should not be edited if you don't know what you do
 	 */
@@ -75,17 +75,17 @@ public interface Model {
 	 * @param obj object to check for collisions
 	 * @param xMovement xMovement of the object
 	 * @param yMovement yMovement of the object
-	 * @return collisions set of other object with collision
+	 * @return ArrayList array List containing Hash Set for x collision at position 1 and Hash Set for y collision
 	 */
-	public HashSet<StreetObject> findCollisions(StreetObject obj, int xMovement, int yMovement);
+	public ArrayList<HashSet<StreetObject>> findCollisions(StreetObject obj, HashSet<Integer> xMovementSet, HashSet<Integer> yMovementSet);
 	
 	/**
 	 * Detects if there is an collision with an existing object on the current position
 	 * x and y movements are therefore set to 0
 	 * @param obj object to check for collisions
-	 * @return collisions set of other objects with collision
+	 * @return ArrayList array List containing Hash Set for x collision at position 1 and Hash Set for y collision
 	 */
-	public HashSet<StreetObject> findCollisions(StreetObject obj);
+	public ArrayList<HashSet<StreetObject>> findCollisions(StreetObject obj);
 	
 	/**
 	 * Will always return a positive value to enable circling through the canvas

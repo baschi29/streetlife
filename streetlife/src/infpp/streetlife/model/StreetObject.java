@@ -7,6 +7,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.Serializable;
 import javax.imageio.ImageIO;
+import java.util.HashSet;
 
 import infpp.streetlife.FileLoader;
 
@@ -36,16 +37,26 @@ public abstract class StreetObject implements Serializable {
 	 */
 	private int x;
 	
+	private HashSet<Integer> xSet;
+	
 	/**
 	 * y position of the object
 	 */
 	private int y;
 	
+	private HashSet<Integer> ySet;
+	
 	/**
-	 * amount of pixel the object extents symmetrically in y
+	 * amount of pixel the object extents symmetrically in y direction
 	 * defaults to 0
 	 */
-	private int yExtension = 0;
+	private int yDimension = 0;
+	
+	/**
+	 * amount of pixel the object extents symmetrically in x direction
+	 * defaults to 0
+	 */
+	private int xDimension = 0;
 	
 	/**
 	 * name of the object
@@ -106,33 +117,61 @@ public abstract class StreetObject implements Serializable {
 	public void setName(String name) {
 		this.name = name;
 	}
-
+	
 	/**
-	 * @return x x position of the object
+	 * @return x x center position of the object
 	 */
-	public int getX() {
-		return x;
+	public int getCenterX() {
+		return this.x;
+	}
+	
+	/**
+	 * @return xSet all x positions of the object
+	 */
+	public HashSet<Integer> getX() {
+		return this.xSet;
 	}
 
 	/**
-	 * @param x new x position of the object
+	 * @param x new x center position of the object
 	 */
 	public void setX(int x) {
 		this.x = x;
+		
+		int halfxDimension = this.getXDimension() / 2;
+		this.xSet = new HashSet<>();
+		
+		for (int i = -halfxDimension; i <= halfxDimension; i++) {
+			this.xSet.add(this.getCenterX() + i);
+		}
 	}
 
 	/**
-	 * @return y y position of the object
+	 * @return y y center position of the object
 	 */
-	public int getY() {
+	public int getCenterY() {
 		return y;
 	}
 
 	/**
-	 * @param y new y position of the object
+	 * @return ySet all y positions of the object
+	 */
+	public HashSet<Integer> getY() {
+		return this.ySet;
+	}
+	
+	/**
+	 * @param y new y center position of the object
 	 */
 	public void setY(int y) {
 		this.y = y;
+		
+		int halfYDimension = this.getYDimension() / 2;
+		this.ySet = new HashSet<>();
+		
+		for (int i = -halfYDimension; i <= halfYDimension; i++) {
+			this.ySet.add(this.getCenterY() + i);
+		}
 	}
 	
 	public BufferedImage getImg() {
@@ -205,17 +244,47 @@ public abstract class StreetObject implements Serializable {
 	}
 
 	/**
-	 * @return yExtension amount of pixel the object extents symmetrically in y direction
+	 * @return yDimension amount of pixel the object extents symmetrically in y direction
 	 */
-	public int getYExtension() {
-		return this.yExtension;
+	public int getYDimension() {
+		return this.yDimension;
 	}
 
 	/**
-	 * @param yExtension new yExtension value
+	 * @param yDimension new yDimension value
 	 */
-	public void setYExtension(int yExtension) {
-		this.yExtension = yExtension;
+	public void setYDimension(int yDimension) {
+		this.yDimension = yDimension;
+		this.setY(this.getCenterY());
+	}
+
+	/**
+	 * @return xDimension amount of pixel the object extents symmetrically in x direction
+	 */
+	public int getXDimension() {
+		return xDimension;
+	}
+
+	/**
+	 * @param xDimension new xDimension value
+	 */
+	public void setXDimension(int xDimension) {
+		this.xDimension = xDimension;
+		this.setX(this.getCenterX());
 	}
 	
+	public boolean isInsideXDimension(HashSet<Integer> set) {
+		return !calculateIntersection(this.getX(), set).isEmpty();
+	}
+	
+	public boolean isInsideYDimension(HashSet<Integer> set) {
+		return !calculateIntersection(this.getY(), set).isEmpty();
+	}
+	
+	// non mutating
+	private HashSet<Integer> calculateIntersection(HashSet<Integer> s1, HashSet<Integer> s2) {
+		HashSet<Integer> intersection = new HashSet<>(s2);
+		intersection.retainAll(s1);
+		return intersection;
+	}
 }

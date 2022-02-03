@@ -3,6 +3,8 @@
  */
 package infpp.streetlife.model;
 
+import java.util.HashSet;
+
 /**
  * Class for cars. A Car has a position (x,y), a specified name and a specific velocity. It also states a current lane.
  * @author Cornelius, Bastian
@@ -51,9 +53,11 @@ public class Car extends MovingStreetObject {
 	 * @param velocity x velocity of car
 	 */
 	public Car(Model model, int x, Lane lane, String name, float velocity) throws Exception{
-		super(model, x, lane.getY(), name, 2, velocity);
+		super(model, x, lane.getCenterY(), name, 2, velocity);
 		this.setLane(lane);
 		this.setLaneSwitchVelocity((int) (Car.laneSwitchQuota * this.getVelocity()));
+		this.setYDimension(3);
+		this.setXDimension(75);
 		
 	}
 	
@@ -63,19 +67,19 @@ public class Car extends MovingStreetObject {
 	 */
 	public void calculateMove() {
 		
-		this.setIntendedX((int) (this.getX() + this.getVelocity()*20));
+		this.setIntendedX((int) (this.getCenterX() + this.getVelocity()*20));
 		this.calculateLaneSwitching();
 		
 		if (this.isSwitchingLanes()) {
 			
-			this.setIntendedY(this.getY() + this.getLaneSwitchIntention() * this.getLaneSwitchVelocity());
+			this.setIntendedY(this.getCenterY() + this.getLaneSwitchIntention() * this.getLaneSwitchVelocity());
 			
-			if (this.getIntendedY() > this.getLane().getTopLane().getY()) {
-				this.setIntendedY(this.getLane().getTopLane().getY());
+			if (this.getIntendedY() > this.getLane().getTopLane().getCenterY()) {
+				this.setIntendedY(this.getLane().getTopLane().getCenterY());
 			}
 			
-			else if (this.getIntendedY() < this.getLane().getBotLane().getY()) {
-				this.setIntendedY(this.getLane().getBotLane().getY());
+			else if (this.getIntendedY() < this.getLane().getBotLane().getCenterY()) {
+				this.setIntendedY(this.getLane().getBotLane().getCenterY());
 			}
 		}
 		
@@ -97,37 +101,37 @@ public class Car extends MovingStreetObject {
 				this.setLaneSwitchIntention(-1);
 			}
 			
-			if (this.getLaneSwitchIntention() != 0 && this.getModel().findCollisions(this, 0, this.getLaneSwitchIntention() * this.getLane().getYExtension()).isEmpty()) {
-				this.setSwitchingLanes(true);
+			if (this.getLaneSwitchIntention() != 0) {
+				
+				HashSet<Integer> laneSwitchMovementSet = new HashSet<>();
+				
+				for (int i = 0; i <= this.getLane().getYDimension(); i++) {
+					
+					for (int ypos : this.getY()) {
+						laneSwitchMovementSet.add(ypos + i * this.getLaneSwitchIntention());
+					}
+				}
+				
+				if (this.getModel().findCollisions(this, new HashSet<>(this.getX()), laneSwitchMovementSet).get(1).isEmpty()) {
+					this.setSwitchingLanes(true);
+				}
 			}
 		}
 		
 		else {
 			
-			if (this.getLane().hasTopLane() && this.getY() == this.getLane().getTopLane().getY()) {
+			if (this.getLane().hasTopLane() && this.getCenterY() == this.getLane().getTopLane().getCenterY()) {
 				
 				this.setLaneSwitchIntention(0);
 				this.setSwitchingLanes(false);
 				this.setLane(this.getLane().getTopLane());
 			}
 			
-			else if (this.getLane().hasBotLane() && this.getY() == this.getLane().getBotLane().getY()) {
+			else if (this.getLane().hasBotLane() && this.getCenterY() == this.getLane().getBotLane().getCenterY()) {
 				this.setLaneSwitchIntention(0);
 				this.setSwitchingLanes(false);
 				this.setLane(this.getLane().getBotLane());
 			}
-		}
-	}
-	
-	/**
-	 * hot fix for weird lane switching collision bugs
-	 * if a car switches lanes there is currently no collision detection in x direction
-	 */
-	@Override
-	protected void handleXCollision(StreetObject obj, int xDirection) {
-		
-		if (!this.isSwitchingLanes()) {
-			super.handleXCollision(obj, xDirection);
 		}
 	}
 	

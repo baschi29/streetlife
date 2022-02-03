@@ -4,6 +4,8 @@
 package infpp.streetlife.model;
 
 import java.util.HashSet;
+import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * Class for moving Street Objects. Every moving Street object has a velocity and a move() method.
@@ -79,45 +81,78 @@ public abstract class MovingStreetObject extends StreetObject{
 	 */
 	private void manageCollisions() {
 		
-		int xMovement = this.getIntendedX() - this.getX();
-		int yMovement = this.getIntendedY() - this.getY();
-		int xDirection = (int) Math.signum(xMovement);
-		int yDirection = (int) Math.signum(yMovement);
+		int xCenterMovement = this.getIntendedX() - this.getCenterX();
+		int yCenterMovement = this.getIntendedY() - this.getCenterY();
+		int xDirection = (int) Math.signum(xCenterMovement);
+		int yDirection = (int) Math.signum(yCenterMovement);
+		
+		HashSet<Integer> xMovementSet = new HashSet<>();
+		
+		for (int i = 0; i <= xCenterMovement * xDirection; i++) {
+			
+			for (int xpos : this.getX()) {
+				xMovementSet.add(this.getModel().moduloCircleX(xpos + i * xDirection));
+			}
+		}
+		
+		HashSet<Integer> yMovementSet = new HashSet<>();
+		
+		for (int i = 0; i <= yCenterMovement * yDirection; i++) {
+			
+			for (int ypos : this.getY()) {
+				yMovementSet.add(ypos + i * yDirection);
+			}
+		}
+		
 		this.setxSlowedDown(false);
 		
-		HashSet<StreetObject> collisions = this.getModel().findCollisions(this, xMovement, yMovement);
+		ArrayList<HashSet<StreetObject>> collisions = this.getModel().findCollisions(this, xMovementSet, yMovementSet);
 		
-		for (StreetObject cobj: collisions) {
+		// handling of x collisions
+		for (int i = 0; i < collisions.size(); i++) {
 			
-			if (this.getHardness() <= cobj.getHardness()) {
+			for (StreetObject cobj : collisions.get(i)) {
 				
-				if (xMovement != 0) {
-					this.handleXCollision(cobj, xDirection);
-					this.setxSlowedDown(true);
+				if (this.getHardness() <= cobj.getHardness()) {
+					
+					if (i == 0) {
+						this.handleXCollision(cobj, xDirection);
+						this.setxSlowedDown(true);
+					}
+					
+					if (i == 1) {
+						this.handleYCollision(cobj, yDirection);
+					}
 				}
 				
-				if (yMovement != 0) {
-					this.handleYCollision(cobj, yDirection);
+				else if (this.getHardness() > cobj.getHardness()) {
+					cobj.setDeleted(true);
 				}
-			}
-			
-			if (this.getHardness() > cobj.getHardness()) {
-				cobj.setDeleted(true);
 			}
 		}
 	}
 	
 	protected void handleXCollision(StreetObject obj, int xDirection) {
 		
-		if (this.getX() != obj.getX()) {
-			this.setIntendedX(obj.getX() - xDirection);
+		if (!this.isInsideXDimension(obj.getX())) {
+			if (Math.signum(xDirection) < 0) {
+				this.setIntendedX(Collections.max(obj.getX()) + (this.getXDimension() / 2 + 1));
+			}
+			else {
+				this.setIntendedX(Collections.min(obj.getX()) - (this.getXDimension() / 2 + 1));
+			}
 		}
 	}
 	
 	protected void handleYCollision(StreetObject obj, int yDirection) {
 		
-		if (this.getY() != obj.getY()) {
-			this.setIntendedY(obj.getY() - yDirection);
+		if (!this.isInsideYDimension(obj.getY())) {
+			if (Math.signum(yDirection) < 0) {
+				this.setIntendedY(Collections.max(obj.getY()) + (this.getYDimension() / 2 + 1));
+			}
+			else {
+				this.setIntendedY(Collections.min(obj.getY()) - (this.getYDimension() / 2 + 1));
+			}
 		}
 	}
 	
