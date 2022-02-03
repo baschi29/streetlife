@@ -52,6 +52,9 @@ public class Lane extends StreetObject{
 	@Override
 	public void tick() {}
 	
+	/**
+	 * @return hasBotLane returns true if the lane has a lane below
+	 */
 	public boolean hasBotLane() {
 		return (this.getBotLane() != this);
 	}
@@ -64,12 +67,15 @@ public class Lane extends StreetObject{
 	}
 
 	/**
-	 * @param botLane Lane below the current lane
+	 * @param botLane sets Lane below the current lane
 	 */
 	public void setBotLane(Lane botLane) {
 		this.botLane = botLane;
 	}
 	
+	/**
+	 * @return hasTopLane returns true if the lane has a lane above
+	 */
 	public boolean hasTopLane() {
 		return (this.getTopLane() != this);
 	}

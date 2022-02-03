@@ -133,7 +133,7 @@ public class StreetLifeModel implements Model, Serializable{
 				return;
 			}
 			
-			obj.setX(this.moduloCircleX(obj.getCenterX() + random.nextInt((int)(this.getLength()))));
+			obj.setCenterX(this.moduloCircleX(obj.getCenterX() + random.nextInt((int)(this.getLength()))));
 			tryCounter += 1;
 		}
 		
@@ -143,7 +143,6 @@ public class StreetLifeModel implements Model, Serializable{
 	
 	/**
 	 * ticks the whole Streetlife for 1 step according to the models rules
-	 * all new positions of all objects get calculated, verified and then set
 	 */
 	@Override
 	public void tick() {
@@ -160,9 +159,9 @@ public class StreetLifeModel implements Model, Serializable{
 	 * and on the way the x and y movements describe
 	 * Objects with a negative hardness level are only able to collide with objects the same hardness
 	 * @param obj object to check for collisions
-	 * @param xMovement xMovement of the object
-	 * @param yMovement yMovement of the object
-	 * @return ArrayList array List containing Hash Set for x collision at position 1 and Hash Set for y collision
+	 * @param xMovementSet all x coordinates the object is on while moving to desired x
+	 * @param yMovementSet all y coordinates the object is on while moving to desired y
+	 * @return ArrayList array List containing Hash Set for x collision at position 1 and Hash Set for y collision at position 0
 	 */
 	@Override
 	public ArrayList<HashSet<StreetObject>> findCollisions(StreetObject obj, HashSet<Integer> xMovementSet, HashSet<Integer> yMovementSet) {
@@ -325,7 +324,7 @@ public class StreetLifeModel implements Model, Serializable{
 
 
 	/**
-	 * @return firstLane
+	 * @return returns the lane at the very bottom of the model aka. the first lane
 	 */
 	@Override
 	public Lane getFirstLane() {
@@ -333,7 +332,7 @@ public class StreetLifeModel implements Model, Serializable{
 	}
 
 	/**
-	 * @param firstLane das zu setzende Objekt firstLane
+	 * @param firstLane the lane at the very bottom of the model aka. the first lane
 	 */
 	private void setFirstLane(Lane firstLane) {
 		this.firstLane = firstLane;

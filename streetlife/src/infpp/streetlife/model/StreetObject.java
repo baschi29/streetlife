@@ -33,17 +33,23 @@ public abstract class StreetObject implements Serializable {
 	private final String CAR_PATH = "img/car.png";
 	
 	/**
-	 * x position of the object
+	 * x position of the center of the object
 	 */
-	private int x;
+	private int centerX;
 	
+	/**
+	 * all x coordinates the object occupies
+	 */
 	private HashSet<Integer> xSet;
 	
 	/**
-	 * y position of the object
+	 * y position of the center of the object
 	 */
-	private int y;
+	private int centerY;
 	
+	/**
+	 * all y coordinates the object occupies
+	 */
 	private HashSet<Integer> ySet;
 	
 	/**
@@ -91,8 +97,8 @@ public abstract class StreetObject implements Serializable {
 	public StreetObject(Model model, int x, int y, String name, int hardness) {
 		
 		this.setModel(model);
-		this.setX(x);
-		this.setY(y);
+		this.setCenterX(x);
+		this.setCenterY(y);
 		this.setName(name);
 		this.setHardness(hardness);
 		
@@ -122,21 +128,22 @@ public abstract class StreetObject implements Serializable {
 	 * @return x x center position of the object
 	 */
 	public int getCenterX() {
-		return this.x;
+		return this.centerX;
 	}
 	
 	/**
-	 * @return xSet all x positions of the object
+	 * @return xSet all x coordinates of the object
 	 */
 	public HashSet<Integer> getX() {
 		return this.xSet;
 	}
 
 	/**
+	 * Sets new center x position and updates the xSet accordingly
 	 * @param x new x center position of the object
 	 */
-	public void setX(int x) {
-		this.x = x;
+	public void setCenterX(int x) {
+		this.centerX = x;
 		
 		int halfxDimension = this.getXDimension() / 2;
 		this.xSet = new HashSet<>();
@@ -147,14 +154,15 @@ public abstract class StreetObject implements Serializable {
 	}
 
 	/**
+	 * Sets new center y position and updates the ySet accordingly
 	 * @return y y center position of the object
 	 */
 	public int getCenterY() {
-		return y;
+		return centerY;
 	}
 
 	/**
-	 * @return ySet all y positions of the object
+	 * @return ySet all y coordinates of the object
 	 */
 	public HashSet<Integer> getY() {
 		return this.ySet;
@@ -163,8 +171,8 @@ public abstract class StreetObject implements Serializable {
 	/**
 	 * @param y new y center position of the object
 	 */
-	public void setY(int y) {
-		this.y = y;
+	public void setCenterY(int y) {
+		this.centerY = y;
 		
 		int halfYDimension = this.getYDimension() / 2;
 		this.ySet = new HashSet<>();
@@ -174,10 +182,16 @@ public abstract class StreetObject implements Serializable {
 		}
 	}
 	
+	/**
+	 * @return img image associated with the object, may be used by view
+	 */
 	public BufferedImage getImg() {
 		return img;
 	}
 	
+	/**
+	 * @param newImg image associated with the object, may be used by view
+	 */
 	public void setImg(BufferedImage newImg) {
 		this.img = newImg;
 	}
@@ -191,13 +205,13 @@ public abstract class StreetObject implements Serializable {
 	public String toString() {
 		return this.name
 				+ " at: x = "
-				+ Integer.toString(this.x)
+				+ Integer.toString(this.centerX)
 				+ " ; y = "
-				+ Integer.toString(this.y);
+				+ Integer.toString(this.centerY);
 	}
 
 	/**
-	 * @return deleted
+	 * @return deleted true if the object has the deleted Status
 	 */
 	public boolean isDeleted() {
 		return this.deleted;
@@ -218,7 +232,7 @@ public abstract class StreetObject implements Serializable {
 	}
 
 	/**
-	 * @param hardness das zu setzende Objekt hardness
+	 * @param hardness hardness of the object
 	 */
 	private void setHardness(int hardness) {
 		this.hardness = hardness;
@@ -255,7 +269,7 @@ public abstract class StreetObject implements Serializable {
 	 */
 	public void setYDimension(int yDimension) {
 		this.yDimension = yDimension;
-		this.setY(this.getCenterY());
+		this.setCenterY(this.getCenterY());
 	}
 
 	/**
@@ -270,18 +284,33 @@ public abstract class StreetObject implements Serializable {
 	 */
 	public void setXDimension(int xDimension) {
 		this.xDimension = xDimension;
-		this.setX(this.getCenterX());
+		this.setCenterX(this.getCenterX());
 	}
 	
+	/**
+	 * Checks if the x coordinates given with the set overlap with the x coordinates of the object
+	 * @param set x coordinates used for checking for overlap
+	 * @return insideXDimension true if some x coordinates are the same
+	 */
 	public boolean isInsideXDimension(HashSet<Integer> set) {
 		return !calculateIntersection(this.getX(), set).isEmpty();
 	}
 	
+	/**
+	 * Checks if the y coordinates given with the set overlap with the y coordinates of the object
+	 * @param set y coordinates used for checking for overlap
+	 * @return insideYDimension true if some y coordinates are the same
+	 */
 	public boolean isInsideYDimension(HashSet<Integer> set) {
 		return !calculateIntersection(this.getY(), set).isEmpty();
 	}
 	
-	// non mutating
+	/**
+	 * Help method to realise non mutating intersection on HashSets
+	 * @param s1 first HashSet
+	 * @param s2 second HashSet
+	 * @return s3 intersection of s1 and s2
+	 */
 	private HashSet<Integer> calculateIntersection(HashSet<Integer> s1, HashSet<Integer> s2) {
 		HashSet<Integer> intersection = new HashSet<>(s2);
 		intersection.retainAll(s1);
