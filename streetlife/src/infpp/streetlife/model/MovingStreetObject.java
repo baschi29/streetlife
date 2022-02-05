@@ -27,10 +27,22 @@ public abstract class MovingStreetObject extends StreetObject{
 	 */
 	private int intendedCenterX;
 	
+	private int xCenterMovement;
+	
+	private int xDirection;
+	
+	private HashSet<Integer> xMovementSet;
+	
 	/**
 	 * the center y coordinate the object intends to be on after movement
 	 */
 	private int intendedCenterY;
+	
+	private int yCenterMovement;
+	
+	private int yDirection;
+	
+	private HashSet<Integer> yMovementSet;
 	
 	/**
 	 * true if the object wasn't able to move at full speed at the previous movement
@@ -87,29 +99,6 @@ public abstract class MovingStreetObject extends StreetObject{
 	 * Objects with higher hardness level will move like there is no collision, the other object will get removed
 	 */
 	private void manageCollisions() {
-		
-		int xCenterMovement = this.getIntendedCenterX() - this.getCenterX();
-		int yCenterMovement = this.getIntendedCenterY() - this.getCenterY();
-		int xDirection = (int) Math.signum(xCenterMovement);
-		int yDirection = (int) Math.signum(yCenterMovement);
-		
-		HashSet<Integer> xMovementSet = new HashSet<>();
-		
-		for (int i = 0; i <= xCenterMovement * xDirection; i++) {
-			
-			for (int xpos : this.getX()) {
-				xMovementSet.add(this.getModel().moduloCircleX(xpos + i * xDirection));
-			}
-		}
-		
-		HashSet<Integer> yMovementSet = new HashSet<>();
-		
-		for (int i = 0; i <= yCenterMovement * yDirection; i++) {
-			
-			for (int ypos : this.getY()) {
-				yMovementSet.add(ypos + i * yDirection);
-			}
-		}
 		
 		this.setxSlowedDown(false);
 		
@@ -223,6 +212,19 @@ public abstract class MovingStreetObject extends StreetObject{
 	 */
 	public void setIntendedCenterX(int intendedX) {
 		this.intendedCenterX = intendedX;
+		this.setxCenterMovement(this.getIntendedCenterX() - this.getCenterX());
+		this.setxDirection((int) Math.signum(this.getxCenterMovement()));
+		
+		HashSet<Integer> xSet = new HashSet<>();
+		
+		for (int i = 0; i <= this.getxCenterMovement() * this.getxDirection(); i++) {
+			
+			for (int xpos : this.getX()) {
+				xSet.add(this.getModel().moduloCircleX(xpos + i * this.getxDirection()));
+			}
+		}
+		
+		this.setxMovementSet(xSet);
 	}
 
 	/**
@@ -237,6 +239,19 @@ public abstract class MovingStreetObject extends StreetObject{
 	 */
 	public void setIntendedCenterY(int intendedY) {
 		this.intendedCenterY = intendedY;
+		this.setyCenterMovement(this.getIntendedCenterY() - this.getCenterY());
+		this.setyDirection((int) Math.signum(this.getyCenterMovement()));
+		
+		HashSet<Integer> ySet = new HashSet<>();
+		
+		for (int i = 0; i <= this.getyCenterMovement() * this.getyDirection(); i++) {
+			
+			for (int ypos : this.getY()) {
+				ySet.add(ypos + i * this.getyDirection());
+			}
+		}
+		
+		this.setyMovementSet(ySet);
 	}
 
 	/**
@@ -252,5 +267,88 @@ public abstract class MovingStreetObject extends StreetObject{
 	public void setxSlowedDown(boolean xSlowedDown) {
 		this.xSlowedDown = xSlowedDown;
 	}
-	
+
+	/**
+	 * @return xCenterMovement
+	 */
+	public int getxCenterMovement() {
+		return xCenterMovement;
+	}
+
+	/**
+	 * @param xCenterMovement
+	 */
+	private void setxCenterMovement(int xCenterMovement) {
+		this.xCenterMovement = xCenterMovement;
+	}
+
+	/**
+	 * @return xDirection
+	 */
+	public int getxDirection() {
+		return xDirection;
+	}
+
+	/**
+	 * @param xDirection
+	 */
+	private void setxDirection(int xDirection) {
+		this.xDirection = xDirection;
+	}
+
+	/**
+	 * @return yCenterMovement
+	 */
+	public int getyCenterMovement() {
+		return yCenterMovement;
+	}
+
+	/**
+	 * @param yCenterMovement
+	 */
+	private void setyCenterMovement(int yCenterMovement) {
+		this.yCenterMovement = yCenterMovement;
+	}
+
+	/**
+	 * @return yDirection
+	 */
+	public int getyDirection() {
+		return yDirection;
+	}
+
+	/**
+	 * @param yDirection
+	 */
+	private void setyDirection(int yDirection) {
+		this.yDirection = yDirection;
+	}
+
+	/**
+	 * @return xMovementSet
+	 */
+	public HashSet<Integer> getxMovementSet() {
+		return xMovementSet;
+	}
+
+	/**
+	 * @param xMovementSet
+	 */
+	private void setxMovementSet(HashSet<Integer> xMovementSet) {
+		this.xMovementSet = xMovementSet;
+	}
+
+	/**
+	 * @return yMovementSet
+	 */
+	public HashSet<Integer> getyMovementSet() {
+		return yMovementSet;
+	}
+
+	/**
+	 * @param yMovementSet
+	 */
+	private void setyMovementSet(HashSet<Integer> yMovementSet) {
+		this.yMovementSet = yMovementSet;
+	}
 }

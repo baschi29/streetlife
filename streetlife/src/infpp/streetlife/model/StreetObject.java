@@ -250,7 +250,7 @@ public abstract class StreetObject implements Serializable {
 	 */
 	public void setYDimension(int yDimension) {
 		this.yDimension = yDimension;
-		this.setCenterY(this.getCenterY());
+		this.setCenterY(this.getCenterY()); //refreshes the Dimension sets
 	}
 
 	/**
@@ -265,7 +265,7 @@ public abstract class StreetObject implements Serializable {
 	 */
 	public void setXDimension(int xDimension) {
 		this.xDimension = xDimension;
-		this.setCenterX(this.getCenterX());
+		this.setCenterX(this.getCenterX()); //refreshes the Dimension sets
 	}
 	
 	/**
