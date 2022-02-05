@@ -112,7 +112,7 @@ public class Car extends MovingStreetObject {
 					}
 				}
 				
-				if (this.getModel().findCollisions(this, new HashSet<>(this.getX()), laneSwitchMovementSet).get(1).isEmpty()) {
+				if (this.getModel().findCollisions(this, new HashSet<>(this.getxMovementSet()), laneSwitchMovementSet).get(1).isEmpty()) {
 					this.setSwitchingLanes(true);
 				}
 			}
