@@ -98,10 +98,8 @@ public class StartUpDialog  extends JDialog implements ActionListener {
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(new BorderLayout(0, 0));
 		this.setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
-		this.addWindowListener(new WindowAdapter()
-		{
-			public void windowClosing(WindowEvent e)
-			{
+		this.addWindowListener(new WindowAdapter() {
+			public void windowClosing(WindowEvent e){
 				closeProgram();
 			 }
 
@@ -323,7 +321,8 @@ public class StartUpDialog  extends JDialog implements ActionListener {
 				int number_of_lanes = Integer.parseInt(this.textFieldLanes.getText());
 				int size_of_street = Integer.parseInt(this.textFieldLength.getText());
 			
-				int sim_speed = this.comboBoxSimTime.getSelectedIndex();
+				//reverse the simspeed mp, so that high indexes actually correspond to fast speeds
+				int sim_speed = this.simspeeds.length -  this.comboBoxSimTime.getSelectedIndex();
 				boolean default_cars = this.tglbtnNewToggleButton.isSelected();
 			
 				System.out.println(number_of_lanes);

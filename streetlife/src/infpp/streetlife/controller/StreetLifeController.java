@@ -4,10 +4,13 @@
 package infpp.streetlife.controller;
 
 import java.util.ArrayList;
+import java.awt.event.WindowEvent;
 import java.io.*;
 import infpp.streetlife.model.*;
 import infpp.streetlife.view.*;
 import java.util.Random;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * The controller initializes the model and the view and controls the model
@@ -45,8 +48,12 @@ public class StreetLifeController implements Controller {
 	/**
 	 * defines if default car-setup should be used or if the street should start empty
 	 */
-	
 	private boolean default_cars;
+	
+	/**
+	 * the timer used for ticking the model many times
+	 */
+	private Timer timer;
 	
 	/**
 	 * List of predefined Cars that can be added to the model
@@ -116,15 +123,22 @@ public class StreetLifeController implements Controller {
 		}
 	}
 
+	
+	
 	/**
-	 * Initiates the model (with default cars if default_cars = true) and the view
+	 * Initiates the model. Should be called first
 	 * @throws Exception 
 	 */
-	
 	private void initiateModel() throws Exception {
+		//this.timer = new Timer();
 		this.model = new StreetLifeModel(this.numLanes, this.sizeStreet);
 	}
 	
+	/**
+	 * Initiates the view, assuming that the model is already present. Should be called second.
+	 * @param default_cars
+	 * @throws Exception
+	 */
 	private void initiateView(boolean default_cars) throws Exception{	
 		//this.view = new TextView();
 		
@@ -158,7 +172,22 @@ public class StreetLifeController implements Controller {
 	 */
 	@Override
 	public void start() throws Exception{
-		//TODO	
+
+		timer = new Timer();
+		TimerTask task = new TimerTask(){
+			
+			public void run()
+			{
+				try {
+					step();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			 }
+		};
+		
+		timer.schedule(task, 0, (this.simSpeed+1) * 200);
+		
 	}
 
 	/**
@@ -166,8 +195,8 @@ public class StreetLifeController implements Controller {
 	 */
 	@Override
 	public void stop() throws Exception{
-		// TODO Auto-generated method stub
-		
+	
+		timer.cancel();
 	}
 	
 	/**
@@ -178,6 +207,7 @@ public class StreetLifeController implements Controller {
 		
 		try {
 				this.model.tick();
+				this.view.refresh();
 			}
 		 catch (Exception e) {
 			// fetches any errors during the running-phase
