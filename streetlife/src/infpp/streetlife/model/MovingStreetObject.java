@@ -27,10 +27,19 @@ public abstract class MovingStreetObject extends StreetObject{
 	 */
 	private int intendedCenterX;
 	
+	/**
+	 * movement of the center on x axis
+	 */
 	private int xCenterMovement;
 	
+	/**
+	 * direction of the movement on the x axis (positive or negative)
+	 */
 	private int xDirection;
 	
+	/**
+	 * all x coordinates the object will move over
+	 */
 	private HashSet<Integer> xMovementSet;
 	
 	/**
@@ -38,10 +47,19 @@ public abstract class MovingStreetObject extends StreetObject{
 	 */
 	private int intendedCenterY;
 	
+	/**
+	 * movement of the center on y axis
+	 */
 	private int yCenterMovement;
 	
+	/**
+	 * direction of the movement on the y axis (positive or negative)
+	 */
 	private int yDirection;
 	
+	/**
+	 * all y coordinates the object will move over
+	 */
 	private HashSet<Integer> yMovementSet;
 	
 	/**
@@ -269,84 +287,84 @@ public abstract class MovingStreetObject extends StreetObject{
 	}
 
 	/**
-	 * @return xCenterMovement
+	 * @return xCenterMovement movement of the center on x axis
 	 */
 	public int getxCenterMovement() {
 		return xCenterMovement;
 	}
 
 	/**
-	 * @param xCenterMovement
+	 * @param xCenterMovement movement of the center on x axis
 	 */
 	private void setxCenterMovement(int xCenterMovement) {
 		this.xCenterMovement = xCenterMovement;
 	}
 
 	/**
-	 * @return xDirection
+	 * @return xDirection direction of the movement on the x axis (positive or negative)
 	 */
 	public int getxDirection() {
 		return xDirection;
 	}
 
 	/**
-	 * @param xDirection
+	 * @param xDirection direction of the movement on the x axis (positive or negative)
 	 */
 	private void setxDirection(int xDirection) {
 		this.xDirection = xDirection;
 	}
 
 	/**
-	 * @return yCenterMovement
+	 * @return yCenterMovement movement of the center on y axis
 	 */
 	public int getyCenterMovement() {
 		return yCenterMovement;
 	}
 
 	/**
-	 * @param yCenterMovement
+	 * @param yCenterMovement movement of the center on y axis
 	 */
 	private void setyCenterMovement(int yCenterMovement) {
 		this.yCenterMovement = yCenterMovement;
 	}
 
 	/**
-	 * @return yDirection
+	 * @return yDirection direction of the movement on the y axis (positive or negative)
 	 */
 	public int getyDirection() {
 		return yDirection;
 	}
 
 	/**
-	 * @param yDirection
+	 * @param yDirection direction of the movement on the y axis (positive or negative)
 	 */
 	private void setyDirection(int yDirection) {
 		this.yDirection = yDirection;
 	}
 
 	/**
-	 * @return xMovementSet
+	 * @return xMovementSet all x coordinates the object will move over
 	 */
 	public HashSet<Integer> getxMovementSet() {
 		return xMovementSet;
 	}
 
 	/**
-	 * @param xMovementSet
+	 * @param xMovementSet all x coordinates the object will move over
 	 */
 	private void setxMovementSet(HashSet<Integer> xMovementSet) {
 		this.xMovementSet = xMovementSet;
 	}
 
 	/**
-	 * @return yMovementSet
+	 * @return yMovementSet all y coordinates the object will move over
 	 */
 	public HashSet<Integer> getyMovementSet() {
 		return yMovementSet;
 	}
 
 	/**
-	 * @param yMovementSet
+	 * @param yMovementSet all y coordinates the object will move over
 	 */
 	private void setyMovementSet(HashSet<Integer> yMovementSet) {
 		this.yMovementSet = yMovementSet;
