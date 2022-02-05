@@ -18,7 +18,7 @@
 ## General info
 Streetlife is a simple Java-Program for educational purposes, programmed for OOP 2021/22 at CAU Kiel
 
-![Screenshot main window](https://github.com/baschi29/streetlife/blob/master/images/scshot_mainframe.JPG)
+![Screenshot main window](https://github.com/baschi29/streetlife/blob/master/images/scshot_mainframe_new.JPG)
 
 ## Technologies
 Project is created with
