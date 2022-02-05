@@ -17,7 +17,9 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 
+import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -39,6 +41,7 @@ import infpp.streetlife.FileLoader;
 import infpp.streetlife.controller.Controller;
 import infpp.streetlife.model.Model;
 import infpp.streetlife.model.StreetObject;
+import javax.swing.JRadioButtonMenuItem;
 /**
  *  The StreetGUI represents the graphical interface of the street with the display area, control buttons, menu bar etc. 
  *  Essentially the swing/AWT-part of the overall view.
@@ -91,6 +94,13 @@ public class StreetGUI extends JFrame implements ActionListener{
 	private FileLoader fl = new FileLoader();
 	
 	private int NumberOfLanes;
+	private JMenu mnSpeedMenu;
+	private JRadioButtonMenuItem rdbtnmntmNewRadioItem;
+	private JRadioButtonMenuItem rdbtnmntmNewRadioItemSlowest;
+	private JRadioButtonMenuItem rdbtnmntmNewRadioItemSlow;
+	private JRadioButtonMenuItem rdbtnmntmNewRadioItemFast;
+	private JRadioButtonMenuItem rdbtnmntmNewRadioItemFastest;
+	private ButtonGroup group;
 	
 	
 	/**
@@ -162,6 +172,36 @@ public class StreetGUI extends JFrame implements ActionListener{
 		
 		JMenu mnViewMenu = new JMenu("View");
 		menuBar.add(mnViewMenu);
+		
+		mnSpeedMenu = new JMenu("Simulation Speed");
+		mnViewMenu.add(mnSpeedMenu);
+		
+		//used simSpeeds in the StartUpDialog
+		//String[] simSpeeds = {"Snail","Slow","Fast","Speedy Gonzales"};
+		group = new ButtonGroup();
+		rdbtnmntmNewRadioItemSlowest = new JRadioButtonMenuItem("Snail");
+		rdbtnmntmNewRadioItemSlowest.addActionListener(this);
+		rdbtnmntmNewRadioItemSlowest.setActionCommand("3"); //sets the represented simspeed
+		group.add(rdbtnmntmNewRadioItemSlowest);
+		mnSpeedMenu.add(rdbtnmntmNewRadioItemSlowest);
+		
+		rdbtnmntmNewRadioItemSlow = new JRadioButtonMenuItem("Slow");
+		rdbtnmntmNewRadioItemSlow.addActionListener(this);
+		rdbtnmntmNewRadioItemSlow.setActionCommand("2");
+		group.add(rdbtnmntmNewRadioItemSlow);
+		mnSpeedMenu.add(rdbtnmntmNewRadioItemSlow);
+		
+		rdbtnmntmNewRadioItemFast = new JRadioButtonMenuItem("Fast");
+		rdbtnmntmNewRadioItemFast.addActionListener(this); 
+		rdbtnmntmNewRadioItemFast.setActionCommand("1");
+		group.add(rdbtnmntmNewRadioItemFast); 
+		mnSpeedMenu.add(rdbtnmntmNewRadioItemFast);
+		
+		rdbtnmntmNewRadioItemFastest = new JRadioButtonMenuItem("Speedy Gonzales");
+		rdbtnmntmNewRadioItemFastest.addActionListener(this);
+		rdbtnmntmNewRadioItemFastest.setActionCommand("0");
+		group.add(rdbtnmntmNewRadioItemFastest); 
+		mnSpeedMenu.add(rdbtnmntmNewRadioItemFastest);
 		
 		JMenu mnHelpMenu = new JMenu("Help");
 		menuBar.add(mnHelpMenu);
@@ -533,6 +573,15 @@ public class StreetGUI extends JFrame implements ActionListener{
 			}
 		}
 		
+		//asks, if the source is from the SimSpeed Radio-Buttons
+		else if (e.getSource() == rdbtnmntmNewRadioItemSlowest || 
+				 e.getSource() == rdbtnmntmNewRadioItemSlow ||
+				 e.getSource() == rdbtnmntmNewRadioItemFast ||
+				 e.getSource() == rdbtnmntmNewRadioItemFastest) {
+			int newSimSpeed = Integer.valueOf(e.getActionCommand());
+			this.controller.setSimSpeed(newSimSpeed);
+		}
+				 
 		//regardless of the action, refresh the gui to keep everything up-to-date
 		this.tp.refresh();
 	}

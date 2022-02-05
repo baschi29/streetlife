@@ -28,6 +28,13 @@ public interface Controller {
 	 */
 	abstract public void step() throws Exception;
 	
+	
+	/**
+	 * stops and then starts the simulation again
+	 *
+	 */
+	abstract public void restart() throws Exception;
+	
 	/**
 	 * Returns the list of all predefined car templates
 	 * @return ArrayList list of predefined car templates
@@ -35,12 +42,14 @@ public interface Controller {
 	abstract public ArrayList<String> getListOfCars();
 	
 	/**
-	 * @param str Name of predefined object to be added
+	 * adds a new Moving Object to the model
+	 * @param str Name of predefined object 
 	 */
 	abstract public void addMovingObject(String str) throws Exception;
 	
 	/**
-	 * @param obj object to be deleted from the model
+	 * removes a current Moving Object from the model
+	 * @param obj object to be deleted
 	 */
 	abstract public void deleteObject(StreetObject obj) throws Exception;
 	
@@ -68,5 +77,14 @@ public interface Controller {
 	 * @return int number of lanes
 	 */
 	public abstract int getLaneNumber();
+
+	/**
+	 * sets an new Speed for the simulation
+	 * @param newSimSpeed new simulation speed
+	 */
+	public abstract void setSimSpeed(int newSimSpeed);
+
+
+	
 	
 }

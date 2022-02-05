@@ -216,6 +216,14 @@ public class StreetLifeController implements Controller {
 		}
 	}
 	
+	@Override
+	public void restart() throws Exception {
+		this.stop();
+		this.start();
+		
+	}
+	
+	
 	/**
 	 * Returns the list of all predefined car templates
 	 * @return ArrayList list of predefined car templates
@@ -323,6 +331,19 @@ public class StreetLifeController implements Controller {
 	public int getLaneNumber() {
 		return this.numLanes;
 	}
+
+	@Override
+	public void setSimSpeed(int newSimSpeed) {
+		this.simSpeed = newSimSpeed;
+		try {
+			this.restart();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+
+	
 	
 	
 
