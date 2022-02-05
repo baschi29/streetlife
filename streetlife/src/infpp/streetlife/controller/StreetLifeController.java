@@ -74,13 +74,8 @@ public class StreetLifeController implements Controller {
 		this.simSpeed = simSpeed;
 		this.default_cars = default_cars;
 		
-		
-		this.possibleCars = new ArrayList<>();
-		this.possibleCars.add("Fiat");
-		this.possibleCars.add("Ford");
-		this.possibleCars.add("Ferrari");
-		
 		try {
+			this.initatePossibleCars();
 			this.initiateModel();
 			this.initiateView(this.default_cars);
 			
@@ -108,13 +103,8 @@ public class StreetLifeController implements Controller {
 		this.simSpeed = 1;
 		this.default_cars = false;
 		
-		
-		this.possibleCars = new ArrayList<>();
-		this.possibleCars.add("Fiat");
-		this.possibleCars.add("Ford");
-		this.possibleCars.add("Ferrari");
-		
 		try {
+			this.initatePossibleCars();
 			this.loadFromFile(filepath);
 			this.initiateView(false);
 		} catch (Exception e) {
@@ -123,8 +113,21 @@ public class StreetLifeController implements Controller {
 		}
 	}
 
-	
-	
+	/**
+	 * initates the list of possible cars. Wont be used in the future
+	 */
+	private void initatePossibleCars() {
+		this.possibleCars = new ArrayList<>();
+		this.possibleCars.add("Fiat");
+		this.possibleCars.add("Ford");
+		this.possibleCars.add("BMW");
+		this.possibleCars.add("Audi");
+		this.possibleCars.add("Ferrari");
+		this.possibleCars.add("Nissan");
+		this.possibleCars.add("VW");
+		this.possibleCars.add("Skoda");
+		this.possibleCars.add("Mercedes");
+	}
 	/**
 	 * Initiates the model. Should be called first
 	 * @throws Exception 
@@ -151,13 +154,14 @@ public class StreetLifeController implements Controller {
 		
 		this.view.setPossibleCars(this.possibleCars);
 		
-		// adds one object of every possible car defined
+		// adds a few cars by default
 		if(default_cars) {
 			try {
-				for (String str : this.getListOfCars()) {
-					this.addMovingObject(str);
+				 this.addMovingObject("Fiat");
+				 this.addMovingObject("Ford");
+				 this.addMovingObject("Ferrari");
 				}
-			}
+		
 			catch (Exception exc) {
 				ErrorDialog dia = new ErrorDialog(exc);
 				dia.setVisible(true);
@@ -250,9 +254,28 @@ public class StreetLifeController implements Controller {
 		else if (str.equals("Ford"))  {
 			this.addObject(new Car(this.model, 0, this.model.getFirstLane(), "Ford", 2));
 		}
-		else if (str.equals("Ferrari"))  {
-			this.addObject(new Car(this.model, 0, this.model.getFirstLane(), "Ferrari", 5));
+		else if (str.equals("BMW"))  {
+			this.addObject(new Car(this.model, 0, this.model.getFirstLane(), "BMW", 5));
 		}
+		else if (str.equals("Audi"))  {
+			this.addObject(new Car(this.model, 0, this.model.getFirstLane(), "Audi", 4));
+		}
+		else if (str.equals("Ferrari"))  {
+			this.addObject(new Car(this.model, 0, this.model.getFirstLane(), "Ferrari", 6));
+		}
+		else if (str.equals("Nissan"))  {
+			this.addObject(new Car(this.model, 0, this.model.getFirstLane(), "Nissan", 1));
+		}
+		else if (str.equals("VW"))  {
+			this.addObject(new Car(this.model, 0, this.model.getFirstLane(), "VW", 3));
+		}
+		else if (str.equals("Skoda"))  {
+			this.addObject(new Car(this.model, 0, this.model.getFirstLane(), "Skoda", 2));
+		}
+		else if (str.equals("Mercedes"))  {
+			this.addObject(new Car(this.model, 0, this.model.getFirstLane(), "Skoda", 5));
+		}
+		
 		else {
 			throw new IllegalArgumentException("Tried adding Object that isn't predefined");
 		}

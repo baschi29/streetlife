@@ -31,7 +31,15 @@ public class StreetLifeView implements View {
 	/**
 	 * Image of the Car, so that it doesn't look like a frog
 	 */
-	private final String CAR_PATH = "img/car.png";
+	private final String WHITE_PATH = "img/car.png";
+	private final String RED_PATH = "img/red.png";
+	private final String BLUE_PATH = "img/blue.png";
+	private final String CYAN_PATH = "img/cyan.png";
+	private final String GREEN_PATH = "img/green.png";
+	private final String TURQUOISE_PATH = "img/turquoise.png";
+	private final String ORANGE_PATH = "img/orange.png";
+	private final String YELLOW_PATH = "img/yellow.png";
+	private final String PURPLE_PATH = "img/purple.png";
 	
 	/**
 	 * Image of the Frog, so that it doesn't look like a car
@@ -46,6 +54,15 @@ public class StreetLifeView implements View {
 	private BufferedImage CarImg;
 	private BufferedImage FrogImg;
 	private BufferedImage ErrorImg;
+	private BufferedImage WhiteCarImg;
+	private BufferedImage RedCarImg;
+	private BufferedImage OrangeCarImg;
+	private BufferedImage YellowCarImg;
+	private BufferedImage GreenCarImg;
+	private BufferedImage CyanCarImg;
+	private BufferedImage TurquoiseCarImg;
+	private BufferedImage BlueCarImg;
+	private BufferedImage PurpleCarImg;
 	
 	public StreetLifeView(Model model) {
 		try {
@@ -128,30 +145,67 @@ public class StreetLifeView implements View {
 		
 	}
 	
+	/**
+	 * tries to load the required images
+	 */
 	private void initiateImages() {
 		try { 
 			 FileLoader fl = new FileLoader();
-	           CarImg = fl.loadImage(CAR_PATH);
+
 	           FrogImg = fl.loadImage(FROG_PATH);
 	           ErrorImg = fl.loadImage(ERROR_PATH);
+	           
+	           WhiteCarImg = fl.loadImage(WHITE_PATH);
+	           RedCarImg = fl.loadImage(RED_PATH);
+	           OrangeCarImg = fl.loadImage(ORANGE_PATH);
+	           YellowCarImg = fl.loadImage(YELLOW_PATH);
+	           GreenCarImg = fl.loadImage(GREEN_PATH);
+	           CyanCarImg = fl.loadImage(CYAN_PATH);
+	           TurquoiseCarImg = fl.loadImage(TURQUOISE_PATH);
+	           BlueCarImg = fl.loadImage(BLUE_PATH);
+	           PurpleCarImg = fl.loadImage(PURPLE_PATH);
+	           
 	        } catch(IOException ioe){
 	        	System.out.println("Unable to open file");
 	        	}
 	}
 	
+	/**
+	 * gets the loaded image
+	 * @param objectName string name of the object
+	 * @return img of object
+	 */
 	public BufferedImage getImg(String objectName) {
 		String str = objectName.trim();
 		if (str.equals("Frog")) {
 			return FrogImg; 
 		}
 		else if (str.equals("Fiat")) {
-			return CarImg;
+			return CyanCarImg;
 		}
 		else if (str.equals("Ford") ) {	
-			return CarImg;
+			return TurquoiseCarImg;
+		}
+		else if (str.equals("BMW")) {
+			return BlueCarImg;
+		}
+		else if (str.equals("Audi")) {
+			return RedCarImg;
 		}
 		else if (str.equals("Ferrari")) {
-			return CarImg;
+			return GreenCarImg;
+		}
+		else if (str.equals("Nissan")) {
+			return YellowCarImg;
+		}
+		else if (str.equals("VW")) {
+			return OrangeCarImg;
+		}
+		else if (str.equals("Skoda")) {
+			return WhiteCarImg;
+		}
+		else if (str.equals("Mercedes")) {
+			return PurpleCarImg;
 		}
 		else {
 			System.out.println(objectName);
