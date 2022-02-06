@@ -3,12 +3,8 @@
  */
 package infpp.streetlife.model;
 
-import java.io.IOException;
 import java.util.Random;
 
-import javax.imageio.ImageIO;
-
-import infpp.streetlife.FileLoader;
 
 /**
  * Class for frogs. A Car has a position (x,y), a specified name and a specific jump interval and

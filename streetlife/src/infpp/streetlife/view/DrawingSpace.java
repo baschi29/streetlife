@@ -7,7 +7,6 @@ import java.awt.TexturePaint;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
@@ -20,6 +19,7 @@ import infpp.streetlife.model.StreetObject;
  * @version 1.0
  * @since 2022-01-28
  */
+@SuppressWarnings("serial") 
 class DrawingSpace extends JPanel
 {
 

@@ -13,15 +13,17 @@ import infpp.streetlife.model.StreetObject;
  * @since 2022-01-28
  *
  */
+@SuppressWarnings("serial")
 public class ComboBoxRenderer extends DefaultListCellRenderer{
 
 
     public JComponent getListCellRendererComponent(
-                                   JList list,
-                                   Object value,
-                                   int index,
-                                   boolean isSelected,
-                                   boolean cellHasFocus) {
+    		@SuppressWarnings("rawtypes") 
+    		JList list,
+    		Object value,
+    		int index,
+    		boolean isSelected,
+    		boolean cellHasFocus) {
     	
     	//if object is type StreetObject, call toString() from StreetObject and store it for later use
         if (value instanceof StreetObject) {

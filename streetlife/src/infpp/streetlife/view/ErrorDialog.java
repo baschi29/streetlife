@@ -29,6 +29,7 @@ import infpp.streetlife.FileLoader;
  * @since 2022-01-28
  *
  */
+@SuppressWarnings("serial")
 public class ErrorDialog extends JDialog {
 
 	// JPanel everything is based upon
@@ -37,8 +38,12 @@ public class ErrorDialog extends JDialog {
 	//path to the used image
 	private final String FROG_PATH = "img/frog_dead.png";
 	
+	//use this Loader to load images/text
 	private FileLoader fl = new FileLoader();
 
+	//the view that controls this Dialog
+	private StreetLifeView view;
+	
 	private SystemTray tray;
 	private TrayIcon trayIcon;
 	
@@ -84,7 +89,7 @@ public class ErrorDialog extends JDialog {
 			}
 			
 		} catch (IOException e1) {
-			e1.printStackTrace();
+			this.view.showException(e1);
 		}
 		
 		JTextArea txtrD = new JTextArea(5, 20);
@@ -146,7 +151,7 @@ public class ErrorDialog extends JDialog {
 			trayIcon.displayMessage("Froschsimulator 2022", "There is a problem with the simulation", MessageType.ERROR);
 		}
 			catch(Exception exc){
-				exc.printStackTrace();
+				this.view.showException(exc);
 		}
 	}
 	
@@ -157,6 +162,14 @@ public class ErrorDialog extends JDialog {
 		this.tray.remove(trayIcon);
 		this.dispose();
 		
+	}
+
+	public StreetLifeView getView() {
+		return view;
+	}
+
+	public void setView(StreetLifeView view) {
+		this.view = view;
 	}
 }
 

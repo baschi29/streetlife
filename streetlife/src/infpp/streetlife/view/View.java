@@ -73,7 +73,7 @@ public interface View {
 	
 	/**
 	 * notify the user and display the Exception with its details
-	 * @param exc
+	 * @param exc Exception, that should be displayed
 	 */
 	abstract public void showException(Exception exc);
 	

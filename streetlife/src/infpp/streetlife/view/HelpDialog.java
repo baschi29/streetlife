@@ -5,10 +5,7 @@ import java.awt.FlowLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.Scanner;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -30,6 +27,7 @@ import infpp.streetlife.FileLoader;
  *
  */
 
+@SuppressWarnings("serial")
 public class HelpDialog extends JDialog {
 
 	//path used for the information for the JTextArea

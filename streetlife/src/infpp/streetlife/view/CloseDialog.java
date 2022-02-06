@@ -22,9 +22,10 @@ import java.awt.event.ActionEvent;
  * The CloseDialog is a custom PopUp window that asks the user, if he/she really wants to close the application. Disposes itself on close/cancel, but stops the application on okay.
  * @author Cornelius, Bastian
  * @version 1.0
- * @since 2022-01-28
+ * @since 2022-01-07
  *
  */
+@SuppressWarnings("serial")
 public class CloseDialog extends JDialog {
 
 	// JPanel everything is based upon
@@ -33,7 +34,11 @@ public class CloseDialog extends JDialog {
 	//path to the used image
 	private final String FROG_PATH = "img/frog_sad.png";
 	
+	//use this fileLoader to get images
 	private FileLoader fl = new FileLoader();
+	
+	//the View that controls this Dialog
+	private StreetLifeView view;
 
 	/**
 	 * Launch the application. Used for debug
@@ -73,7 +78,7 @@ public class CloseDialog extends JDialog {
 			
 		} catch (IOException e1) {
 			
-			e1.printStackTrace();
+			this.view.showException(e1);
 		}
 		
 		
@@ -110,5 +115,13 @@ public class CloseDialog extends JDialog {
 				buttonPane.add(cancelButton);
 			}
 		}
+	}
+
+	public StreetLifeView getView() {
+		return view;
+	}
+
+	public void setView(StreetLifeView view) {
+		this.view = view;
 	}
 }

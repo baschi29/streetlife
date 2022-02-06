@@ -1,7 +1,6 @@
 package infpp.streetlife.view;
 
 import java.awt.BorderLayout;
-import java.awt.Desktop;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -12,12 +11,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
-import java.util.Scanner;
 
-import javax.imageio.ImageIO;
 import javax.management.InvalidAttributeValueException;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -44,6 +39,7 @@ import infpp.streetlife.StreetLifeMain;
  * @since 1.0
  *
  */
+@SuppressWarnings("serial")
 public class StartUpDialog  extends JDialog implements ActionListener {
 
 	// JPanel everything is based upon
@@ -60,7 +56,7 @@ public class StartUpDialog  extends JDialog implements ActionListener {
 	private JTextField textFieldLength;
 	private JTextField textFieldLanes;
 	private JTextField textFieldPath;
-	private JComboBox comboBoxSimTime;
+	private JComboBox<?> comboBoxSimTime;
 
 	//global buttons for ActionListener
 	private JButton btnLaunchButton;
@@ -248,7 +244,7 @@ public class StartUpDialog  extends JDialog implements ActionListener {
 						panel_newStreet.add(lblSimTimeLabel, gbc_lblSimTimeLabel);
 					}
 					{
-						comboBoxSimTime = new JComboBox(simspeeds);
+						comboBoxSimTime = new JComboBox<Object>(simspeeds);
 						comboBoxSimTime.setToolTipText("Speed of simulation");
 						GridBagConstraints gbc_comboBoxSimTime = new GridBagConstraints();
 						gbc_comboBoxSimTime.insets = new Insets(0, 0, 0, 5);

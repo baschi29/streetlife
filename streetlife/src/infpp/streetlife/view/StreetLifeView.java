@@ -6,12 +6,9 @@ package infpp.streetlife.view;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Random;
 
 import infpp.streetlife.FileLoader;
 import infpp.streetlife.controller.Controller;
-import infpp.streetlife.model.Car;
-import infpp.streetlife.model.Frog;
 import infpp.streetlife.model.Model;
 import infpp.streetlife.model.StreetObject;
 
@@ -19,7 +16,7 @@ import infpp.streetlife.model.StreetObject;
  * The StreetLifeView implements the interface, manages the in/outputs and controls the gui. Basically used for connecting the gui to the view-interface
  * @author Cornelius, Bastian
  * @version 1.4
- * @since 2022-01-28
+ * @since 2021-11-20
  *
  */
 public class StreetLifeView implements View {
@@ -51,7 +48,6 @@ public class StreetLifeView implements View {
 	 */
 	private final String ERROR_PATH = "img/missing_texture.png";
 	
-	private BufferedImage CarImg;
 	private BufferedImage FrogImg;
 	private BufferedImage ErrorImg;
 	private BufferedImage WhiteCarImg;
@@ -112,7 +108,6 @@ public class StreetLifeView implements View {
 	public void setPossibleCars(ArrayList<String> ArrStr) {
 		this.gui.setPossibleCars(ArrStr);
 		
-		
 	}
 
 
@@ -166,12 +161,12 @@ public class StreetLifeView implements View {
 	           PurpleCarImg = fl.loadImage(PURPLE_PATH);
 	           
 	        } catch(IOException ioe){
-	        	System.out.println("Unable to open file");
+	        	this.showException(ioe);
 	        	}
 	}
 	
 	/**
-	 * gets the loaded image
+	 * gets the loaded image as Buffered Image, marked to change in the future
 	 * @param objectName string name of the object
 	 * @return img of object
 	 */
@@ -208,11 +203,11 @@ public class StreetLifeView implements View {
 			return PurpleCarImg;
 		}
 		else {
-			
-			//if no img is found, return the default missing_texture-image
-			
+			//used in older versions of this view, could be used in the future again
 			//System.out.println(objectName);
 			//System.out.println(objectName.getClass());
+
+			//if no img is found, return the default missing_texture-image
 			//throw new IllegalArgumentException("Tried returning Object that isn't predefined");
 			
 			return ErrorImg;
@@ -224,15 +219,20 @@ public class StreetLifeView implements View {
 	@Override
 	public void showException(Exception exc) {
 		ErrorDialog dia = new ErrorDialog(exc);
+		dia.setView(this);
 		dia.setVisible(true);
+		
+		//also print the StackTrace on the console, so that programmers know that is going on
+		exc.printStackTrace();
 		
 	}
 
 	/**
-	 * asks the user if he/she is sure, that he/she wants to close the program
+	 * asks the user if he/she is sure, that he/she wants to quit the simulation
 	 */
 	public void closeProgram() {
 		CloseDialog dia = new CloseDialog();
+		dia.setView(this);
 		dia.setVisible(true);
 		
 	}

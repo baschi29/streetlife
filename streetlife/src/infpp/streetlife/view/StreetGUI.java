@@ -1,7 +1,6 @@
 package infpp.streetlife.view;
 
 import java.awt.BorderLayout;
-import java.awt.Desktop;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -15,10 +14,8 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
@@ -27,7 +24,6 @@ import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JLayeredPane;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -47,8 +43,8 @@ import javax.swing.JRadioButtonMenuItem;
  *  The StreetGUI represents the graphical interface of the street with the display area, control buttons, menu bar etc. 
  *  Essentially the swing/AWT-part of the overall view.
  * @author Cornelius, Bastian
- * @version 1.18
- * @since 2022-01-28
+ * @version 1.4
+ * @since 1.0
  *
  */
 @SuppressWarnings("serial")
@@ -76,15 +72,19 @@ public class StreetGUI extends JFrame implements ActionListener{
 	private JMenuItem mntmFileMenuItemSave;
 	private JMenuItem mntmFileMenuQuit;
 	private JMenuItem mntmHelpMenuAbout;
-	
-	private JPanel contentPane;
+
+	private JRadioButtonMenuItem rdbtnmntmNewRadioItemSlowest;
+	private JRadioButtonMenuItem rdbtnmntmNewRadioItemSlow;
+	private JRadioButtonMenuItem rdbtnmntmNewRadioItemFast;
+	private JRadioButtonMenuItem rdbtnmntmNewRadioItemFastest;
+
 	private Controller controller;
 	private StreetLifeView view;
-
 	private JComboBox<String> comboBoxInsert;
 	private JComboBox<StreetObject> comboBoxDelete;
 	
 	private DrawingSpace tp;
+	private JPanel contentPane;
 	private JSpinner FrogSpinner;
 	private JLabel lblSizeLabel;
 	private JLabel lblSizeDisplay;
@@ -92,14 +92,9 @@ public class StreetGUI extends JFrame implements ActionListener{
 	
 	private FileLoader fl = new FileLoader();
 	
-	private int NumberOfLanes;
 	private JMenu mnSpeedMenu;
-	private JRadioButtonMenuItem rdbtnmntmNewRadioItemSlowest;
-	private JRadioButtonMenuItem rdbtnmntmNewRadioItemSlow;
-	private JRadioButtonMenuItem rdbtnmntmNewRadioItemFast;
-	private JRadioButtonMenuItem rdbtnmntmNewRadioItemFastest;
 	private ButtonGroup group;
-	private Model model;
+	
 	
 	
 	/**
@@ -123,8 +118,6 @@ public class StreetGUI extends JFrame implements ActionListener{
 	 * @throws IOException Exception while loading the used images
 	 */
 	public StreetGUI(Model model) throws IOException {
-		this.model = model;
-		
 		setPreferredSize(new Dimension(1200,800));
 		setTitle("Froschsimulator 2022");
 		setBounds(100, 100, 1200, 600);
@@ -372,7 +365,6 @@ public class StreetGUI extends JFrame implements ActionListener{
 	 * @param model Model that should be displayed
 	 */
 	public void setModel(Model model) {
-		this.model= model;
 		tp.setModelState(model.getModelState());
 		
 	}
@@ -385,7 +377,6 @@ public class StreetGUI extends JFrame implements ActionListener{
 	 * @param ln the number of lanes used in current model
 	 */
 	public void setSizeDisplay(int x, int y, int ln) {
-		this.NumberOfLanes = ln;
 		String currentSize = Integer.toString(x) + " x " + Integer.toString(y) + "\n LaneNumber: " + Integer.toString(ln);
 		this.lblSizeDisplay.setText(currentSize);
 		refresh();
