@@ -40,8 +40,8 @@ import infpp.streetlife.StreetLifeMain;
 /**
  * The StartUpDialog is the first thing the user interacts with. It is a custom PopUp window , that handles inputs for all the parameters and finally starts the controller. ${date}
  * @author Cornelius, Bastian
- * @version 1.0
- * @since 2022-01-28
+ * @version 1.4
+ * @since 1.0
  *
  */
 public class StartUpDialog  extends JDialog implements ActionListener {
@@ -62,13 +62,14 @@ public class StartUpDialog  extends JDialog implements ActionListener {
 	private JTextField textFieldPath;
 	private JComboBox comboBoxSimTime;
 
+	//global buttons for ActionListener
 	private JButton btnLaunchButton;
 	private JButton btnLoadButton;
-	private JButton btnDebugButton;
 	private JButton btnLaunchButton_1;
 	
 	JToggleButton tglbtnNewToggleButton;
 	
+	//FileLoader used for loading the icons/text file
 	private FileLoader fl = new FileLoader();
 
 	/**
@@ -92,7 +93,7 @@ public class StartUpDialog  extends JDialog implements ActionListener {
 	 */
 	public StartUpDialog() {
 		setType(Type.NORMAL);
-		setBounds(100, 100, 623, 379);
+		setBounds(100, 100, 620, 310);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
@@ -105,7 +106,7 @@ public class StartUpDialog  extends JDialog implements ActionListener {
 
 		});
 		
-		
+		//load the frog icon and set it to the imageLabel
 		try {
 			ImageIcon img = fl.loadImageIcon(FROG_PATH);
 			this.setIconImage(img.getImage());
@@ -121,6 +122,7 @@ public class StartUpDialog  extends JDialog implements ActionListener {
 			e.printStackTrace();
 		}
 		
+		//creation of every other component, created with WindowBuilder
 		{
 			JPanel panel = new JPanel();
 			contentPanel.add(panel, BorderLayout.CENTER);
@@ -170,7 +172,7 @@ public class StartUpDialog  extends JDialog implements ActionListener {
 				gbl_panel_newStreet.rowWeights = new double[]{0.0, 1.0, 0.0, Double.MIN_VALUE};
 				panel_newStreet.setLayout(gbl_panel_newStreet);
 				{
-					JLabel lblSizeLabel = new JLabel("What Size does the street have?");
+					JLabel lblSizeLabel = new JLabel("Set the parameters for a new street");
 					GridBagConstraints gbc_lblSizeLabel = new GridBagConstraints();
 					gbc_lblSizeLabel.gridwidth = 6;
 					gbc_lblSizeLabel.insets = new Insets(0, 0, 5, 0);
@@ -196,7 +198,7 @@ public class StartUpDialog  extends JDialog implements ActionListener {
 					gbc_textFieldLength.gridx = 1;
 					gbc_textFieldLength.gridy = 1;
 					panel_newStreet.add(textFieldLength, gbc_textFieldLength);
-					textFieldLength.setToolTipText("length_of_street");
+					textFieldLength.setToolTipText("length of street in pixel");
 					textFieldLength.setColumns(10);
 				}
 				{
@@ -210,6 +212,7 @@ public class StartUpDialog  extends JDialog implements ActionListener {
 				}
 				{
 					textFieldLanes = new JTextField();
+					textFieldLanes.setToolTipText("Number of lanes for street");
 					textFieldLanes.setText("5");
 					GridBagConstraints gbc_textFieldLanes = new GridBagConstraints();
 					gbc_textFieldLanes.insets = new Insets(0, 0, 5, 0);
@@ -221,6 +224,7 @@ public class StartUpDialog  extends JDialog implements ActionListener {
 				}
 				{
 					tglbtnNewToggleButton = new JToggleButton("Start with preset cars");
+					tglbtnNewToggleButton.setToolTipText("should the street spawn some cars?");
 					tglbtnNewToggleButton.setSelected(true);
 					GridBagConstraints gbc_tglbtnNewToggleButton = new GridBagConstraints();
 					gbc_tglbtnNewToggleButton.anchor = GridBagConstraints.EAST;
@@ -232,6 +236,7 @@ public class StartUpDialog  extends JDialog implements ActionListener {
 				}
 				{
 					btnLaunchButton = new JButton("Start!");
+					btnLaunchButton.setToolTipText("start with set parameters");
 					btnLaunchButton.addActionListener(this);
 					{
 						JLabel lblSimTimeLabel = new JLabel("SimTime");
@@ -244,6 +249,7 @@ public class StartUpDialog  extends JDialog implements ActionListener {
 					}
 					{
 						comboBoxSimTime = new JComboBox(simspeeds);
+						comboBoxSimTime.setToolTipText("Speed of simulation");
 						GridBagConstraints gbc_comboBoxSimTime = new GridBagConstraints();
 						gbc_comboBoxSimTime.insets = new Insets(0, 0, 0, 5);
 						gbc_comboBoxSimTime.fill = GridBagConstraints.HORIZONTAL;
@@ -269,15 +275,17 @@ public class StartUpDialog  extends JDialog implements ActionListener {
 				{
 					GridBagLayout gbl_panel_loadStreet = new GridBagLayout();
 					gbl_panel_loadStreet.columnWidths = new int[]{112, 86, 77, 0};
-					gbl_panel_loadStreet.rowHeights = new int[]{23, 0, 0, 0, 0};
+					gbl_panel_loadStreet.rowHeights = new int[]{23, 0, 0};
 					gbl_panel_loadStreet.columnWeights = new double[]{0.0, 1.0, 0.0, Double.MIN_VALUE};
-					gbl_panel_loadStreet.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+					gbl_panel_loadStreet.rowWeights = new double[]{0.0, 0.0, Double.MIN_VALUE};
 					panel_loadStreet.setLayout(gbl_panel_loadStreet);
 					
 					btnLoadButton = new JButton("Open File");
+					btnLoadButton.setToolTipText("open file dialog");
 					btnLoadButton.addActionListener(this);
 					{
 						textFieldPath = new JTextField();
+						textFieldPath.setToolTipText("enter the file path");
 						GridBagConstraints gbc_textFieldPath = new GridBagConstraints();
 						gbc_textFieldPath.fill = GridBagConstraints.HORIZONTAL;
 						gbc_textFieldPath.gridwidth = 2;
@@ -295,26 +303,19 @@ public class StartUpDialog  extends JDialog implements ActionListener {
 					panel_loadStreet.add(btnLoadButton, gbc_btnLoadButton);
 				}
 				{
-					btnDebugButton = new JButton("Start Debug Mode");
-					btnDebugButton.addActionListener(this);
-					GridBagConstraints gbc_btnDebugButton = new GridBagConstraints();
-					gbc_btnDebugButton.insets = new Insets(0, 0, 5, 5);
-					gbc_btnDebugButton.gridx = 1;
-					gbc_btnDebugButton.gridy = 2;
-					panel_loadStreet.add(btnDebugButton, gbc_btnDebugButton);
-				}
-				{
 					this.btnLaunchButton_1 = new JButton("Start from loaded File!");
+					btnLaunchButton_1.setToolTipText("start from file path");
 					btnLaunchButton_1.addActionListener(this);
 					GridBagConstraints gbc_btnLaunchButton_1 = new GridBagConstraints();
 					gbc_btnLaunchButton_1.gridx = 2;
-					gbc_btnLaunchButton_1.gridy = 3;
+					gbc_btnLaunchButton_1.gridy = 1;
 					panel_loadStreet.add(btnLaunchButton_1, gbc_btnLaunchButton_1);
 				}
 			}
 		}
 	}
 	
+	//Implementation of ActionListener
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		
@@ -344,13 +345,15 @@ public class StartUpDialog  extends JDialog implements ActionListener {
 		}
 		
 		//if the debug button is pressed, start the simulation with default values
-		else if (e.getSource() == btnDebugButton) {
-			
-			StreetLifeMain.startStreetLife();
-			
-			this.dispose();
-		}
+		//in current version not used
+//		else if (e.getSource() == btnDebugButton) {
+//			
+//			StreetLifeMain.startStreetLife();
+//			
+//			this.dispose();
+//		}
 		
+		//if second launchButton is pressed, load a street from the filepath stated
 		else if (e.getSource() == btnLaunchButton_1) {
 			try {
 				String filepath = textFieldPath.getText();
@@ -365,6 +368,7 @@ public class StartUpDialog  extends JDialog implements ActionListener {
 			}
 		}
 		
+		//if loadButton is pressed, launch the file dialog in system explorer to find a file
 		else if (e.getSource() == btnLoadButton) {
 			
 			    JFileChooser fc = new JFileChooser("./");
@@ -382,6 +386,7 @@ public class StartUpDialog  extends JDialog implements ActionListener {
 	
 	/**
 	 * opens a new confirmation dialog for closing the program
+	 * @since 1.1
 	 */
 	
 	private void closeProgram() {
