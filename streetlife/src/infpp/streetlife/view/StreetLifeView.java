@@ -68,7 +68,7 @@ public class StreetLifeView implements View {
 		try {
 			this.gui = new StreetGUI(model);
 		} catch (IOException e) {
-			e.printStackTrace();
+			this.showException(e);
 		}
 		this.setModel(model);
 		this.initiateImages();
@@ -208,10 +208,32 @@ public class StreetLifeView implements View {
 			return PurpleCarImg;
 		}
 		else {
-			System.out.println(objectName);
-			System.out.println(objectName.getClass());
-			return ErrorImg;
+			
+			//if no img is found, return the default missing_texture-image
+			
+			//System.out.println(objectName);
+			//System.out.println(objectName.getClass());
 			//throw new IllegalArgumentException("Tried returning Object that isn't predefined");
+			
+			return ErrorImg;
+			
 		}
+	}
+
+
+	@Override
+	public void showException(Exception exc) {
+		ErrorDialog dia = new ErrorDialog(exc);
+		dia.setVisible(true);
+		
+	}
+
+	/**
+	 * asks the user if he/she is sure, that he/she wants to close the program
+	 */
+	public void closeProgram() {
+		CloseDialog dia = new CloseDialog();
+		dia.setVisible(true);
+		
 	}
 }

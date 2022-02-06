@@ -71,4 +71,10 @@ public interface View {
 	 */
 	public abstract void setSize(int i, int j);
 	
+	/**
+	 * notify the user and display the Exception with its details
+	 * @param exc
+	 */
+	abstract public void showException(Exception exc);
+	
 }	

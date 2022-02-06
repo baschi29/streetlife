@@ -15,6 +15,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -50,6 +51,7 @@ import javax.swing.JRadioButtonMenuItem;
  * @since 2022-01-28
  *
  */
+@SuppressWarnings("serial")
 public class StreetGUI extends JFrame implements ActionListener{
 
 	//used resources with paths
@@ -76,14 +78,11 @@ public class StreetGUI extends JFrame implements ActionListener{
 	private JMenuItem mntmHelpMenuAbout;
 	
 	private JPanel contentPane;
-	private Model model;
 	private Controller controller;
 	private StreetLifeView view;
 
 	private JComboBox<String> comboBoxInsert;
 	private JComboBox<StreetObject> comboBoxDelete;
-	
-	private JLayeredPane layeredPane;
 	
 	private DrawingSpace tp;
 	private JSpinner FrogSpinner;
@@ -95,12 +94,12 @@ public class StreetGUI extends JFrame implements ActionListener{
 	
 	private int NumberOfLanes;
 	private JMenu mnSpeedMenu;
-	private JRadioButtonMenuItem rdbtnmntmNewRadioItem;
 	private JRadioButtonMenuItem rdbtnmntmNewRadioItemSlowest;
 	private JRadioButtonMenuItem rdbtnmntmNewRadioItemSlow;
 	private JRadioButtonMenuItem rdbtnmntmNewRadioItemFast;
 	private JRadioButtonMenuItem rdbtnmntmNewRadioItemFastest;
 	private ButtonGroup group;
+	private Model model;
 	
 	
 	/**
@@ -121,7 +120,7 @@ public class StreetGUI extends JFrame implements ActionListener{
 
 	/**
 	 * Create the frame.
-	 * @throws IOException 
+	 * @throws IOException Exception while loading the used images
 	 */
 	public StreetGUI(Model model) throws IOException {
 		this.model = model;
@@ -133,7 +132,7 @@ public class StreetGUI extends JFrame implements ActionListener{
 		Image img = fl.loadImageIcon(FROG_PATH).getImage();
 		this.setIconImage(img);
 
-		//dont just quit when closing, but ask the user if he/she is sure
+		//dont quit when closing, but ask the user if he/she is sure
 		this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		this.addWindowListener(new WindowAdapter()
 			{
@@ -434,13 +433,14 @@ public class StreetGUI extends JFrame implements ActionListener{
 	 * implements the actionListener
 	 */
 	@Override
-	public void actionPerformed(ActionEvent e) {
+	public void actionPerformed(ActionEvent e){
 		
 		//if quit is pressed, open a new CloseDialog to make sure
 		if (e.getSource() == mntmFileMenuQuit) {
 			this.closeProgram();
 		}
 		
+		//If load is pressed, open a new Load Dialog and tell the controller to load 
 		else if (e.getSource() == mntmFileMenuItemLoad) {
 			JFileChooser fc = new JFileChooser("./");
 		    File file;
@@ -448,16 +448,17 @@ public class StreetGUI extends JFrame implements ActionListener{
             if (returnVal == JFileChooser.APPROVE_OPTION)
             	{
                 	file = fc.getSelectedFile();
-                	//System.out.println(file.getAbsolutePath());
+                	//System.out.println(file.getAbsolutePath()); //Debug
                 	try {
 						this.controller.loadFromFile(file.getAbsolutePath());
 					} catch (Exception exc) {
-						ErrorDialog dia = new ErrorDialog(exc);
-						dia.setVisible(true);
+						//launch an errorDialog for notifying the user
+						this.showException(exc);
 					}
             	}
             }
 		
+		//If save is pressed, open a new Save Dialog and tell the controller to save
 		else if (e.getSource() == mntmFileMenuItemSave) {
 			JFileChooser fc = new JFileChooser("./");
 		    File file;
@@ -465,12 +466,12 @@ public class StreetGUI extends JFrame implements ActionListener{
             if (returnVal == JFileChooser.APPROVE_OPTION)
             	{
                 	file = fc.getSelectedFile();
-                	//System.out.println(file.getAbsolutePath());
+                	//System.out.println(file.getAbsolutePath()); //debug
                 	try {
 						this.controller.saveToFile(file.getAbsolutePath());
 					} catch (Exception exc) {
-						ErrorDialog dia = new ErrorDialog(exc);
-						dia.setVisible(true);
+						//launch an errorDialog for notifying the user
+						this.showException(exc);
 					}
             	}
             }
@@ -479,71 +480,66 @@ public class StreetGUI extends JFrame implements ActionListener{
 		
 		//if start is pressed, start the model thread
 		else if (e.getSource() == btnStart) {
-			System.out.println("Start pressed"); //Debug
+			//System.out.println("Start pressed"); //Debug
 			
 			try {
 				this.controller.start();
 			}
 			catch (Exception exc) {
 				//launch an errorDialog for notifying the user
-				ErrorDialog dia = new ErrorDialog(exc);
-				dia.setVisible(true);
+				this.showException(exc);
 			}
 		}
 		
 		//if step is pressed, move the whole model for one step only
 		else if (e.getSource() == btnStep) {
 			
-			System.out.println("Step pressed"); //Debug
+			//System.out.println("Step pressed"); //Debug
 			
 			try {
 				this.controller.step();
 			}
 			catch (Exception exc) {
 				//launch an errorDialog for notifying the user
-				ErrorDialog dia = new ErrorDialog(exc);
-				dia.setVisible(true);
+				this.showException(exc);
 			}
 		}
 		
 		//if stop is pressed, stop the model thread
 		else if (e.getSource() == btnStop) {
-			System.out.println("Stop pressed");
+			//System.out.println("Stop pressed"); Debug
 			try {
 				this.controller.stop();
 			}
 			catch (Exception exc) {
 				//launch an errorDialog for notifying the user
-				ErrorDialog dia = new ErrorDialog(exc);
-				dia.setVisible(true);
+				this.showException(exc);
 			}
 		}
 		
 		//if insert is pressed, add the selected car
 		else if (e.getSource() == btnInsert) {
-			System.out.println("Insert pressed");	//Debug
+			//System.out.println("Insert pressed");	//Debug
 			try {
 				this.controller.addMovingObject(comboBoxInsert.getSelectedItem().toString());
 			} 
 			catch (Exception exc) {
 				//launch an errorDialog for notifying the user
-				ErrorDialog dia = new ErrorDialog(exc);
-				dia.setVisible(true);
+				this.showException(exc);
 			}
 				
 		}
 		
 		//if delete is pressed, delete the selected car
 		else if (e.getSource() == btnDelete) {
-			System.out.println("Delete pressed"); //Debug
+			//System.out.println("Delete pressed"); //Debug
 			try {
 				this.controller.deleteObject(comboBoxDelete.getItemAt(comboBoxDelete.getSelectedIndex()));
 				
 			} 
 			catch (Exception exc) {
 				//launch an errorDialog for notifying the user
-				ErrorDialog dia = new ErrorDialog(exc);
-				dia.setVisible(true);
+				this.showException(exc);
 			}
 		}
 		
@@ -555,21 +551,20 @@ public class StreetGUI extends JFrame implements ActionListener{
 			}
 			catch (Exception exc) {
 				//launch an errorDialog for notifying the user
-				ErrorDialog dia = new ErrorDialog(exc);
-				dia.setVisible(true);
+				this.showException(exc);
 			}
 		}
 		
 		//if help is pressed, launch a new help window
 		else if (e.getSource() == mntmHelpMenuAbout) {
 			try {
+				//opens a new help window. Is not handled over the StreetLifeView as this should only be possible over the gui
 				HelpDialog dia = new HelpDialog();
 				dia.setVisible(true);
 			}
 			catch (Exception exc) {
 				//launch an errorDialog for notifying the user
-				ErrorDialog dia = new ErrorDialog(exc);
-				dia.setVisible(true);
+				this.showException(exc);
 			}
 		}
 		
@@ -604,24 +599,39 @@ public class StreetGUI extends JFrame implements ActionListener{
 		
 	}
 	
+	/**
+	 * sets the view object that controls the gui
+	 * @param view
+	 */
 	public void setView (StreetLifeView view) {
 		this.view = view;
 	}
 	
+	/**
+	 * gets the view object that controls the gui
+	 * @return view
+	 */
 	public StreetLifeView getView () {
 		return this.view;
 	}
 	
 	
 	/**
-	 * opens a new confirmation dialog for closing the program
+	 * opens a new confirmation dialog for closing the program. Handling this over the StreetLifeView as Close Dialogs are used in different parts of the view
 	 */
 	private void closeProgram() {
-		CloseDialog dia = new CloseDialog();
-		dia.setVisible(true);
+		this.view.closeProgram();
 		
 	}
 
+	/**
+	 * display a new Exception, handling this over the StreetLifeView as ErrorHandling is not the task of the gui
+	 * @param exc
+	 */
+	private void showException(Exception exc) {
+		this.view.showException(exc);
+	}
+	
  }
 	
 

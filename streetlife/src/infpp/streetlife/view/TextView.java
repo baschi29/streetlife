@@ -114,6 +114,13 @@ public class TextView implements View {
 		// TODO Automatisch generierter Methodenstub
 		
 	}
+
+
+	@Override
+	public void showException(Exception exc) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 	
 }

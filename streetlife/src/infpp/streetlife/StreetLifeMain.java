@@ -1,9 +1,5 @@
-/**
- * 
- */
-package infpp.streetlife;
 
-import javax.swing.JDialog;
+package infpp.streetlife;
 
 import infpp.streetlife.controller.Controller;
 import infpp.streetlife.controller.StreetLifeController;
@@ -14,12 +10,15 @@ import java.awt.EventQueue;
 /**
  * Class for starting the StreetLifeController and opening the StartUpDialog
  * @author Cornelius, Bastian
+ * @version 1.4
+ * @since 1.1
  */
 public class StreetLifeMain {
 
 	/**
 	 * Creates an instance of the StartUp-Dialog and sets its visibility to true.
 	 * @param args command line arguments
+	 * @since 0.1
 	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -40,6 +39,8 @@ public class StreetLifeMain {
 	
 	/**
 	 * starts the StreetLife-Simulation with default parameters. Useful for debug.
+	 * @since 1.1
+	 * @deprecated currently not in use
 	 */
 	public static void startStreetLife() {
 		Controller controller = new StreetLifeController(5,1000,1,true);
@@ -55,6 +56,7 @@ public class StreetLifeMain {
 	/**
 	 * starts the StreetLife-Simulation from a previous save
 	 * @param filepath
+	 * @since 1.2
 	 */
 	public static void startStreetLife(String filepath) {
 		Controller controller = new StreetLifeController(filepath);
@@ -74,6 +76,7 @@ public class StreetLifeMain {
 	 * @param size_of_street	the length of the street, equal to the size of the window
 	 * @param sim_speed			the speed the simulation should run
 	 * @param default_cars		true if default cars should be added
+	 * @since 1.0
 	 */
 	
 	public static void startStreetLife(int number_of_lanes,int size_of_street,int sim_speed, boolean default_cars) {
