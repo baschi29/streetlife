@@ -189,6 +189,7 @@ public class StartUpDialog  extends JDialog implements ActionListener {
 				}
 				{
 					textFieldLength = new JTextField();
+					textFieldLength.setText("1200");
 					GridBagConstraints gbc_textFieldLength = new GridBagConstraints();
 					gbc_textFieldLength.fill = GridBagConstraints.HORIZONTAL;
 					gbc_textFieldLength.insets = new Insets(0, 0, 5, 5);
@@ -209,6 +210,7 @@ public class StartUpDialog  extends JDialog implements ActionListener {
 				}
 				{
 					textFieldLanes = new JTextField();
+					textFieldLanes.setText("5");
 					GridBagConstraints gbc_textFieldLanes = new GridBagConstraints();
 					gbc_textFieldLanes.insets = new Insets(0, 0, 5, 0);
 					gbc_textFieldLanes.fill = GridBagConstraints.HORIZONTAL;
@@ -219,6 +221,7 @@ public class StartUpDialog  extends JDialog implements ActionListener {
 				}
 				{
 					tglbtnNewToggleButton = new JToggleButton("Start with preset cars");
+					tglbtnNewToggleButton.setSelected(true);
 					GridBagConstraints gbc_tglbtnNewToggleButton = new GridBagConstraints();
 					gbc_tglbtnNewToggleButton.anchor = GridBagConstraints.EAST;
 					gbc_tglbtnNewToggleButton.gridwidth = 2;
